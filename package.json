@@ -1,0 +1,14 @@
+{
+  "name": "presto-parts",
+  "version": "0.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Colin A. Williams",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^15.1.0"
+  }
+}
