@@ -2,36 +2,29 @@ import sys
 import os
 import PyPDF2
 
-if __name__ == "__main__":
-	# read cmd line args
-	pieces = []
-	for i in range(1, len(sys.argv) - 2):
-		pieces.append(sys.argv[i])
-	parts_list_path = sys.argv[-2]
-	dest_name = sys.argv[-1]
-
+def generate_instrument_parts_and_master(piece_list, song_folders_location, parts_list, dest_name):
 	# create list of parts and number of respective copies
 	num_copies_of_part = dict()
-	with open(parts_list_path) as parts_list_file:
-		for line in parts_list_file:
-			# split line into part name and number of copies
-			part_name_and_num_copies = line.split("#")
+	for part in parts_list.splitlines():
+		# split line into part name and number of copies
+		part_name_and_num_copies = part.split("#")
 
-			# remove spaces from part name
-			part_name_and_num_copies[0] = part_name_and_num_copies[0].strip() \
-				.replace(" ", "")
+		# remove spaces from part name
+		part_name_and_num_copies[0] = part_name_and_num_copies[0].strip() \
+			.replace(" ", "")
 
-			# set default num copies to 1 or convert num copies from str to int
-			if len(part_name_and_num_copies) < 2:
-				part_name_and_num_copies.append(1)
-			else:
-				part_name_and_num_copies[1] = int(part_name_and_num_copies[1])
+		# set default num copies to 1 or convert num copies from str to int
+		if len(part_name_and_num_copies) < 2:
+			part_name_and_num_copies.append(1)
+		else:
+			part_name_and_num_copies[1] = int(part_name_and_num_copies[1])
 
-			# add part and its number of pages to dict
-			num_copies_of_part[part_name_and_num_copies[0]] \
-				= part_name_and_num_copies[1]
+		# add part and its number of pages to dict
+		num_copies_of_part[part_name_and_num_copies[0]] \
+			= part_name_and_num_copies[1]
 
 	# create new dir named dest_name and chdir to that dir
+	os.chdir(song_folders_location)
 	os.mkdir(dest_name)
 	os.chdir(dest_name)
 
@@ -43,7 +36,10 @@ if __name__ == "__main__":
 		part_writer = PyPDF2.PdfFileWriter()
 
 		# merge parts from each piece
-		for piece in pieces:
+		for piece in piece_list.splitlines():
+			# remove spaces from piece name
+			piece = piece.strip().replace(" ", "")
+
 			os.chdir("../{}".format(piece))
 			# open part_files (yes, it has to be done this way...)
 			part_files = []
@@ -82,3 +78,19 @@ if __name__ == "__main__":
 	# close part_files (yes, it has to be done this way...)
 	for i in range(len(part_files)):
 		part_files[i].close()
+
+	return f'{song_folders_location}/{dest_name}'
+
+if __name__ == "__main__":
+	# read cmd line args
+	piece_list = ''
+	for i in range(1, len(sys.argv) - 2):
+		piece_list += sys.argv[i] + '\n'
+
+	parts_list_path = sys.argv[-2]
+	with open(parts_list_path) as parts_list_file:
+		parts_list = parts_list_file.read()
+
+	dest_name = sys.argv[-1]
+
+	generate_instrument_parts_and_master(piece_list, os.getcwd(), parts_list, dest_name)

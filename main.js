@@ -50,7 +50,7 @@ createWindow = () => {
 		},
 	})
 
-	win.loadFile('index.html')
+	win.loadFile('separate.html')
 }
 
 app.whenReady().then(() => {
@@ -58,6 +58,4 @@ app.whenReady().then(() => {
 	startBackend((debugMode = true))
 })
 
-app.on('before-quit', () => {
-	terminateBackend()
-})
+app.on('before-quit', terminateBackend)

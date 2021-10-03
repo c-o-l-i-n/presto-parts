@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta
+			http-equiv="Content-Security-Policy"
+			content="default-src 'self'; script-src 'self'"
+		/>
+		<meta
+			http-equiv="X-Content-Security-Policy"
+			content="default-src 'self'; script-src 'self'"
+		/>
+		<title>PrestoParts</title>
+	</head>
+	<body>
+		<a href="separate.html"><p>Seperate Song Parts</p></a>
+		<h1>Generate Instrument Parts and Master</h1>
+		<form action="http://127.0.0.1:5000/generate" method="post">
+			<p>
+				<label for="collection-name">Collection Name</label>
+				<input
+					type="text"
+					name="collection-name"
+					id="collection-name"
+					placeholder="Disney Jazz"
+				/>
+			</p>
+
+			<p>
+				<label for="song-folders-location">Song Folders Location</label>
+				<input
+					type="text"
+					name="song-folders-location"
+					id="song-folders-location"
+					size="75"
+					placeholder="/Users/you/Documents/Sheet Music/Disney Jazz"
+				/>
+			</p>
+
+			<p>
+				<label for="song-list">Song List</label>
+			</p>
+			<textarea
+				name="song-list"
+				id="song-list"
+				cols="30"
+				rows="10"
+				placeholder="Hot Cross Buns
+Old McDonald
+Happy Birthday
+Ode to Joy"
+			></textarea>
+
+			<p>
+				<label for="parts-list">Parts List</label>
+			</p>
+			<textarea
+				name="parts-list"
+				id="parts-list"
+				cols="30"
+				rows="20"
+				placeholder="Trumpet 1
+Trumpet 2
+Horn
+Trombone
+Tuba"
+			></textarea>
+
+			<p>
+				<input type="submit" value="Go" />
+			</p>
+		</form>
+	</body>
+</html>

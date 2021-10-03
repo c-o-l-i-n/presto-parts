@@ -15,6 +15,7 @@
 		<title>PrestoParts</title>
 	</head>
 	<body>
+		<a href="generate.html"><p>Generate Instrument Parts and Master</p></a>
 		<h1>Seperate Song Parts</h1>
 		<form action="http://127.0.0.1:5000/separate" method="post">
 			<p>
@@ -30,7 +31,12 @@
 
 			<p>
 				<label for="song-title">Song Title</label>
-				<input type="text" name="song-title" id="song-title" />
+				<input
+					type="text"
+					name="song-title"
+					id="song-title"
+					placeholder="Hot Cross Buns"
+				/>
 			</p>
 
 			<p>
@@ -40,7 +46,12 @@
 				name="parts-list"
 				id="parts-list"
 				cols="30"
-				rows="15"
+				rows="20"
+				placeholder="Trumpet 1
+Trumpet 2
+Horn
+Trombone
+Tuba"
 			></textarea>
 
 			<p>
