@@ -58,7 +58,6 @@ app.whenReady().then(() => {
 	startBackend((debugMode = true))
 })
 
-app.on('window-all-closed', () => {
+app.on('before-quit', () => {
 	terminateBackend()
-	app.quit()
 })

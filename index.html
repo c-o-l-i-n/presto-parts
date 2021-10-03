@@ -15,6 +15,37 @@
 		<title>PrestoParts</title>
 	</head>
 	<body>
-		<h1>PrestoParts</h1>
+		<h1>Seperate Song Parts</h1>
+		<form action="http://127.0.0.1:5000/separate" method="post">
+			<p>
+				<label for="pdf-source-path">PDF Source</label>
+				<input
+					type="text"
+					name="pdf-source-path"
+					id="pdf-source-path"
+					size="75"
+					placeholder="/Users/you/Documents/Sheet Music/parts.pdf"
+				/>
+			</p>
+
+			<p>
+				<label for="song-title">Song Title</label>
+				<input type="text" name="song-title" id="song-title" />
+			</p>
+
+			<p>
+				<label for="parts-list">Parts List</label>
+			</p>
+			<textarea
+				name="parts-list"
+				id="parts-list"
+				cols="30"
+				rows="15"
+			></textarea>
+
+			<p>
+				<input type="submit" value="Go" />
+			</p>
+		</form>
 	</body>
 </html>
