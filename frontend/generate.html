@@ -15,29 +15,43 @@
 		<title>PrestoParts</title>
 	</head>
 	<body>
-		<a href="generate.html"><p>Generate Instrument Parts and Master</p></a>
-		<h1>Seperate Song Parts</h1>
-		<form action="http://127.0.0.1:5000/separate" method="post">
+		<a href="separate.html"><p>Seperate Song Parts</p></a>
+		<h1>Generate Instrument Parts and Master</h1>
+		<form action="http://127.0.0.1:14161/generate" method="post">
 			<p>
-				<label for="pdf-source-path">PDF Source</label>
+				<label for="collection-name">Collection Name</label>
 				<input
 					type="text"
-					name="pdf-source-path"
-					id="pdf-source-path"
-					size="75"
-					placeholder="/Users/you/Documents/Sheet Music/parts.pdf"
+					name="collection-name"
+					id="collection-name"
+					placeholder="Disney Jazz"
 				/>
 			</p>
 
 			<p>
-				<label for="song-title">Song Title</label>
+				<label for="song-folders-location">Song Folders Location</label>
 				<input
 					type="text"
-					name="song-title"
-					id="song-title"
-					placeholder="Hot Cross Buns"
+					name="song-folders-location"
+					id="song-folders-location"
+					size="75"
+					placeholder="/Users/you/Documents/Sheet Music/Disney Jazz"
 				/>
 			</p>
+
+			<p>
+				<label for="song-list">Song List</label>
+			</p>
+			<textarea
+				name="song-list"
+				id="song-list"
+				cols="30"
+				rows="10"
+				placeholder="Hot Cross Buns
+Old McDonald
+Happy Birthday
+Ode to Joy"
+			></textarea>
 
 			<p>
 				<label for="parts-list">Parts List</label>

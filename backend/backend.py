@@ -15,4 +15,4 @@ def generate():
   return f'Intrument Part PDFs and Master PDF created in folder: {output_folder}'
 
 if __name__ == '__main__':
-  app.run(debug=True)
+  app.run(debug=True, port=14161)

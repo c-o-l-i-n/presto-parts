@@ -50,7 +50,7 @@ createWindow = () => {
 		},
 	})
 
-	win.loadFile('separate.html')
+	win.loadFile('frontend/separate.html')
 }
 
 app.whenReady().then(() => {
