@@ -4,14 +4,6 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta
-			http-equiv="Content-Security-Policy"
-			content="default-src 'self'; script-src 'self'"
-		/>
-		<meta
-			http-equiv="X-Content-Security-Policy"
-			content="default-src 'self'; script-src 'self'"
-		/>
 		<title>PrestoParts</title>
 
 		<link rel="stylesheet" href="css/common.css" />
@@ -25,6 +17,17 @@
 
 				<form action="http://127.0.0.1:14161/separate" method="post">
 					<div class="field">
+						<label class="label" for="song-title">Song Title</label>
+						<input
+							class="input"
+							type="text"
+							name="song-title"
+							id="song-title"
+							placeholder="Hot Cross Buns"
+						/>
+					</div>
+
+					<div class="field">
 						<label class="label" for="pdf-source-path">PDF Source</label>
 						<input
 							class="input"
@@ -37,17 +40,6 @@
 					</div>
 
 					<div class="field">
-						<label class="label" for="song-title">Song Title</label>
-						<input
-							class="input"
-							type="text"
-							name="song-title"
-							id="song-title"
-							placeholder="Hot Cross Buns"
-						/>
-					</div>
-
-					<div class="field">
 						<label class="label" for="parts-list">Parts List</label>
 
 						<textarea
@@ -55,7 +47,7 @@
 							name="parts-list"
 							id="parts-list"
 							cols="30"
-							rows="20"
+							rows="10"
 							placeholder="Trumpet 1
 Trumpet 2
 Horn
