@@ -7,7 +7,8 @@
 		"start": "electron-forge start",
 		"package": "electron-forge package",
 		"make": "electron-forge make",
-		"watch-scss": "sass --watch frontend/scss:frontend/css"
+		"build-css": "sass frontend/scss:frontend/css",
+		"watch-css": "npm run build-css -- --watch"
 	},
 	"author": "Colin A. Williams",
 	"license": "MIT",
