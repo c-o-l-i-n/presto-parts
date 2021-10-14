@@ -12,9 +12,35 @@
 		<div id="loader">
 			<div class="loader is-loading"></div>
 		</div>
+		<div id="navbar" class="tabs is-centered">
+			<ul>
+				<li>
+					<a href="separate.html">
+						<span class="icon">
+							<div
+								class="pp-icon"
+								style="-webkit-mask-image: url(resources/icons/cut.svg)"
+							></div>
+						</span>
+						<span>Seperate Song Parts</span>
+					</a>
+				</li>
+				<li class="is-active">
+					<a>
+						<span class="icon">
+							<div
+								class="pp-icon"
+								style="-webkit-mask-image: url(resources/icons/sheet-music.svg)"
+							></div>
+							<i class="fas fa-file-download" aria-hidden="true"></i>
+						</span>
+						<span>Generate Instrument Parts and Master</span>
+					</a>
+				</li>
+			</ul>
+		</div>
 		<section class="section">
 			<div class="container">
-				<a href="separate.html"><p>Seperate Song Parts</p></a>
 				<h1 class="title">Generate Instrument Parts and Master</h1>
 
 				<div class="field">
@@ -60,7 +86,7 @@ Ode to Joy"
 					</div>
 
 					<div class="field">
-						<label class="label" for="parts-list">Parts List</label>
+						<label class="label" for="parts-list">Instrument Parts List</label>
 
 						<textarea
 							class="textarea"
@@ -68,11 +94,13 @@ Ode to Joy"
 							id="parts-list"
 							cols="30"
 							rows="10"
-							placeholder="Trumpet 1
-Trumpet 2
-Horn
-Trombone
-Tuba"
+							placeholder="Score
+Flute
+Claritnet
+Alto Sax #2
+Trumpet #4
+Trombone #2
+Tuba #2"
 						></textarea>
 					</div>
 				</div>

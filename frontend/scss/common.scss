@@ -1,5 +1,46 @@
+// brand colors
+$purple: slateblue;
+
+@font-face {
+	font-family: 'Comfortaa';
+	src: url(../resources/fonts/Comfortaa.ttf);
+}
+
+// update Bulma's global variables
+$family-sans-serif: 'Comfortaa', sans-serif;
+$primary: $purple;
+$link: $primary;
+
+// import Bulma
 @import '../../node_modules/bulma/bulma.sass';
 
+// ------------------------------ custom styles -------------------------------
+
+// disable selecting (highlighting)
+:not(input):not(textarea),
+:not(input):not(textarea)::after,
+:not(input):not(textarea)::before,
+input[type='submit'] {
+	-webkit-user-select: none;
+	user-select: none;
+	cursor: default;
+}
+
+// disable dragging
+a:not([draggable='true']),
+img:not([draggable='true']) {
+	-webkit-user-drag: none;
+	user-drag: none; /* Technically not supported in Electron yet */
+}
+a[href^="http://"],
+a[href^="https://"],
+a[href^="ftp://"]
+{
+	-webkit-user-drag: auto;
+	user-drag: auto; /* Technically not supported in Electron yet */
+}
+
+// full-screen loading animation
 #loader {
 	position: absolute;
 	top: 0;
@@ -23,4 +64,30 @@
 		opacity: 0.5;
 		z-index: 1;
 	}
+}
+
+#navbar {
+	margin-bottom: 0;
+}
+
+html,
+body {
+	height: 100vh;
+	overflow: hidden;
+}
+
+section {
+	height: 100%;
+	overflow-y: scroll;
+}
+
+.pp-icon {
+	height: $icon-dimensions;
+	width: $icon-dimensions;
+	background-color: $grey-dark;
+	-webkit-mask-size: cover;
+}
+
+li.is-active .pp-icon {
+	background-color: $link;
 }
