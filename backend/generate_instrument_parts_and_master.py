@@ -3,6 +3,9 @@ import os
 import PyPDF2
 
 def generate_instrument_parts_and_master(piece_list, song_folders_location, parts_list, dest_name):
+	if not os.path.exists(song_folders_location):
+		raise FileNotFoundError('The Song Folders Location does not exist')
+	
 	# create list of parts and number of respective copies
 	num_copies_of_part = dict()
 	for part in parts_list.splitlines():

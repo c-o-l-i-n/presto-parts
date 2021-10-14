@@ -14,6 +14,12 @@ def seperate_song_parts(src_path, parts_list, prefix):
 	etc ...
 	"""
 
+	if not os.path.exists(src_path):
+		raise FileNotFoundError('The given PDF source file does not exist')
+	
+	if src_path[-4:].lower() != '.pdf':
+		raise BaseException('The given PDF source file is not a PDF')
+
 	num_pages_for_part = dict()
 	pages_sum = 0
 	for line in parts_list.splitlines():
@@ -37,10 +43,6 @@ def seperate_song_parts(src_path, parts_list, prefix):
 		# add to the total number of pages in document
 		pages_sum += part_name_and_num_pages[1]
 
-	# create new folder with name of prefix
-	source_file_directory = src_path[0:src_path.rfind('/')]
-	os.chdir(source_file_directory)
-	os.mkdir(prefix)
 
 	# get PDF
 	with open(src_path, "rb") as src_file:
@@ -49,10 +51,16 @@ def seperate_song_parts(src_path, parts_list, prefix):
 
 		# make sure actual page # of src matches part names list
 		if src.numPages != pages_sum:
-			raise BaseException("Incorrect number of pages in parts list file. \
-				Expected: {}, Found: {}".format(src.numPages, pages_sum))
+			raise BaseException(f'Incorrect number of pages in Parts List. \
+				PDF has {src.numPages} pages, but you listed {pages_sum}.')
 
-		# chdir into parts folder
+		# create new folder with name of prefix
+		source_file_directory = src_path[0:src_path.rfind('/')]
+		os.chdir(source_file_directory)
+		try:
+			os.mkdir(prefix)
+		except FileExistsError:
+			raise FileExistsError(f'A folder named "{prefix}" already exists at the PDF location')
 		os.chdir(prefix)
 
 		# for each part

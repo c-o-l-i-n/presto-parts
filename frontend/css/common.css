@@ -10305,4 +10305,27 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   padding: 3rem 1.5rem 6rem;
 }
 
+#loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: black;
+  opacity: 0;
+  z-index: -1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+}
+#loader .loader {
+  height: 80px;
+  width: 80px;
+}
+#loader.is-active {
+  opacity: 0.5;
+  z-index: 1;
+}
+
 /*# sourceMappingURL=common.css.map */
