@@ -23,7 +23,7 @@ $link: $primary;
 input[type='submit'] {
 	-webkit-user-select: none;
 	user-select: none;
-	cursor: default;
+	cursor: default !important;
 }
 
 // disable dragging

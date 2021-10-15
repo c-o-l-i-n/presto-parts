@@ -10315,7 +10315,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 input[type=submit] {
   -webkit-user-select: none;
   user-select: none;
-  cursor: default;
+  cursor: default !important;
 }
 
 a:not([draggable=true]),
