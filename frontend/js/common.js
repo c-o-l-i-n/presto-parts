@@ -2,6 +2,7 @@ const axios = require('axios')
 const { ipcRenderer } = require('electron')
 
 // DOM Elelements
+const mainElement = document.getElementById('main')
 const submitButtonElement = document.getElementById('submit-button')
 const loaderElement = document.getElementById('loader')
 const notificationElement = document.getElementById('notification')
@@ -34,7 +35,6 @@ const clearForm = () => {
 	for (element of formElements) {
 		element.value = ''
 	}
-	errorElement.style.display = 'none'
 }
 
 // show notification
@@ -44,6 +44,7 @@ const showNotification = (isGreen, text) => {
 	notificationElement.classList.add(isGreen ? 'is-success' : 'is-danger')
 	notificationTextElement.innerText = isGreen ? '🎉\xa0\xa0' + text : text
 	notificationElement.style.display = 'block'
+	mainElement.scrollTo(0, 0)
 }
 
 // display backend errors
