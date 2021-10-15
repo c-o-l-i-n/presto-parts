@@ -16954,7 +16954,7 @@ label.panel-block:hover {
 input[type=submit] {
   -webkit-user-select: none;
   user-select: none;
-  cursor: default;
+  cursor: default !important;
 }
 
 a:not([draggable=true]),
@@ -17016,7 +17016,10 @@ section {
   -webkit-mask-size: cover;
 }
 
-li.is-active .pp-icon {
+.tabs li a:hover .pp-icon {
+  background-color: #363636;
+}
+.tabs li.is-active a .pp-icon {
   background-color: slateblue;
 }
 

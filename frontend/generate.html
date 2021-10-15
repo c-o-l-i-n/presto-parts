@@ -39,10 +39,17 @@
 				</li>
 			</ul>
 		</div>
-		<section class="section">
+		<section id="main" class="section">
 			<div class="container">
 				<h1 class="title">Generate Instrument Parts and Master</h1>
-
+				<div
+					id="notification"
+					class="notification is-danger"
+					style="display: none"
+				>
+					<button id="close-notification-btn" class="delete"></button>
+					<span id="notification-text"></span>
+				</div>
 				<div class="field">
 					<label class="label" for="collection-name">Collection Name</label>
 					<input
