@@ -83,10 +83,16 @@ section {
 .pp-icon {
 	height: $icon-dimensions;
 	width: $icon-dimensions;
-	background-color: $grey-dark;
+	background-color: $text;
 	-webkit-mask-size: cover;
 }
 
-li.is-active .pp-icon {
-	background-color: $link;
+.tabs {
+	li a:hover .pp-icon {
+		background-color: $text-strong;
+	}
+
+	li.is-active a .pp-icon {
+		background-color: $link;
+	}
 }
