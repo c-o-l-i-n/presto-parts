@@ -11,8 +11,9 @@ $family-sans-serif: 'Comfortaa', sans-serif;
 $primary: $purple;
 $link: $primary;
 
-// import Bulma
+// import Bulma and dark mode
 @import '../../node_modules/bulma/bulma.sass';
+@import '../../node_modules/bulma-prefers-dark/bulma-prefers-dark.sass';
 
 // ------------------------------ custom styles -------------------------------
 
@@ -89,4 +90,22 @@ section {
 
 li.is-active .pp-icon {
 	background-color: $link;
+}
+
+// ------------------------------ dark mode -------------------------------
+
+@media (prefers-color-scheme: dark) {
+	.tabs {
+		li a .pp-icon {
+			background-color: $text-dark;
+		}
+
+		li a:hover .pp-icon {
+			background-color: $text-strong-dark;
+		}
+
+		li.is-active a .pp-icon {
+			background-color: $link-dark;
+		}
+	}
 }
