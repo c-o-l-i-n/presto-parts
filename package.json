@@ -4,11 +4,12 @@
 	"description": "",
 	"main": "main.js",
 	"scripts": {
-		"start": "electron-forge start",
+		"start": "npm run build-backend; npm run build-css; electron-forge start",
 		"package": "electron-forge package",
 		"make": "electron-forge make",
 		"build-css": "sass frontend/scss:frontend/css",
-		"watch-css": "npm run build-css -- --watch"
+		"watch-css": "npm run build-css -- --watch",
+		"build-backend": "backend/env/bin/pip install -r backend/requirements.txt; backend/env/bin/pyinstaller --onefile --distpath backend/dist --workpath backend/build --specpath backend backend/backend.py"
 	},
 	"author": "Colin A. Williams",
 	"license": "MIT",
