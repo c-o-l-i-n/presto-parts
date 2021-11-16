@@ -19,24 +19,11 @@ const startBackend = (window, debugMode) => {
 			window.webContents.send('backend-error', errorMessage)
 		})
 	} else {
-		console.log("I haven't figured out executable mode yet")
-		app.quit()
-
-		// backend = path.join(process.cwd(), 'resources/backend/dist/backend.exe')
-
-		// let execFile = require('child_process').execFile
-
-		// execFile(backend, { windowsHide: true }, (err, stdout, stderr) => {
-		// 	if (err) {
-		// 		console.log(err.toString('utf-8'))
-		// 	}
-		// 	if (stdout) {
-		// 		console.log(stdout.toString('utf-8'))
-		// 	}
-		// 	if (stderr) {
-		// 		console.log(stderr.toString('utf-8'))
-		// 	}
-		// })
+		backend = require('child_process').exec('./backend/dist/backend')
+		backend.stderr.on('data', (data) => {
+			const errorMessage = data.toString('utf-8').match(/(?<=: )(.*)\n$/gm)
+			window.webContents.send('backend-error', errorMessage)
+		})
 	}
 }
 
@@ -61,7 +48,7 @@ createWindow = () => {
 
 app.whenReady().then(() => {
 	const win = createWindow()
-	startBackend(win, (debugMode = true))
+	startBackend(win, (debugMode = false))
 })
 
 app.on('before-quit', terminateBackend)
