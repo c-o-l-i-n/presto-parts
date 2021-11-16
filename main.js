@@ -1,7 +1,11 @@
-const { app, BrowserWindow } = require('electron')
-const path = require('path')
+const { app, dialog, BrowserWindow, ipcMain } = require('electron')
 
 let backend
+let mainWindow
+
+const showMessageBox = (type, message) => {
+	dialog.showMessageBox(mainWindow, { type: type, message: message })
+}
 
 const startBackend = (window, debugMode) => {
 	if (debugMode) {
@@ -15,14 +19,15 @@ const startBackend = (window, debugMode) => {
 		backend.stderr.on('data', (data) => {
 			console.log(`backend error: ${data.toString('utf-8')}`)
 			// get the last line of the Python traceback after ': '
-			const errorMessage = data.toString('utf-8').match(/(?<=: )(.*)\n$/gm)
-			window.webContents.send('backend-error', errorMessage)
+			const errorMessage = data.toString('utf-8').match(/(?<=: )(.*)\n$/gm)[0]
+			showMessageBox('error', errorMessage)
 		})
 	} else {
 		backend = require('child_process').exec('./backend/dist/backend')
 		backend.stderr.on('data', (data) => {
-			const errorMessage = data.toString('utf-8').match(/(?<=: )(.*)\n$/gm)
-			window.webContents.send('backend-error', errorMessage)
+			// get the last line of the Python traceback after ': '
+			const errorMessage = data.toString('utf-8').match(/(?<=: )(.*)\n$/)[0]
+			showMessageBox('error', errorMessage)
 		})
 	}
 }
@@ -33,8 +38,10 @@ const terminateBackend = () => {
 
 createWindow = () => {
 	const win = new BrowserWindow({
-		width: 1024,
-		height: 800,
+		width: 770,
+		minWidth: 770,
+		height: 660,
+		minHeight: 660,
 		webPreferences: {
 			nodeIntegration: true,
 			contextIsolation: false,
@@ -43,12 +50,16 @@ createWindow = () => {
 
 	win.loadFile('frontend/separate.html')
 
-	return win
+	mainWindow = win
 }
 
 app.whenReady().then(() => {
-	const win = createWindow()
-	startBackend(win, (debugMode = false))
+	createWindow()
+	startBackend(mainWindow, (debugMode = false))
 })
 
 app.on('before-quit', terminateBackend)
+
+ipcMain.on('show-message-box', (e, type, message) => {
+	showMessageBox(type, message)
+})
