@@ -1,15 +1,7 @@
-// brand colors
-$purple: slateblue;
-
-@font-face {
-	font-family: 'Comfortaa';
-	src: url(../resources/fonts/Comfortaa.ttf);
-}
-
 // update Bulma's global variables
-$family-sans-serif: 'Comfortaa', sans-serif;
-$primary: $purple;
+$primary: DodgerBlue;
 $link: $primary;
+$section-padding: 3rem;
 
 // import Bulma and dark mode
 @import '../../node_modules/bulma/bulma.sass';
@@ -17,7 +9,7 @@ $link: $primary;
 
 // ------------------------------ custom styles -------------------------------
 
-// disable selecting (highlighting)
+// disable selecting text not in a textbox
 :not(input):not(textarea),
 :not(input):not(textarea)::after,
 :not(input):not(textarea)::before,
@@ -39,6 +31,22 @@ a[href^="ftp://"]
 {
 	-webkit-user-drag: auto;
 	user-drag: auto; /* Technically not supported in Electron yet */
+}
+
+html {
+	font: caption;
+	font-size: 14px;
+}
+
+html,
+body {
+	height: 100vh;
+	overflow: hidden;
+}
+
+// textbox highlight color
+::selection {
+	background: rgba($primary, 0.5);
 }
 
 // full-screen loading animation
@@ -70,15 +78,9 @@ a[href^="ftp://"]
 	margin-bottom: 0;
 }
 
-html,
-body {
-	height: 100vh;
-	overflow: hidden;
-}
-
 section {
 	height: 100%;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 
 .pp-icon {
@@ -110,8 +112,12 @@ section {
 			background-color: $text-strong-dark;
 		}
 
-		li.is-active a .pp-icon {
-			background-color: $link-dark;
+		li.is-active a {
+			color: $link;
+
+			.pp-icon {
+				background-color: $link;
+			}
 		}
 	}
 }
