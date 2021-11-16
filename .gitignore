@@ -351,4 +351,6 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/node,python,visualstudiocode,macos,windows,linux
 
+# CSS files are built on "npm start"
+*.css
 *.css.map
