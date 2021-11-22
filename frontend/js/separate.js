@@ -5,9 +5,10 @@ const partsListElement = document.getElementById('parts-list')
 
 // send data to backend on submit button click
 submitButtonElement.addEventListener('click', (e) => {
-	submitForm('separate', {
-		'song-title': songTitleElement.value,
-		'pdf-source-path': pdfSourcePathElement.value,
-		'parts-list': partsListElement.value,
-	})
+	ipcRenderer.send(
+		'separate',
+		pdfSourcePathElement.value,
+		partsListElement.value,
+		songTitleElement.value
+	)
 })

@@ -22,6 +22,16 @@ const submitForm = (endpoint, data) => {
 		})
 }
 
+// show the loader screen overlay
+const showLoader = () => {
+	loaderElement.classList.add('is-active')
+}
+
+// show the loader screen overlay
+const hideLoader = () => {
+	loaderElement.classList.remove('is-active')
+}
+
 // clear form
 const clearForm = () => {
 	const formElements = document.querySelectorAll(
@@ -31,3 +41,7 @@ const clearForm = () => {
 		element.value = ''
 	}
 }
+
+ipcRenderer.on('show-loader', showLoader)
+ipcRenderer.on('hide-loader', hideLoader)
+ipcRenderer.on('clear-form', clearForm)

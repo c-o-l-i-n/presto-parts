@@ -1,4 +1,5 @@
 const { app, dialog, BrowserWindow, ipcMain } = require('electron')
+const { separateSongParts } = require('./js-backend/separateSongParts')
 
 let backend
 let mainWindow
@@ -62,4 +63,22 @@ app.on('before-quit', terminateBackend)
 
 ipcMain.on('show-message-box', (e, type, message) => {
 	showMessageBox(type, message)
+})
+
+ipcMain.on('separate', async (e, sourcePath, partsList, prefix) => {
+	mainWindow.webContents.send('show-loader')
+	try {
+		const destinationDirectory = await separateSongParts(
+			sourcePath,
+			partsList,
+			prefix
+		)
+		showMessageBox(
+			'info',
+			`Success!\n\nSeparated PDFs created in ${destinationDirectory}`
+		)
+	} catch (errorMessage) {
+		showMessageBox('error', errorMessage)
+	}
+	mainWindow.webContents.send('hide-loader')
 })
