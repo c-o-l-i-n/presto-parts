@@ -8,10 +8,11 @@ const partsListElement = document.getElementById('parts-list')
 
 // send data to backend on submit button click
 submitButtonElement.addEventListener('click', (e) => {
-	submitForm('generate', {
-		'collection-name': collectionNameElement.value,
-		'song-folders-location': songFoldersLocationElement.value,
-		'song-list': songListElement.value,
-		'parts-list': partsListElement.value,
-	})
+	ipcRenderer.send(
+		'generate',
+		collectionNameElement.value,
+		songFoldersLocationElement.value,
+		songListElement.value,
+		partsListElement.value
+	)
 })

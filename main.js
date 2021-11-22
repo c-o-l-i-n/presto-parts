@@ -1,5 +1,8 @@
 const { app, dialog, BrowserWindow, ipcMain } = require('electron')
 const { separateSongParts } = require('./js-backend/separateSongParts')
+const {
+	generateInstrumentPartsAndMaster,
+} = require('./js-backend/generateInstrumentPartsAndMaster')
 
 let backend
 let mainWindow
@@ -75,10 +78,32 @@ ipcMain.on('separate', async (e, sourcePath, partsList, prefix) => {
 		)
 		showMessageBox(
 			'info',
-			`Success!\n\nSeparated PDFs created in ${destinationDirectory}`
+			`Success!\n\nSeparated PDFs created in '${destinationDirectory}'`
 		)
 	} catch (errorMessage) {
-		showMessageBox('error', errorMessage)
+		showMessageBox('error', errorMessage.toString())
 	}
 	mainWindow.webContents.send('hide-loader')
 })
+
+ipcMain.on(
+	'generate',
+	async (e, pieceList, songFoldersLocation, partsList, destName) => {
+		mainWindow.webContents.send('show-loader')
+		try {
+			const destinationDirectory = await generateInstrumentPartsAndMaster(
+				pieceList,
+				songFoldersLocation,
+				partsList,
+				destName
+			)
+			showMessageBox(
+				'info',
+				`Success!\n\nInstrument parts and Master PDF created in '${destinationDirectory}'`
+			)
+		} catch (errorMessage) {
+			showMessageBox('error', errorMessage.toString())
+		}
+		mainWindow.webContents.send('hide-loader')
+	}
+)
