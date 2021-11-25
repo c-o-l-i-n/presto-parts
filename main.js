@@ -1,4 +1,4 @@
-const { app, dialog, BrowserWindow, ipcMain } = require('electron')
+const { app, dialog, BrowserWindow, ipcMain, Menu } = require('electron')
 const { separateSongParts } = require('./backend/separateSongParts')
 const {
 	generateInstrumentPartsAndMaster,
@@ -74,3 +74,31 @@ ipcMain.on(
 		mainWindow.webContents.send('hide-loader')
 	}
 )
+
+const isMac = process.platform === 'darwin'
+
+const template = [
+	{ role: 'appMenu' },
+	{ role: 'fileMenu' },
+	{ role: 'editMenu' },
+	{
+		label: 'View',
+		submenu: [{ role: 'togglefullscreen' }],
+	},
+	{ role: 'windowMenu' },
+	{
+		role: 'help',
+		submenu: [
+			{
+				label: 'Learn More',
+				click: async () => {
+					const { shell } = require('electron')
+					await shell.openExternal('https://electronjs.org')
+				},
+			},
+		],
+	},
+]
+
+const menu = Menu.buildFromTemplate(template)
+Menu.setApplicationMenu(menu)
