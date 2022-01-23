@@ -4,9 +4,9 @@
 	"description": "",
 	"main": "main.js",
 	"scripts": {
-		"start": "npm run build-css; electron-forge start",
-		"package": "npm run build-css; electron-forge package",
-		"make": "npm run build-css; electron-forge make",
+		"start": "npm run build-css && electron-forge start",
+		"package": "npm run build-css && electron-forge package",
+		"make": "npm run build-css && electron-forge make",
 		"build-css": "sass frontend/scss:frontend/css",
 		"watch-css": "npm run build-css -- --watch"
 	},
