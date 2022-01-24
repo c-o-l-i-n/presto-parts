@@ -51,8 +51,8 @@ ipcMain.on('choose-song-folders-location', () => {
 	mainWindow.webContents.send(
 		'user-chose-song-folders-location',
 		dialog.showOpenDialogSync(mainWindow, {
-			title: 'Choose songs folders location',
-			message: 'Choose songs folders location',
+			title: 'Choose song folders location',
+			message: 'Choose song folders location',
 			properties: ['openDirectory'],
 		})
 	)
