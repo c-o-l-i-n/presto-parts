@@ -8,6 +8,9 @@ const mainElement = document.getElementById('main')
 const submitButtonElement = document.getElementById('submit-button')
 const loaderElement = document.getElementById('loader')
 
+// set app title
+document.title = require(electron).app.name
+
 // show the loader screen overlay
 const showLoader = () => {
 	loaderElement.classList.add('is-active')

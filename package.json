@@ -1,5 +1,6 @@
 {
 	"name": "presto-parts",
+	"productName": "Presto Parts",
 	"version": "0.0.0",
 	"description": "",
 	"main": "main.js",

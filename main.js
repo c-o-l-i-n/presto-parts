@@ -100,6 +100,12 @@ ipcMain.on(
 
 const isMac = process.platform === 'darwin'
 
+app.setAboutPanelOptions({
+	applicationName: app.name,
+	applicationVersion: app.getVersion(),
+	copyright: 'Copyright © 2022 Colin A. Williams',
+})
+
 const template = [
 	{ role: 'appMenu' },
 	{ role: 'fileMenu' },
