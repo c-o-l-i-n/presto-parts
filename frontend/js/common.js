@@ -9,7 +9,7 @@ const submitButtonElement = document.getElementById('submit-button')
 const loaderElement = document.getElementById('loader')
 
 // set app title
-document.title = require(electron).app.name
+document.title = 'Presto Parts'
 
 // show the loader screen overlay
 const showLoader = () => {
