@@ -5,6 +5,9 @@ const songFoldersLocationElement = document.getElementById(
 )
 const songListElement = document.getElementById('song-list')
 const partsListElement = document.getElementById('parts-list')
+const chooseFolderButtonElement = document.getElementById(
+	'choose-folder-button'
+)
 
 // send data to backend on submit button click
 submitButtonElement.addEventListener('click', (e) => {
@@ -15,4 +18,17 @@ submitButtonElement.addEventListener('click', (e) => {
 		songListElement.value,
 		partsListElement.value
 	)
+})
+
+// open file dialog on "Choose File" button click
+chooseFolderButtonElement.addEventListener('click', () => {
+	ipcRenderer.send('choose-song-folders-location')
+	chooseFolderButtonElement.blur()
+})
+
+// set textbox value to chosen file path
+ipcRenderer.on('user-chose-song-folders-location', (e, folderPath) => {
+	if (folderPath) {
+		songFoldersLocationElement.value = folderPath
+	}
 })

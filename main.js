@@ -35,6 +35,29 @@ ipcMain.on('show-message-box', (e, type, message) => {
 	showMessageBox(type, message)
 })
 
+ipcMain.on('choose-pdf-source-file', () => {
+	mainWindow.webContents.send(
+		'user-chose-pdf-source-file',
+		dialog.showOpenDialogSync(mainWindow, {
+			title: 'Choose PDF source file',
+			message: 'Choose PDF source file',
+			filters: [{ name: 'PDF Files', extensions: ['pdf'] }],
+			properties: ['openFile'],
+		})
+	)
+})
+
+ipcMain.on('choose-song-folders-location', () => {
+	mainWindow.webContents.send(
+		'user-chose-song-folders-location',
+		dialog.showOpenDialogSync(mainWindow, {
+			title: 'Choose songs folders location',
+			message: 'Choose songs folders location',
+			properties: ['openDirectory'],
+		})
+	)
+})
+
 ipcMain.on('separate', async (e, sourcePath, partsList, prefix) => {
 	mainWindow.webContents.send('show-loader')
 	try {
