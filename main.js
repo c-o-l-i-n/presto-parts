@@ -1,4 +1,4 @@
-const { app, dialog, BrowserWindow, ipcMain, Menu } = require('electron')
+const { app, dialog, BrowserWindow, ipcMain, Menu, shell } = require('electron')
 const { separateSongParts } = require('./backend/separateSongParts')
 const {
 	generateInstrumentPartsAndMaster,
@@ -121,7 +121,6 @@ const template = [
 			{
 				label: 'Learn More',
 				click: async () => {
-					const { shell } = require('electron')
 					await shell.openExternal('https://electronjs.org')
 				},
 			},
