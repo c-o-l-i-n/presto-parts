@@ -94,7 +94,7 @@ const handleFileDrop = (e, desiredFileType, destinationInputElement) => {
 	}
 
 	if (fileType !== desiredFileType) {
-		const lettersPrecededByAn = 'AEFHILMNOREX'
+		const lettersPrecededByAn = 'AEFHILMNORSX'
 		ipcRenderer.send(
 			'show-message-box',
 			'error',
