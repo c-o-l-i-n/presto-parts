@@ -14,6 +14,11 @@ submitButtonElement.addEventListener('click', (e) => {
 	)
 })
 
+// populates file path on file drop
+document.addEventListener('drop', (e) => {
+	handleFileDrop(e, 'PDF', pdfSourcePathElement)
+})
+
 // open file dialog on "Choose File" button click
 chooseFileButtonElement.addEventListener('click', () => {
 	ipcRenderer.send('choose-pdf-source-file')

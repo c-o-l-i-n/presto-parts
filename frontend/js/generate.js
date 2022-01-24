@@ -20,6 +20,11 @@ submitButtonElement.addEventListener('click', (e) => {
 	)
 })
 
+// populates file path on file drop
+document.addEventListener('drop', (e) => {
+	handleFileDrop(e, 'folder', songFoldersLocationElement)
+})
+
 // open file dialog on "Choose File" button click
 chooseFolderButtonElement.addEventListener('click', () => {
 	ipcRenderer.send('choose-song-folders-location')
