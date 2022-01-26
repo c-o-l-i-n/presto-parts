@@ -9,9 +9,6 @@ const submitButtonElement = document.getElementById('submit-button')
 const loaderElement = document.getElementById('loader')
 const externalLinkElements = document.getElementsByClassName('external-link')
 
-// set app title
-document.title = 'Presto Parts'
-
 // show the loader screen overlay
 const showLoader = () => {
 	loaderElement.classList.add('is-active')
