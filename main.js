@@ -63,9 +63,6 @@ createWindow = () => {
 			aboutWindow.hide()
 		}
 	})
-
-	mainWindow.webContents.openDevTools()
-	aboutWindow.webContents.openDevTools()
 }
 
 app.whenReady().then(() => {
