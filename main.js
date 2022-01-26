@@ -12,6 +12,7 @@ const showMessageBox = (type, message) => {
 
 createWindow = () => {
 	const win = new BrowserWindow({
+		show: false,
 		width: 770,
 		minWidth: 770,
 		height: 660,
@@ -23,6 +24,10 @@ createWindow = () => {
 	})
 
 	win.loadFile('frontend/separate.html')
+
+	win.once('ready-to-show', () => {
+		win.show()
+	})
 
 	mainWindow = win
 }
