@@ -48,7 +48,12 @@ createWindow = () => {
 		},
 	})
 
-	aboutWindow.loadFile('frontend/about.html')
+	aboutWindow.loadFile('frontend/about.html').then(() => {
+		aboutWindow.webContents.send('app-info', {
+			name: app.name,
+			version: app.getVersion(),
+		})
+	})
 
 	// hide window rather than destroy it on close
 	aboutWindow.on('close', (e) => {
@@ -58,6 +63,9 @@ createWindow = () => {
 			aboutWindow.hide()
 		}
 	})
+
+	mainWindow.webContents.openDevTools()
+	aboutWindow.webContents.openDevTools()
 }
 
 app.whenReady().then(() => {
