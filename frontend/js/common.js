@@ -1,4 +1,4 @@
-const { ipcRenderer } = require('electron')
+const { ipcRenderer, shell } = require('electron')
 const fs = require('fs')
 const path = require('path')
 
@@ -7,6 +7,7 @@ const dropZoneElement = document.getElementById('drop-zone')
 const mainElement = document.getElementById('main')
 const submitButtonElement = document.getElementById('submit-button')
 const loaderElement = document.getElementById('loader')
+const externalLinkElements = document.getElementsByClassName('external-link')
 
 // set app title
 document.title = 'Presto Parts'
@@ -106,4 +107,11 @@ const handleFileDrop = (e, desiredFileType, destinationInputElement) => {
 	}
 
 	destinationInputElement.value = filePath
+}
+
+// make external links functional
+for (const externalLinkElement of externalLinkElements) {
+	externalLinkElement.addEventListener('click', () => {
+		shell.openExternal(externalLinkElement.dataset.href)
+	})
 }

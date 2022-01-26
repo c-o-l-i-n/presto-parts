@@ -5,13 +5,15 @@ const {
 } = require('./backend/generateInstrumentPartsAndMaster')
 
 let mainWindow
+let aboutWindow
+let appIsQuitting = false
 
 const showMessageBox = (type, message) => {
 	dialog.showMessageBox(mainWindow, { type: type, message: message })
 }
 
 createWindow = () => {
-	const win = new BrowserWindow({
+	mainWindow = new BrowserWindow({
 		show: false,
 		width: 770,
 		minWidth: 770,
@@ -23,17 +25,47 @@ createWindow = () => {
 		},
 	})
 
-	win.loadFile('frontend/separate.html')
+	mainWindow.loadFile('frontend/separate.html')
 
-	win.once('ready-to-show', () => {
-		win.show()
+	mainWindow.once('ready-to-show', () => {
+		mainWindow.show()
 	})
 
-	mainWindow = win
+	mainWindow.on('close', (e) => {
+		app.quit()
+	})
+
+	aboutWindow = new BrowserWindow({
+		show: false,
+		width: 270,
+		height: 278,
+		resizable: false,
+		minimizable: false,
+		maximizable: false,
+		webPreferences: {
+			nodeIntegration: true,
+			contextIsolation: false,
+		},
+	})
+
+	aboutWindow.loadFile('frontend/about.html')
+
+	// hide window rather than destroy it on close
+	aboutWindow.on('close', (e) => {
+		// if this isn't here, the app won't ever quit
+		if (!appIsQuitting) {
+			e.preventDefault()
+			aboutWindow.hide()
+		}
+	})
 }
 
 app.whenReady().then(() => {
 	createWindow()
+})
+
+app.on('before-quit', function (evt) {
+	appIsQuitting = true
 })
 
 ipcMain.on('show-message-box', (e, type, message) => {
@@ -105,20 +137,40 @@ ipcMain.on(
 
 const isMac = process.platform === 'darwin'
 
-app.setAboutPanelOptions({
-	applicationName: app.name,
-	applicationVersion: app.getVersion(),
-	copyright: 'Copyright © 2022 Colin A. Williams',
-})
-
 const template = [
-	{ role: 'appMenu' },
+	...(isMac
+		? [
+				{
+					label: app.name,
+					submenu: [
+						{
+							label: 'About ' + app.name,
+							click: () => {
+								aboutWindow.show()
+							},
+						},
+						{ type: 'separator' },
+						{ role: 'services' },
+						{ type: 'separator' },
+						{ role: 'hide' },
+						{ role: 'hideOthers' },
+						{ role: 'unhide' },
+						{ type: 'separator' },
+						{ role: 'quit' },
+					],
+				},
+		  ]
+		: []),
 	{ role: 'fileMenu' },
 	{ role: 'editMenu' },
-	{
-		label: 'View',
-		submenu: [{ role: 'togglefullscreen' }],
-	},
+	...(isMac
+		? [
+				{
+					label: 'View',
+					submenu: [{ role: 'togglefullscreen' }],
+				},
+		  ]
+		: []),
 	{ role: 'windowMenu' },
 	{
 		role: 'help',
@@ -126,7 +178,7 @@ const template = [
 			{
 				label: 'Learn More',
 				click: async () => {
-					await shell.openExternal('https://electronjs.org')
+					await shell.openExternal('https://prestoparts.org')
 				},
 			},
 		],
