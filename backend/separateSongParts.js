@@ -1,6 +1,8 @@
 const { PDFDocument, degrees } = require('pdf-lib')
 const fs = require('fs')
 
+const directorySeparator = process.platform === 'win32' ? '\\' : '/'
+
 const separateSongParts = async (sourcePath, partsList, prefix) => {
 	// 	Sepatates song parts based on a list of part names and number of pages for each part.
 	// 	Format is shown below: part name followed by #num_pages (1 is default)
@@ -55,12 +57,17 @@ const separateSongParts = async (sourcePath, partsList, prefix) => {
 	// check that destination directory name is available
 	const sourceFileDirectory = sourcePath.substring(
 		0,
-		sourcePath.lastIndexOf('/')
+		sourcePath.lastIndexOf(directorySeparator)
 	)
-	const destinationDirecrory = `${sourceFileDirectory}/${prefix}`
+	const destinationDirecrory = `${sourceFileDirectory}${directorySeparator}${prefix}`
 	if (fs.existsSync(destinationDirecrory)) {
 		throw `A folder named "${prefix}" already exists at the PDF location`
 	}
+
+	console.log('source path: ' + sourcePath)
+	console.log('source file directory: ' + sourceFileDirectory)
+	console.log('destination directory: ' + destinationDirecrory)
+	// return
 
 	// generate PDF for each part in the given list
 	let startingPage = 0
@@ -73,7 +80,7 @@ const separateSongParts = async (sourcePath, partsList, prefix) => {
 			// get page from source PDF
 			const page = (await partPdf.copyPages(source, [startingPage + i]))[0]
 			// flip even pages (odd here since indexing starts at 0)
-			if (i % 2 == 1) {
+			if (i % 2 === 1) {
 				page.setRotation(degrees(180))
 			}
 			partPdf.addPage(page)
@@ -81,7 +88,7 @@ const separateSongParts = async (sourcePath, partsList, prefix) => {
 		startingPage += numPagesForPart[part]
 
 		// generate file name
-		const destFileName = `${destinationDirecrory}/${prefix}-${part}.pdf`
+		const destFileName = `${destinationDirecrory}${directorySeparator}${prefix}-${part}.pdf`
 
 		// save PDF file bytes
 		const pdfBytes = await partPdf.save()

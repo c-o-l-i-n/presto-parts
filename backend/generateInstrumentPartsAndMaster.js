@@ -1,13 +1,15 @@
 const { PDFDocument } = require('pdf-lib')
 const fs = require('fs')
 
+const directorySeparator = process.platform === 'win32' ? '\\' : '/'
+
 const generateInstrumentPartsAndMaster = async (
 	collectionName,
 	songFoldersLocation,
 	songList,
 	instrumentPartsList
 ) => {
-	const destinationDirectory = `${songFoldersLocation}/${collectionName}`
+	const destinationDirectory = `${songFoldersLocation}${directorySeparator}${collectionName}`
 
 	if (!fs.existsSync(songFoldersLocation)) {
 		throw 'Error: The Song Folders Location does not exist'
@@ -43,7 +45,7 @@ const generateInstrumentPartsAndMaster = async (
 	// create PDF for each instrument
 	let instrumentPdfFiles = []
 	for (instrument in numCopiesOfPart) {
-		const instrumentPartFilePath = `${destinationDirectory}/${collectionName}-${instrument}.pdf`
+		const instrumentPartFilePath = `${destinationDirectory}${directorySeparator}${collectionName}-${instrument}.pdf`
 
 		let instrumentPartPdfDocument = await PDFDocument.create()
 
@@ -53,9 +55,9 @@ const generateInstrumentPartsAndMaster = async (
 			songName = songName.replace(/\s/g, '')
 
 			// get instrument part PDF from this song
-			const songDirectory = `${songFoldersLocation}/${songName}`
+			const songDirectory = `${songFoldersLocation}${directorySeparator}${songName}`
 			const partFile = fs.readFileSync(
-				`${songDirectory}/${songName}-${instrument}.pdf`
+				`${songDirectory}${directorySeparator}${songName}-${instrument}.pdf`
 			)
 			let partFileReader = await PDFDocument.load(partFile)
 
@@ -70,8 +72,8 @@ const generateInstrumentPartsAndMaster = async (
 
 			// if working with a score, special case, add a blank page after each if there is an odd number of pages in the score
 			if (
-				instrument.toLowerCase() == 'score' &&
-				partFileReader.getPageCount() % 2 == 1
+				instrument.toLowerCase() === 'score' &&
+				partFileReader.getPageCount() % 2 === 1
 			) {
 				addBlankPage(instrumentPartPdfDocument)
 			}
@@ -95,7 +97,7 @@ const generateInstrumentPartsAndMaster = async (
 			}
 
 			// if odd number of pages in instrument part, add blank page for double sided printing
-			if (instrumentPartPdfDocument.getPageCount() % 2 == 1) {
+			if (instrumentPartPdfDocument.getPageCount() % 2 === 1) {
 				addBlankPage(masterPdfDocument)
 			}
 		}
