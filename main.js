@@ -4,6 +4,14 @@ const {
 	generateInstrumentPartsAndMaster,
 } = require('./backend/generateInstrumentPartsAndMaster')
 
+const isMac = process.platform === 'darwin'
+
+// Fixes strange behavior with window size on Windows 10
+const mainWindowWidth = isMac ? 770 : 786
+const mainWindowMinimumWidth = mainWindowWidth
+const mainWindowHeight = isMac ? 660 : 0
+const mainWindowMinimumHeight = isMac ? mainWindowMinimumHeight : 700
+
 let mainWindow
 let aboutWindow
 let appIsQuitting = false
@@ -15,10 +23,10 @@ const showMessageBox = (type, message) => {
 createWindow = () => {
 	mainWindow = new BrowserWindow({
 		show: false,
-		width: 770,
-		minWidth: 770,
-		height: 660,
-		minHeight: 660,
+		width: mainWindowWidth,
+		height: mainWindowHeight,
+		minWidth: mainWindowMinimumWidth,
+		minHeight: mainWindowMinimumHeight,
 		webPreferences: {
 			nodeIntegration: true,
 			contextIsolation: false,
@@ -141,8 +149,6 @@ ipcMain.on(
 		mainWindow.webContents.send('hide-loader')
 	}
 )
-
-const isMac = process.platform === 'darwin'
 
 const template = [
 	...(isMac
