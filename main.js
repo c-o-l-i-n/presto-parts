@@ -48,6 +48,8 @@ createWindow = () => {
 		},
 	})
 
+	aboutWindow.setMenu(null)
+
 	aboutWindow.loadFile('frontend/about.html').then(() => {
 		aboutWindow.webContents.send('app-info', {
 			name: app.name,
@@ -186,6 +188,17 @@ const template = [
 					await shell.openExternal('https://prestoparts.org')
 				},
 			},
+			...(!isMac
+				? [
+						{ type: 'separator' },
+						{
+							label: 'About',
+							click: () => {
+								aboutWindow.show()
+							},
+						},
+				  ]
+				: []),
 		],
 	},
 ]
