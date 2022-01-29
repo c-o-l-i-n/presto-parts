@@ -16,7 +16,7 @@ const separateSongParts = async (sourcePath, partsList, prefix) => {
 		throw 'The given PDF source file does not exist'
 	}
 
-	if (sourcePath.slice(-4) != '.pdf') {
+	if (sourcePath.slice(-4).toLowerCase() != '.pdf') {
 		throw 'The given PDF source file is not a PDF'
 	}
 
@@ -47,7 +47,9 @@ const separateSongParts = async (sourcePath, partsList, prefix) => {
 
 	// make sure actual page # of src matches part names list
 	if (source.getPageCount() != pagesSum) {
-		throw `Incorrect number of pages in Parts List.\n\nThe PDF source has ${source.getPageCount()} pages, but you listed ${pagesSum}.`
+		throw `Incorrect number of pages in Parts List.\n\nThe PDF source has ${source.getPageCount()} pages, but ${pagesSum} ${
+			pagesSum === 1 ? 'was' : 'were'
+		} listed.`
 	}
 
 	// check that destination directory name is available

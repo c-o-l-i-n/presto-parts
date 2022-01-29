@@ -73,8 +73,18 @@ document.addEventListener('dragleave', (e) => {
 
 // populate file path and handles errors when user drops file
 const handleFileDrop = (e, desiredFileType, destinationInputElement) => {
+	if (!e.dataTransfer.files[0]) {
+		ipcRenderer.send(
+			'show-message-box',
+			'error',
+			`Must be a ${desiredFileType}.`
+		)
+		return
+	}
+
 	const filePath = e.dataTransfer.files[0].path
 	const isFolder = fs.statSync(filePath).isDirectory()
+	console.log(filePath)
 
 	const fileType = isFolder
 		? 'folder'
@@ -86,7 +96,9 @@ const handleFileDrop = (e, desiredFileType, destinationInputElement) => {
 		ipcRenderer.send(
 			'show-message-box',
 			'error',
-			`Must be a single file.\nYou dropped ${e.dataTransfer.files.length} files.`
+			`Must be a single file.\n${e.dataTransfer.files.length} file${
+				e.dataTransfer.files.length === 0 ? ' was' : 's were'
+			} dropped.`
 		)
 		return
 	}
@@ -96,9 +108,9 @@ const handleFileDrop = (e, desiredFileType, destinationInputElement) => {
 		ipcRenderer.send(
 			'show-message-box',
 			'error',
-			`Must be a ${desiredFileType}.\nYou dropped a${
+			`Must be a ${desiredFileType}.\nA${
 				lettersPrecededByAn.includes(fileType.charAt(0)) ? 'n' : ''
-			} ${fileType}.`
+			} ${fileType} was dropped.`
 		)
 		return
 	}
