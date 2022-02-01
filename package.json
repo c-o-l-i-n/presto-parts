@@ -2,7 +2,7 @@
 	"name": "presto-parts",
 	"productName": "Presto Parts",
 	"version": "0.1.0",
-	"description": "",
+	"description": "Organize your sheet music by part",
 	"main": "main.js",
 	"scripts": {
 		"start": "npm run build-css && electron-forge start",
@@ -31,13 +31,17 @@
 	"config": {
 		"forge": {
 			"packagerConfig": {
-				"icon": "./app-icons/icon.icns"
+				"icon": "./app-icons/app-icon.icns"
 			},
 			"makers": [
 				{
 					"name": "@electron-forge/maker-squirrel",
 					"config": {
-						"name": "presto_parts"
+						"name": "PrestoParts",
+						"icon": "./app-icons/app-icon.ico",
+						"loadingGif": "./app-icons/install-animation.gif",
+						"setupExe": "${productName} ${version} Installer.exe",
+						"setupIcon": "./app-icons/installer-icon.ico"
 					}
 				},
 				{
