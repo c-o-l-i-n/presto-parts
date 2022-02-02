@@ -1,5 +1,6 @@
 const { PDFDocument, degrees } = require('pdf-lib')
 const fs = require('fs')
+const validFilename = require('valid-filename')
 
 const directorySeparator = process.platform === 'win32' ? '\\' : '/'
 
@@ -14,12 +15,16 @@ const separateSongParts = async (sourcePath, partsList, prefix) => {
 	// 	etc ...
 	//
 
+	if (!validFilename(prefix)) {
+		throw `"${prefix}" is not a valid folder name. Please try something different.`
+	}
+
 	if (!fs.existsSync(sourcePath)) {
-		throw 'The given PDF source file does not exist'
+		throw 'The given PDF source file does not exist.'
 	}
 
 	if (sourcePath.slice(-4).toLowerCase() != '.pdf') {
-		throw 'The given PDF source file is not a PDF'
+		throw 'The given PDF source file is not a PDF.'
 	}
 
 	let numPagesForPart = {}
@@ -61,13 +66,8 @@ const separateSongParts = async (sourcePath, partsList, prefix) => {
 	)
 	const destinationDirecrory = `${sourceFileDirectory}${directorySeparator}${prefix}`
 	if (fs.existsSync(destinationDirecrory)) {
-		throw `A folder named "${prefix}" already exists at the PDF location`
+		throw `A folder named "${prefix}" already exists at the PDF location.`
 	}
-
-	console.log('source path: ' + sourcePath)
-	console.log('source file directory: ' + sourceFileDirectory)
-	console.log('destination directory: ' + destinationDirecrory)
-	// return
 
 	// generate PDF for each part in the given list
 	let startingPage = 0

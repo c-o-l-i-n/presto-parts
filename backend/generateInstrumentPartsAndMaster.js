@@ -1,5 +1,6 @@
 const { PDFDocument } = require('pdf-lib')
 const fs = require('fs')
+const validFilename = require('valid-filename')
 
 const directorySeparator = process.platform === 'win32' ? '\\' : '/'
 
@@ -11,12 +12,16 @@ const generateInstrumentPartsAndMaster = async (
 ) => {
 	const destinationDirectory = `${songFoldersLocation}${directorySeparator}${collectionName}`
 
+	if (!validFilename(prefix)) {
+		throw `"${collectionName}" is not a valid folder name. Please try something different.`
+	}
+
 	if (!fs.existsSync(songFoldersLocation)) {
-		throw 'Error: The Song Folders Location does not exist'
+		throw 'Error: The Song Folders Location does not exist.'
 	}
 
 	if (fs.existsSync(destinationDirectory)) {
-		throw `Error: Cannot create destination folder.\n\nA folder named '${destinationDirectory}' already exists`
+		throw `Error: Cannot create destination folder.\n\nA folder named "${destinationDirectory}" already exists.`
 	}
 
 	// generate list of parts and number of respective copies based on given input
