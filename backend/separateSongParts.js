@@ -34,6 +34,10 @@ const separateSongParts = async (sourcePath, partsList, prefix) => {
 		let partNameAndNumPages = line.split('#')
 		// remove spaces from part name
 		partNameAndNumPages[0] = partNameAndNumPages[0].replace(/\s/g, '')
+		// skip line if blank
+		if (!partNameAndNumPages[0]) {
+			continue
+		}
 		// set default page number to 1 or convert page number from str to int
 		if (partNameAndNumPages.length < 2) {
 			partNameAndNumPages.push(1)

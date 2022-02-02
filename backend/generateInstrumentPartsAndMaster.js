@@ -33,6 +33,11 @@ const generateInstrumentPartsAndMaster = async (
 		// remove spaces from part name
 		partNameAndNumCopies[0] = partNameAndNumCopies[0].replace(/\s/g, '')
 
+		// skip part if blank
+		if (!partNameAndNumCopies[0]) {
+			continue
+		}
+
 		// set default num copies to 1 or convert num copies from str to int
 		if (partNameAndNumCopies.length < 2) {
 			partNameAndNumCopies.push(1)
@@ -58,6 +63,11 @@ const generateInstrumentPartsAndMaster = async (
 		for (songName of songList.split(/\r?\n/)) {
 			// remove spaces from song name
 			songName = songName.replace(/\s/g, '')
+
+			// skip songName if blank
+			if (!songName) {
+				continue
+			}
 
 			// get instrument part PDF from this song
 			const songDirectory = `${songFoldersLocation}${directorySeparator}${songName}`
