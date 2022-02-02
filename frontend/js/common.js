@@ -77,7 +77,7 @@ const handleFileDrop = (e, desiredFileType, destinationInputElement) => {
 		ipcRenderer.send(
 			'show-message-box',
 			'error',
-			`Must be a ${desiredFileType}.`
+			`Error: Must be a ${desiredFileType}.`
 		)
 		return
 	}
@@ -96,7 +96,7 @@ const handleFileDrop = (e, desiredFileType, destinationInputElement) => {
 		ipcRenderer.send(
 			'show-message-box',
 			'error',
-			`Must be a single file.\n${e.dataTransfer.files.length} file${
+			`Error: Must be a single file.\n${e.dataTransfer.files.length} file${
 				e.dataTransfer.files.length === 0 ? ' was' : 's were'
 			} dropped.`
 		)
@@ -108,7 +108,7 @@ const handleFileDrop = (e, desiredFileType, destinationInputElement) => {
 		ipcRenderer.send(
 			'show-message-box',
 			'error',
-			`Must be a ${desiredFileType}.\nA${
+			`Error: Must be a ${desiredFileType}.\nA${
 				lettersPrecededByAn.includes(fileType.charAt(0)) ? 'n' : ''
 			} ${fileType} was dropped.`
 		)

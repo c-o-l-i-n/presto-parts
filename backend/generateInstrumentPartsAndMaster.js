@@ -12,8 +12,8 @@ const generateInstrumentPartsAndMaster = async (
 ) => {
 	const destinationDirectory = `${songFoldersLocation}${directorySeparator}${collectionName}`
 
-	if (!validFilename(prefix)) {
-		throw `"${collectionName}" is not a valid folder name. Please try something different.`
+	if (!validFilename(collectionName)) {
+		throw `Error: Collection Name must be a valid folder name. "${collectionName}" is not a valid folder name. Please try something different.`
 	}
 
 	if (!fs.existsSync(songFoldersLocation)) {
@@ -71,9 +71,14 @@ const generateInstrumentPartsAndMaster = async (
 
 			// get instrument part PDF from this song
 			const songDirectory = `${songFoldersLocation}${directorySeparator}${songName}`
-			const partFile = fs.readFileSync(
-				`${songDirectory}${directorySeparator}${songName}-${instrument}.pdf`
-			)
+
+			const partFilePath = `${songDirectory}${directorySeparator}${songName}-${instrument}.pdf`
+
+			if (!fs.existsSync(partFilePath)) {
+				throw `Error: Could not find "${instrument}" part for song "${songName}". File does not exist: "${partFilePath}"`
+			}
+
+			const partFile = fs.readFileSync(partFilePath)
 			let partFileReader = await PDFDocument.load(partFile)
 
 			// copy the pages to the instrument part

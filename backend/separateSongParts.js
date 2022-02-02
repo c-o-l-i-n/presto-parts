@@ -16,15 +16,15 @@ const separateSongParts = async (sourcePath, partsList, prefix) => {
 	//
 
 	if (!validFilename(prefix)) {
-		throw `"${prefix}" is not a valid folder name. Please try something different.`
+		throw `Error: Song Title must be a valid folder name. "${prefix}" is not a valid folder name. Please try something different.`
 	}
 
 	if (!fs.existsSync(sourcePath)) {
-		throw 'The given PDF source file does not exist.'
+		throw 'Error: The given PDF source file does not exist.'
 	}
 
 	if (sourcePath.slice(-4).toLowerCase() != '.pdf') {
-		throw 'The given PDF source file is not a PDF.'
+		throw 'Error: The given PDF source file is not a PDF.'
 	}
 
 	let numPagesForPart = {}
@@ -37,6 +37,10 @@ const separateSongParts = async (sourcePath, partsList, prefix) => {
 		// skip line if blank
 		if (!partNameAndNumPages[0]) {
 			continue
+		}
+		// check if part is valid file name
+		if (!validFilename(partNameAndNumPages[0])) {
+			throw `Error: Each part must be a valid file name. "${partNameAndNumPages[0]}" is not a valid file name. Please try something different.`
 		}
 		// set default page number to 1 or convert page number from str to int
 		if (partNameAndNumPages.length < 2) {
@@ -58,7 +62,7 @@ const separateSongParts = async (sourcePath, partsList, prefix) => {
 
 	// make sure actual page # of src matches part names list
 	if (source.getPageCount() != pagesSum) {
-		throw `Incorrect number of pages in Parts List.\n\nThe PDF source has ${source.getPageCount()} pages, but ${pagesSum} ${
+		throw `Error: Incorrect number of pages in Parts List.\n\nThe PDF source has ${source.getPageCount()} pages, but ${pagesSum} ${
 			pagesSum === 1 ? 'was' : 'were'
 		} listed.`
 	}
@@ -70,7 +74,7 @@ const separateSongParts = async (sourcePath, partsList, prefix) => {
 	)
 	const destinationDirecrory = `${sourceFileDirectory}${directorySeparator}${prefix}`
 	if (fs.existsSync(destinationDirecrory)) {
-		throw `A folder named "${prefix}" already exists at the PDF location.`
+		throw `Error: A folder named "${prefix}" already exists at the PDF location.`
 	}
 
 	// generate PDF for each part in the given list

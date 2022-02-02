@@ -124,7 +124,7 @@ ipcMain.on('separate', async (e, sourcePath, partsList, prefix) => {
 		)
 		showMessageBox(
 			'info',
-			`Success!\n\nSeparated PDFs created in '${destinationDirectory}'`
+			`Success!\n\nSeparated PDFs created in folder "${destinationDirectory}"`
 		)
 	} catch (errorMessage) {
 		showMessageBox('error', errorMessage.toString())
@@ -145,7 +145,7 @@ ipcMain.on(
 			)
 			showMessageBox(
 				'info',
-				`Success!\n\nInstrument parts and Master PDF created in '${destinationDirectory}'`
+				`Success!\n\nInstrument parts and Master PDF created in folder "${destinationDirectory}"`
 			)
 		} catch (errorMessage) {
 			showMessageBox('error', errorMessage.toString())
