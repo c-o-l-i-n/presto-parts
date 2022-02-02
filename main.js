@@ -17,7 +17,11 @@ let aboutWindow
 let appIsQuitting = false
 
 const showMessageBox = (type, message) => {
-	dialog.showMessageBox(mainWindow, { type: type, message: message })
+	dialog.showMessageBox(mainWindow, {
+		type: type,
+		message: message,
+		title: app.name,
+	})
 }
 
 createWindow = () => {
