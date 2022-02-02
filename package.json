@@ -25,6 +25,7 @@
 	"dependencies": {
 		"bulma": "^0.9.3",
 		"bulma-prefers-dark": "0.1.0-beta.1",
+		"electron-context-menu": "^3.1.1",
 		"electron-squirrel-startup": "^1.0.0",
 		"pdf-lib": "^1.17.1",
 		"valid-filename": "^3.1.0"

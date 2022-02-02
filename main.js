@@ -1,4 +1,5 @@
 const { app, dialog, BrowserWindow, ipcMain, Menu, shell } = require('electron')
+const contextMenu = require('electron-context-menu')
 const { separateSongParts } = require('./backend/separateSongParts')
 const {
 	generateInstrumentPartsAndMaster,
@@ -23,6 +24,16 @@ const showMessageBox = (type, message) => {
 		title: app.name,
 	})
 }
+
+contextMenu({
+	menu: (actions, props, browserWindow, dictionarySuggestions) => [
+		...dictionarySuggestions,
+		actions.separator(),
+		actions.cut(),
+		actions.copy(),
+		actions.paste(),
+	],
+})
 
 createWindow = () => {
 	mainWindow = new BrowserWindow({
