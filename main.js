@@ -11,7 +11,7 @@ const isMac = process.platform === 'darwin'
 const mainWindowWidth = isMac ? 770 : 786
 const mainWindowMinimumWidth = mainWindowWidth
 const mainWindowHeight = isMac ? 660 : 0
-const mainWindowMinimumHeight = isMac ? mainWindowMinimumHeight : 700
+const mainWindowMinimumHeight = isMac ? mainWindowHeight : 700
 
 let mainWindow
 let aboutWindow
