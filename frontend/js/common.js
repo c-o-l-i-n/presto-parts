@@ -4,7 +4,7 @@ const path = require('path')
 
 const initializePersistentStorage = async (prefix, elements) => {
 	for (const element of elements) {
-		const persistentStorageItem = `${prefix}/${element.id}`
+		const persistentStorageItem = `${prefix}.${element.id}`
 
 		// get initial value
 		element.value =
