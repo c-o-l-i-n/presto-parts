@@ -1,8 +1,7 @@
 const { PDFDocument, degrees } = require('pdf-lib')
+const path = require('path')
 const fs = require('fs')
 const validFilename = require('valid-filename')
-
-const directorySeparator = process.platform === 'win32' ? '\\' : '/'
 
 const separateSongParts = async (sourcePath, partsList, prefix) => {
 	// 	Sepatates song parts based on a list of part names and number of pages for each part.
@@ -70,9 +69,9 @@ const separateSongParts = async (sourcePath, partsList, prefix) => {
 	// check that destination directory name is available
 	const sourceFileDirectory = sourcePath.substring(
 		0,
-		sourcePath.lastIndexOf(directorySeparator)
+		sourcePath.lastIndexOf(path.sep)
 	)
-	const destinationDirecrory = `${sourceFileDirectory}${directorySeparator}${prefix}`
+	const destinationDirecrory = `${sourceFileDirectory}${path.sep}${prefix}`
 	if (fs.existsSync(destinationDirecrory)) {
 		throw `Error: A folder named "${prefix}" already exists at the PDF location.`
 	}
@@ -96,7 +95,7 @@ const separateSongParts = async (sourcePath, partsList, prefix) => {
 		startingPage += numPagesForPart[part]
 
 		// generate file name
-		const destFileName = `${destinationDirecrory}${directorySeparator}${prefix}-${part}.pdf`
+		const destFileName = `${destinationDirecrory}${path.sep}${prefix}-${part}.pdf`
 
 		// save PDF file bytes
 		const pdfBytes = await partPdf.save()

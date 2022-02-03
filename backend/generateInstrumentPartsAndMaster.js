@@ -1,8 +1,7 @@
 const { PDFDocument } = require('pdf-lib')
+const path = require('path')
 const fs = require('fs')
 const validFilename = require('valid-filename')
-
-const directorySeparator = process.platform === 'win32' ? '\\' : '/'
 
 const generateInstrumentPartsAndMaster = async (
 	collectionName,
@@ -10,7 +9,7 @@ const generateInstrumentPartsAndMaster = async (
 	songList,
 	instrumentPartsList
 ) => {
-	const destinationDirectory = `${songFoldersLocation}${directorySeparator}${collectionName}`
+	const destinationDirectory = `${songFoldersLocation}${path.sep}${collectionName}`
 
 	if (!validFilename(collectionName)) {
 		throw `Error: Collection Name must be a valid folder name. "${collectionName}" is not a valid folder name. Please try something different.`
@@ -55,7 +54,7 @@ const generateInstrumentPartsAndMaster = async (
 	// create PDF for each instrument
 	let instrumentPdfFiles = []
 	for (instrument in numCopiesOfPart) {
-		const instrumentPartFilePath = `${destinationDirectory}${directorySeparator}${collectionName}-${instrument}.pdf`
+		const instrumentPartFilePath = `${destinationDirectory}${path.sep}${collectionName}-${instrument}.pdf`
 
 		let instrumentPartPdfDocument = await PDFDocument.create()
 
@@ -70,9 +69,9 @@ const generateInstrumentPartsAndMaster = async (
 			}
 
 			// get instrument part PDF from this song
-			const songDirectory = `${songFoldersLocation}${directorySeparator}${songName}`
+			const songDirectory = `${songFoldersLocation}${path.sep}${songName}`
 
-			const partFilePath = `${songDirectory}${directorySeparator}${songName}-${instrument}.pdf`
+			const partFilePath = `${songDirectory}${path.sep}${songName}-${instrument}.pdf`
 
 			if (!fs.existsSync(partFilePath)) {
 				throw `Error: Could not find "${instrument}" part for song "${songName}". File does not exist: "${partFilePath}"`
