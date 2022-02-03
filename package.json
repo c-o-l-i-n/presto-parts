@@ -3,6 +3,16 @@
 	"productName": "Presto Parts",
 	"version": "0.1.0",
 	"description": "Organize your sheet music by part",
+	"author": "Colin A. Williams",
+	"license": "MIT",
+	"homepage": "https://prestoparts.org",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/c-o-l-i-n/presto-parts.git"
+	},
+	"bugs": {
+		"url": "https://github.com/c-o-l-i-n/presto-parts/issues"
+	},
 	"main": "main.js",
 	"scripts": {
 		"start": "npm run build-css && electron-forge start",
@@ -11,8 +21,6 @@
 		"build-css": "sass frontend/scss:frontend/css",
 		"watch-css": "npm run build-css -- --watch"
 	},
-	"author": "Colin A. Williams",
-	"license": "MIT",
 	"devDependencies": {
 		"@electron-forge/cli": "^6.0.0-beta.61",
 		"@electron-forge/maker-deb": "^6.0.0-beta.61",
