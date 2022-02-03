@@ -1,10 +1,49 @@
 const { app, dialog, BrowserWindow, ipcMain, Menu, shell } = require('electron')
 const contextMenu = require('electron-context-menu')
 const Store = require('electron-store')
+const unhandled = require('electron-unhandled')
 const { separateSongParts } = require('./backend/separateSongParts')
 const {
 	generateInstrumentPartsAndMaster,
 } = require('./backend/generateInstrumentPartsAndMaster')
+
+const sendErrorReport = (
+	os,
+	osVersion,
+	appVersion,
+	electronVersion,
+	nodeVersion,
+	chromeVersion,
+	stackTrace
+) => {
+	const params = new URLSearchParams({
+		os: os,
+		osv: osVersion,
+		av: appVersion,
+		ev: electronVersion,
+		nv: nodeVersion,
+		cv: chromeVersion,
+		stack: stackTrace,
+	})
+
+	shell.openExternal('https://prestoparts.org/report?' + params.toString())
+}
+
+// handles unhandled errors
+unhandled({
+	showDialog: true,
+	reportButton: (error) => {
+		sendErrorReport(
+			process.platform,
+			require('os').release(),
+			app.getVersion(),
+			process.versions.electron,
+			process.versions.node,
+			process.versions.chrome,
+			error.stack
+		)
+	},
+})
 
 const isMac = process.platform === 'darwin'
 
