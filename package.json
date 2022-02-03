@@ -52,7 +52,7 @@
 						"name": "PrestoParts",
 						"icon": "./app-icons/app-icon.ico",
 						"loadingGif": "./app-icons/install-animation.gif",
-						"setupExe": "${productName} ${version} Installer.exe",
+						"setupExe": "${name}-windows-${version}.exe",
 						"setupIcon": "./app-icons/installer-icon.ico"
 					}
 				},
