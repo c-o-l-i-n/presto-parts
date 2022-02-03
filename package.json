@@ -2,7 +2,7 @@
 	"name": "presto-parts",
 	"productName": "Presto Parts",
 	"version": "0.1.0",
-	"description": "Organize your sheet music by part",
+	"description": "Restructure your sheet music to be by part, not by song.",
 	"author": "Colin A. Williams",
 	"license": "MIT",
 	"homepage": "https://prestoparts.org",
