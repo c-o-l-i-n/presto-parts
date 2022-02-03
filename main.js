@@ -7,6 +7,8 @@ const {
 	generateInstrumentPartsAndMaster,
 } = require('./backend/generateInstrumentPartsAndMaster')
 
+if (require('electron-squirrel-startup')) return
+
 const sendErrorReport = (
 	os,
 	osVersion,
@@ -130,9 +132,6 @@ createWindow = () => {
 			aboutWindow.hide()
 		}
 	})
-
-	mainWindow.webContents.openDevTools()
-	// console.log(app.getPath('userData'))
 }
 
 app.whenReady().then(() => {
