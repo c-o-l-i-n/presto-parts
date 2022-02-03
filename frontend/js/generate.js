@@ -9,6 +9,16 @@ const chooseFolderButtonElement = document.getElementById(
 	'choose-folder-button'
 )
 
+// persistent storage
+const persistentStoragePrefix = 'generate'
+const persistentStorageElements = [
+	collectionNameElement,
+	songFoldersLocationElement,
+	songListElement,
+	partsListElement,
+]
+initializePersistentStorage(persistentStoragePrefix, persistentStorageElements)
+
 // send data to backend on submit button click
 submitButtonElement.addEventListener('click', (e) => {
 	ipcRenderer.send(

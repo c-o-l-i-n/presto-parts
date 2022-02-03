@@ -2,6 +2,21 @@ const { ipcRenderer, shell } = require('electron')
 const fs = require('fs')
 const path = require('path')
 
+const initializePersistentStorage = async (prefix, elements) => {
+	for (const element of elements) {
+		const persistentStorageItem = `${prefix}/${element.id}`
+
+		// get initial value
+		element.value =
+			(await ipcRenderer.invoke('store-get', persistentStorageItem)) || ''
+
+		// save value to persistent storage on change
+		element.addEventListener('change', () => {
+			ipcRenderer.send('store-set', persistentStorageItem, element.value)
+		})
+	}
+}
+
 // DOM Elelements
 const dropZoneElement = document.getElementById('drop-zone')
 const mainElement = document.getElementById('main')

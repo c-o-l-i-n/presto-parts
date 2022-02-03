@@ -4,6 +4,15 @@ const pdfSourcePathElement = document.getElementById('pdf-source-path')
 const partsListElement = document.getElementById('parts-list')
 const chooseFileButtonElement = document.getElementById('choose-file-button')
 
+// persistent storage
+const persistentStoragePrefix = 'separate'
+const persistentStorageElements = [
+	songTitleElement,
+	pdfSourcePathElement,
+	partsListElement,
+]
+initializePersistentStorage(persistentStoragePrefix, persistentStorageElements)
+
 // send data to backend on submit button click
 submitButtonElement.addEventListener('click', (e) => {
 	ipcRenderer.send(

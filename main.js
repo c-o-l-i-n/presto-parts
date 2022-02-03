@@ -1,5 +1,6 @@
 const { app, dialog, BrowserWindow, ipcMain, Menu, shell } = require('electron')
 const contextMenu = require('electron-context-menu')
+const Store = require('electron-store')
 const { separateSongParts } = require('./backend/separateSongParts')
 const {
 	generateInstrumentPartsAndMaster,
@@ -12,6 +13,8 @@ const mainWindowWidth = isMac ? 770 : 786
 const mainWindowMinimumWidth = mainWindowWidth
 const mainWindowHeight = isMac ? 660 : 0
 const mainWindowMinimumHeight = isMac ? mainWindowHeight : 700
+
+const store = new Store()
 
 let mainWindow
 let aboutWindow
@@ -88,6 +91,9 @@ createWindow = () => {
 			aboutWindow.hide()
 		}
 	})
+
+	mainWindow.webContents.openDevTools()
+	// console.log(app.getPath('userData'))
 }
 
 app.whenReady().then(() => {
@@ -96,6 +102,14 @@ app.whenReady().then(() => {
 
 app.on('before-quit', function (evt) {
 	appIsQuitting = true
+})
+
+ipcMain.handle('store-get', (e, storeItem) => {
+	return store.get(storeItem)
+})
+
+ipcMain.on('store-set', (e, storeItem, value) => {
+	store.set(storeItem, value)
 })
 
 ipcMain.on('show-message-box', (e, type, message) => {
