@@ -1,52 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
-   width="849.05975"
-   height="509.0004"
-   viewBox="0 0 224.64706 134.67302"
-   version="1.1"
-   id="svg4546"
-   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
-   sodipodi:docname="installer-gif-inkscape-project.svg"
-   inkscape:export-filename="C:\Users\matth\Downloads\Piano Keys.png"
-   inkscape:export-xdpi="96"
-   inkscape:export-ydpi="96"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:dc="http://purl.org/dc/elements/1.1/">
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:export-ydpi="96"
+   inkscape:export-xdpi="96"
+   inkscape:export-filename="C:\Users\matth\Downloads\Piano Keys.png"
+   sodipodi:docname="install-animation-inkscape-project.svg"
+   inkscape:version="1.0 (4035a4f, 2020-05-01)"
+   id="svg4546"
+   version="1.1"
+   viewBox="0 0 152.12268 99.163977"
+   height="374.793"
+   width="574.95184">
   <defs
      id="defs4540" />
   <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="0.70710678"
-     inkscape:cx="282.13561"
-     inkscape:cy="325.97623"
-     inkscape:document-units="mm"
-     inkscape:current-layer="g905"
-     showgrid="false"
-     fit-margin-top="8"
-     fit-margin-left="8"
-     fit-margin-right="8"
-     fit-margin-bottom="8"
-     inkscape:window-width="1920"
-     inkscape:window-height="1017"
-     inkscape:window-x="1912"
-     inkscape:window-y="241"
-     inkscape:window-maximized="1"
-     inkscape:pagecheckerboard="1"
-     lock-margins="false"
+     inkscape:document-rotation="0"
+     scale-x="8"
      units="px"
-     scale-x="8" />
+     lock-margins="false"
+     inkscape:pagecheckerboard="1"
+     inkscape:window-maximized="1"
+     inkscape:window-y="25"
+     inkscape:window-x="0"
+     inkscape:window-height="975"
+     inkscape:window-width="1920"
+     fit-margin-bottom="0"
+     fit-margin-right="0"
+     fit-margin-left="0"
+     fit-margin-top="0"
+     showgrid="false"
+     inkscape:current-layer="g5221"
+     inkscape:document-units="mm"
+     inkscape:cy="196.0589"
+     inkscape:cx="236.36547"
+     inkscape:zoom="1.0526668"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base" />
   <metadata
      id="metadata4543">
     <rdf:RDF>
@@ -55,133 +54,120 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
+     transform="translate(-197.94393,-62.898015)"
      id="layer1"
-     transform="translate(-166.794,-29.505643)">
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1">
     <g
        id="g5221">
       <g
-         id="g905"
+         inkscape:export-ydpi="118"
+         inkscape:export-xdpi="118"
+         inkscape:export-filename="C:\Users\Colin Williams\Documents\presto-parts\app-icons\isntaller-gif-frames\0.png"
          transform="matrix(0.32204489,0,0,0.32204489,189.22929,65.522793)"
-         inkscape:export-filename="C:\Users\Colin Williams\Documents\presto-parts\app-icons\isntaller-gif-frames\0.png"
-         inkscape:export-xdpi="118"
-         inkscape:export-ydpi="118">
+         id="g905">
         <rect
-           id="rect3724"
-           width="67.084877"
-           height="305.14905"
-           x="28.445669"
-           y="-6.7649989"
+           ry="7.7258973"
            style="fill:#1e90ff;fill-opacity:1;stroke:#000000;stroke-width:2.7707;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.980099"
-           ry="7.7258973" />
-        <rect
-           id="rect3724-2"
-           width="67.084877"
+           y="-6.7649989"
+           x="28.445669"
            height="305.14905"
+           width="67.084877"
+           id="rect3724" />
+        <rect
+           ry="7.7258978"
+           style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2.7707;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.980099"
+           y="-6.7649989"
            x="95.530548"
-           y="-6.7649989"
-           style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2.7707;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.980099"
-           ry="7.7258978" />
-        <rect
-           id="rect3724-9"
-           width="67.084877"
            height="305.14905"
+           width="67.084877"
+           id="rect3724-2" />
+        <rect
+           ry="7.7258978"
+           style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2.7707;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.980099"
+           y="-6.7649989"
            x="162.61542"
-           y="-6.7649989"
-           style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2.7707;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.980099"
-           ry="7.7258978" />
-        <rect
-           id="rect3724-4"
-           width="67.084877"
            height="305.14905"
+           width="67.084877"
+           id="rect3724-9" />
+        <rect
+           ry="7.7258978"
+           style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2.7707;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.980099"
+           y="-6.7649989"
            x="229.70029"
-           y="-6.7649989"
-           style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2.7707;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.980099"
-           ry="7.7258978" />
-        <rect
-           id="rect3724-8"
-           width="67.084877"
            height="305.14905"
+           width="67.084877"
+           id="rect3724-4" />
+        <rect
+           ry="7.7258978"
+           style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2.7707;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.980099"
+           y="-6.7649989"
            x="296.78516"
-           y="-6.7649989"
-           style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2.7707;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.980099"
-           ry="7.7258978" />
-        <rect
-           id="rect3724-6"
-           width="67.084877"
            height="305.14905"
+           width="67.084877"
+           id="rect3724-8" />
+        <rect
+           ry="7.7258978"
+           style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2.7707;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.980099"
+           y="-6.7649989"
            x="363.87003"
-           y="-6.7649989"
-           style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2.7707;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.980099"
-           ry="7.7258978" />
-        <rect
-           id="rect3724-28"
-           width="67.084877"
            height="305.14905"
-           x="430.9549"
-           y="-6.7649989"
+           width="67.084877"
+           id="rect3724-6" />
+        <rect
+           ry="7.7258978"
            style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2.7707;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.980099"
-           ry="7.7258978" />
+           y="-6.7649989"
+           x="430.9549"
+           height="305.14905"
+           width="67.084877"
+           id="rect3724-28" />
         <rect
-           style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:2.82222;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="rect5144"
-           width="31.217339"
-           height="182.76332"
+           ry="7.7258859"
+           y="-6.7392378"
            x="80.002808"
-           y="-6.7392378"
-           ry="7.7258859" />
-        <rect
-           style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:2.82222;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="rect5144-5"
-           width="31.217339"
            height="182.76332"
+           width="31.217339"
+           id="rect5144"
+           style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:2.82222;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        <rect
+           ry="7.7258859"
+           y="-6.7392378"
            x="147.05116"
-           y="-6.7392378"
-           ry="7.7258859" />
-        <rect
-           style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:2.82222;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="rect5144-4"
-           width="31.217339"
            height="182.76332"
+           width="31.217339"
+           id="rect5144-5"
+           style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:2.82222;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        <rect
+           ry="7.7258859"
+           y="-6.7392378"
            x="281.20731"
-           y="-6.7392378"
-           ry="7.7258859" />
-        <rect
-           style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:2.82222;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="rect5144-8"
-           width="31.217339"
            height="182.76332"
+           width="31.217339"
+           id="rect5144-4"
+           style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:2.82222;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        <rect
+           ry="7.7258859"
+           y="-6.7392378"
            x="348.2312"
-           y="-6.7392378"
-           ry="7.7258859" />
-        <rect
-           style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:2.82222;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="rect5144-6"
-           width="31.217339"
            height="182.76332"
-           x="415.35974"
+           width="31.217339"
+           id="rect5144-8"
+           style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:2.82222;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+        <rect
+           ry="7.7258859"
            y="-6.7392378"
-           ry="7.7258859" />
+           x="415.35974"
+           height="182.76332"
+           width="31.217339"
+           id="rect5144-6"
+           style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:2.82222;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       </g>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-weight:normal;font-size:19.9121px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.69331;stroke-miterlimit:4;stroke-dasharray:none"
-         x="168.43425"
-         y="46.361931"
-         id="text1594"
-         inkscape:export-filename="C:\Users\Colin Williams\Documents\presto-parts\app-icons\isntaller-gif-frames\0.png"
-         inkscape:export-xdpi="118"
-         inkscape:export-ydpi="118"><tspan
-           sodipodi:role="line"
-           id="tspan1592"
-           style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:19.9121px;font-family:'Segoe UI';-inkscape-font-specification:'Segoe UI';fill:#1e90ff;fill-opacity:1;stroke:#ffffff;stroke-width:1.69331;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
-           x="168.43425"
-           y="46.361931">Installing Presto Parts...</tspan></text>
     </g>
   </g>
 </svg>
