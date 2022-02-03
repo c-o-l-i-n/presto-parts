@@ -1,10 +1,12 @@
 <h1 align="center">Welcome to Presto Parts 🎺</h1>
+<img alt="Presto Parts Logo" width="128" height="128" align="right" src="app-icons\app-icon.iconset\icon_256x256.png" />
 <p>
-  <img alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/c-o-l-i-n/presto-parts">
-  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/c-o-l-i-n/presto-parts">
+  <img alt="Version" src="https://img.shields.io/github/package-json/v/c-o-l-i-n/presto-parts">
+  <img alt="Last commit" src="https://img.shields.io/github/last-commit/c-o-l-i-n/presto-parts">
   <a href="LICENSE" target="_blank">
-    <img alt="License: MIT" src="https://img.shields.io/github/license/c-o-l-i-n/presto-parts" />
+    <img alt="License" src="https://img.shields.io/github/license/c-o-l-i-n/presto-parts">
   </a>
+  <img alt="Code style: prettier" src="https://img.shields.io/badge/code_style-prettier-6a5acd.svg"></a>
 </p>
 
 > Presto Parts saves music instructors hours of time: organize sheet music PDFs
