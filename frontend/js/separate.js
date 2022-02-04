@@ -38,5 +38,6 @@ chooseFileButtonElement.addEventListener('click', () => {
 ipcRenderer.on('user-chose-pdf-source-file', (e, filePath) => {
 	if (filePath) {
 		pdfSourcePathElement.value = filePath
+		pdfSourcePathElement.dispatchEvent(new Event('change'))
 	}
 })
