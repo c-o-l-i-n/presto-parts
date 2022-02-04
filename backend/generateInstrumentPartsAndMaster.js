@@ -57,7 +57,7 @@ const generateInstrumentPartsAndMaster = async (
 		// trim spaces from instrument name
 		instrument = instrument.trim()
 
-		const instrumentPartFilePath = `${destinationDirectory}${path.sep}${collectionName}-${instrument}.pdf`
+		const instrumentPartFilePath = `${destinationDirectory}${path.sep}${collectionName} - ${instrument}.pdf`
 
 		let instrumentPartPdfDocument = await PDFDocument.create()
 
@@ -74,7 +74,7 @@ const generateInstrumentPartsAndMaster = async (
 			// get instrument part PDF from this song
 			const songDirectory = `${songFoldersLocation}${path.sep}${songName}`
 
-			const partFilePath = `${songDirectory}${path.sep}${songName}-${instrument}.pdf`
+			const partFilePath = `${songDirectory}${path.sep}${songName} - ${instrument}.pdf`
 
 			if (!fs.existsSync(partFilePath)) {
 				throw `Error: Could not find "${instrument}" part for song "${songName}". File does not exist: "${partFilePath}"`
@@ -135,7 +135,7 @@ const generateInstrumentPartsAndMaster = async (
 
 	// export master PDF file
 	fs.writeFileSync(
-		`${destinationDirectory}/${collectionName}-MASTER.pdf`,
+		`${destinationDirectory}${path.sep}${collectionName} - MASTER.pdf`,
 		await masterPdfDocument.save()
 	)
 

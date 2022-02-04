@@ -98,7 +98,7 @@ const separateSongParts = async (sourcePath, partsList, prefix) => {
 		startingPage += numPagesForPart[part]
 
 		// generate file name
-		const destFileName = `${destinationDirecrory}${path.sep}${prefix}-${part}.pdf`
+		const destFileName = `${destinationDirecrory}${path.sep}${prefix} - ${part}.pdf`
 
 		// save PDF file bytes
 		const pdfBytes = await partPdf.save()
