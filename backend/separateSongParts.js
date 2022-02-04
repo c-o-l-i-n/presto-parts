@@ -14,6 +14,9 @@ const separateSongParts = async (sourcePath, partsList, prefix) => {
 	// 	etc ...
 	//
 
+	// trim spaces from song name
+	prefix = prefix.trim()
+
 	if (!validFilename(prefix)) {
 		throw `Error: Song Title must be a valid folder name. "${prefix}" is not a valid folder name. Please try something different.`
 	}
@@ -31,8 +34,8 @@ const separateSongParts = async (sourcePath, partsList, prefix) => {
 	for (line of partsList.split(/\r?\n/)) {
 		// split line into part name and number of pages
 		let partNameAndNumPages = line.split('#')
-		// remove spaces from part name
-		partNameAndNumPages[0] = partNameAndNumPages[0].replace(/\s/g, '')
+		// trim spaces from part name
+		partNameAndNumPages[0] = partNameAndNumPages[0].trim()
 		// skip line if blank
 		if (!partNameAndNumPages[0]) {
 			continue

@@ -29,8 +29,8 @@ const generateInstrumentPartsAndMaster = async (
 		// split line into part name and number of copies
 		let partNameAndNumCopies = part.split('#')
 
-		// remove spaces from part name
-		partNameAndNumCopies[0] = partNameAndNumCopies[0].replace(/\s/g, '')
+		// trim spaces from part name
+		partNameAndNumCopies[0] = partNameAndNumCopies[0].trim()
 
 		// skip part if blank
 		if (!partNameAndNumCopies[0]) {
@@ -54,14 +54,17 @@ const generateInstrumentPartsAndMaster = async (
 	// create PDF for each instrument
 	let instrumentPdfFiles = []
 	for (instrument in numCopiesOfPart) {
+		// trim spaces from instrument name
+		instrument = instrument.trim()
+
 		const instrumentPartFilePath = `${destinationDirectory}${path.sep}${collectionName}-${instrument}.pdf`
 
 		let instrumentPartPdfDocument = await PDFDocument.create()
 
 		// get this instrument's part from each song
 		for (songName of songList.split(/\r?\n/)) {
-			// remove spaces from song name
-			songName = songName.replace(/\s/g, '')
+			// trim spaces from song name
+			songName = songName.trim()
 
 			// skip songName if blank
 			if (!songName) {
