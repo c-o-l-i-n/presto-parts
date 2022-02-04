@@ -131,6 +131,7 @@ const handleFileDrop = (e, desiredFileType, destinationInputElement) => {
 	}
 
 	destinationInputElement.value = filePath
+	destinationInputElement.dispatchEvent(new Event('change'))
 }
 
 // make external links functional
