@@ -25,6 +25,7 @@
 		"@electron-forge/cli": "^6.0.0-beta.61",
 		"@electron-forge/maker-dmg": "^6.0.0-beta.61",
 		"@electron-forge/maker-squirrel": "^6.0.0-beta.61",
+		"@electron-forge/publisher-github": "^6.0.0-beta.63",
 		"electron": "^15.1.0",
 		"sass": "^1.42.1"
 	},
@@ -59,6 +60,17 @@
 					"config": {
 						"name": "${name}-mac-${version}",
 						"overwrite": true
+					}
+				}
+			],
+			"publishers": [
+				{
+					"name": "@electron-forge/publisher-github",
+					"config": {
+						"repository": {
+							"owner": "c-o-l-i-n",
+							"name": "presto-parts"
+						}
 					}
 				}
 			]
