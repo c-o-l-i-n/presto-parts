@@ -70,7 +70,8 @@
 						"repository": {
 							"owner": "c-o-l-i-n",
 							"name": "presto-parts"
-						}
+						},
+						"draft": true
 					}
 				}
 			]
