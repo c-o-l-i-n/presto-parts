@@ -45,5 +45,6 @@ chooseFolderButtonElement.addEventListener('click', () => {
 ipcRenderer.on('user-chose-song-folders-location', (e, folderPath) => {
 	if (folderPath) {
 		songFoldersLocationElement.value = folderPath
+		songFoldersLocationElement.dispatchEvent(new Event('change'))
 	}
 })
