@@ -1,81 +1,94 @@
 {
 	"name": "presto-parts",
-	"productName": "Presto Parts",
+	"productName": "presto-parts",
 	"version": "0.1.1",
-	"description": "Restructure your sheet music to be by part, not by song.",
-	"author": "Colin A. Williams",
-	"license": "MIT",
-	"homepage": "https://prestoparts.org",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/c-o-l-i-n/presto-parts.git"
-	},
-	"bugs": {
-		"url": "https://github.com/c-o-l-i-n/presto-parts/issues"
-	},
-	"main": "main.js",
+	"description": "My Electron application description",
+	"main": ".webpack/main",
 	"scripts": {
-		"start": "npm run build-css && electron-forge start",
-		"package": "npm run build-css && electron-forge package",
-		"make": "npm run build-css && electron-forge make",
-		"publish": "npm run build-css && electron-forge publish",
-		"build-css": "sass frontend/scss:frontend/css",
-		"watch-css": "npm run build-css -- --watch"
+		"start": "electron-forge start",
+		"package": "electron-forge package",
+		"make": "electron-forge make",
+		"publish": "electron-forge publish",
+		"lint": "eslint --ext .ts,.tsx ."
 	},
-	"devDependencies": {
-		"@electron-forge/cli": "^6.0.0-beta.61",
-		"@electron-forge/maker-dmg": "^6.0.0-beta.61",
-		"@electron-forge/maker-squirrel": "^6.0.0-beta.61",
-		"@electron-forge/publisher-github": "^6.0.0-beta.63",
-		"electron": "^15.1.0",
-		"sass": "^1.42.1"
+	"keywords": [],
+	"author": {
+		"name": "Colin Williams",
+		"email": "colin@colinaw.com"
 	},
-	"dependencies": {
-		"bulma": "^0.9.3",
-		"bulma-prefers-dark": "0.1.0-beta.1",
-		"electron-context-menu": "^3.1.1",
-		"electron-squirrel-startup": "^1.0.0",
-		"electron-store": "^8.0.1",
-		"electron-unhandled": "^3.0.2",
-		"pdf-lib": "^1.17.1",
-		"valid-filename": "^3.1.0"
-	},
+	"license": "MIT",
 	"config": {
 		"forge": {
-			"packagerConfig": {
-				"icon": "./app-icons/app-icon.icns"
-			},
+			"packagerConfig": {},
 			"makers": [
 				{
 					"name": "@electron-forge/maker-squirrel",
 					"config": {
-						"name": "PrestoParts",
-						"icon": "./app-icons/app-icon.ico",
-						"loadingGif": "./app-icons/install-animation.gif",
-						"setupExe": "${name}-windows-${version}.exe",
-						"setupIcon": "./app-icons/installer-icon.ico"
+						"name": "presto_parts"
 					}
 				},
 				{
-					"name": "@electron-forge/maker-dmg",
-					"config": {
-						"name": "${name}-mac-${version}",
-						"overwrite": true
-					}
+					"name": "@electron-forge/maker-zip",
+					"platforms": [
+						"darwin"
+					]
+				},
+				{
+					"name": "@electron-forge/maker-deb",
+					"config": {}
+				},
+				{
+					"name": "@electron-forge/maker-rpm",
+					"config": {}
 				}
 			],
-			"publishers": [
-				{
-					"name": "@electron-forge/publisher-github",
-					"config": {
-						"repository": {
-							"owner": "c-o-l-i-n",
-							"name": "presto-parts"
-						},
-						"draft": true
+			"plugins": [
+				[
+					"@electron-forge/plugin-webpack",
+					{
+						"mainConfig": "./webpack.main.config.js",
+						"renderer": {
+							"config": "./webpack.renderer.config.js",
+							"entryPoints": [
+								{
+									"html": "./src/renderer/index.html",
+									"js": "./src/renderer/index.tsx",
+									"name": "main_window"
+								}
+							]
+						}
 					}
-				}
+				]
 			]
 		}
+	},
+	"devDependencies": {
+		"@electron-forge/cli": "^6.0.0-beta.65",
+		"@electron-forge/maker-deb": "^6.0.0-beta.65",
+		"@electron-forge/maker-rpm": "^6.0.0-beta.65",
+		"@electron-forge/maker-squirrel": "^6.0.0-beta.65",
+		"@electron-forge/maker-zip": "^6.0.0-beta.65",
+		"@electron-forge/plugin-webpack": "^6.0.0-beta.65",
+		"@types/react": "^18.0.17",
+		"@types/react-dom": "^18.0.6",
+		"@typescript-eslint/eslint-plugin": "^5.33.1",
+		"@typescript-eslint/parser": "^5.33.1",
+		"@vercel/webpack-asset-relocator-loader": "^1.7.3",
+		"css-loader": "^6.7.1",
+		"electron": "20.0.2",
+		"eslint": "^8.22.0",
+		"eslint-plugin-import": "^2.26.0",
+		"fork-ts-checker-webpack-plugin": "^7.2.13",
+		"node-loader": "^2.0.0",
+		"sass": "^1.54.4",
+		"sass-loader": "^13.0.2",
+		"style-loader": "^3.3.1",
+		"ts-loader": "^9.3.1",
+		"typescript": "^4.5.5"
+	},
+	"dependencies": {
+		"electron-squirrel-startup": "^1.0.0",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0"
 	}
 }
