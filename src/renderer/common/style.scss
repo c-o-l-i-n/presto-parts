@@ -5,8 +5,8 @@ $section-padding: 3rem;
 $body-min-width: 200px;
 
 // import Bulma and dark mode
-@import '../../node_modules/bulma/bulma.sass';
-@import '../../node_modules/bulma-prefers-dark/bulma-prefers-dark.sass';
+@import '~bulma/bulma.sass';
+@import '~bulma-prefers-dark/bulma-prefers-dark.sass';
 
 // ------------------------------ custom styles -------------------------------
 

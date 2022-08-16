@@ -1,50 +1,225 @@
-import { app, BrowserWindow } from 'electron'
+import { app, dialog, BrowserWindow, ipcMain, Menu, shell } from 'electron'
+import contextMenu from 'electron-context-menu'
+import Store from 'electron-store'
+import unhandled from 'electron-unhandled'
+import os from 'os'
+import separateSongParts from './separate-song-parts'
+import generateInstrumentPartsAndMaster from './generate-instrument-parts-and-master'
+import createAppMenu from './menu'
+
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string
-console.log('TESTING')
+declare const ABOUT_WINDOW_WEBPACK_ENTRY: string
 
-console.log(MAIN_WINDOW_WEBPACK_ENTRY)
+if (require('electron-squirrel-startup')) process.exit()
 
-// Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (require('electron-squirrel-startup')) {
-	// eslint-disable-line global-require
-	app.quit()
-}
-
-const createWindow = (): void => {
-	// Create the browser window.
-	const mainWindow = new BrowserWindow({
-		height: 600,
-		width: 800,
+const sendErrorReport = (
+	os: NodeJS.Platform,
+	osVersion: string,
+	appVersion: string,
+	electronVersion: string,
+	nodeVersion: string,
+	chromeVersion: string,
+	stackTrace: string
+) => {
+	const params = new URLSearchParams({
+		os: os,
+		osv: osVersion,
+		av: appVersion,
+		ev: electronVersion,
+		nv: nodeVersion,
+		cv: chromeVersion,
+		stack: stackTrace,
 	})
 
-	// and load the index.html of the app.
-	mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY)
-
-	// Open the DevTools.
-	mainWindow.webContents.openDevTools()
+	shell.openExternal('https://prestoparts.org/report?' + params.toString())
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
-app.on('ready', createWindow)
+// handles unhandled errors
+unhandled({
+	showDialog: true,
+	reportButton: (error) => {
+		sendErrorReport(
+			process.platform,
+			os.release(),
+			app.getVersion(),
+			process.versions.electron,
+			process.versions.node,
+			process.versions.chrome,
+			error.stack
+		)
+	},
+})
 
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
-app.on('window-all-closed', () => {
-	if (process.platform !== 'darwin') {
+const isMac = process.platform === 'darwin'
+
+// Fixes strange behavior with window size on Windows 10
+const mainWindowWidth = isMac ? 770 : 786
+const mainWindowMinimumWidth = mainWindowWidth
+const mainWindowHeight = isMac ? 660 : 0
+const mainWindowMinimumHeight = isMac ? mainWindowHeight : 700
+
+const store = new Store()
+
+let mainWindow: BrowserWindow
+let aboutWindow: BrowserWindow
+let appIsQuitting = false
+
+const showMessageBox = (
+	type: 'none' | 'info' | 'error' | 'question' | 'warning',
+	message: string
+) => {
+	dialog.showMessageBox(mainWindow, {
+		type: type,
+		message: message,
+		title: app.name,
+	})
+}
+
+contextMenu({
+	menu: (actions, props, browserWindow, dictionarySuggestions) => [
+		...dictionarySuggestions,
+		actions.separator(),
+		actions.cut({}),
+		actions.copy({}),
+		actions.paste({}),
+	],
+})
+
+const createWindow = () => {
+	mainWindow = new BrowserWindow({
+		show: false,
+		width: mainWindowWidth,
+		height: mainWindowHeight,
+		minWidth: mainWindowMinimumWidth,
+		minHeight: mainWindowMinimumHeight,
+		webPreferences: {
+			nodeIntegration: true,
+			contextIsolation: false,
+		},
+	})
+
+	mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY)
+
+	mainWindow.once('ready-to-show', () => {
+		mainWindow.show()
+	})
+
+	mainWindow.on('close', () => {
 		app.quit()
-	}
+	})
+
+	aboutWindow = new BrowserWindow({
+		show: false,
+		width: 270,
+		height: 278,
+		resizable: false,
+		minimizable: false,
+		maximizable: false,
+		webPreferences: {
+			nodeIntegration: true,
+			contextIsolation: false,
+		},
+	})
+
+	aboutWindow.setMenu(null)
+
+	aboutWindow.loadURL(ABOUT_WINDOW_WEBPACK_ENTRY).then(() => {
+		aboutWindow.webContents.send('app-info', {
+			name: app.name,
+			version: app.getVersion(),
+		})
+	})
+
+	// hide window rather than destroy it on close
+	aboutWindow.on('close', (e) => {
+		// if this isn't here, the app won't ever quit
+		if (!appIsQuitting) {
+			e.preventDefault()
+			aboutWindow.hide()
+		}
+	})
+}
+
+app.whenReady().then(() => {
+	createWindow()
+	createAppMenu(isMac, app, aboutWindow)
 })
 
-app.on('activate', () => {
-	// On OS X it's common to re-create a window in the app when the
-	// dock icon is clicked and there are no other windows open.
-	if (BrowserWindow.getAllWindows().length === 0) {
-		createWindow()
-	}
+app.on('before-quit', () => {
+	appIsQuitting = true
 })
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and import them here.
+ipcMain.handle('store-get', (e, storeItem) => {
+	return store.get(storeItem)
+})
+
+ipcMain.on('store-set', (e, storeItem, value) => {
+	store.set(storeItem, value)
+})
+
+ipcMain.on('show-message-box', (e, type, message) => {
+	showMessageBox(type, message)
+})
+
+ipcMain.on('choose-pdf-source-file', () => {
+	mainWindow.webContents.send(
+		'user-chose-pdf-source-file',
+		dialog.showOpenDialogSync(mainWindow, {
+			title: 'Choose PDF source file',
+			message: 'Choose PDF source file',
+			filters: [{ name: 'PDF Files', extensions: ['pdf'] }],
+			properties: ['openFile'],
+		})
+	)
+})
+
+ipcMain.on('choose-song-folders-location', () => {
+	mainWindow.webContents.send(
+		'user-chose-song-folders-location',
+		dialog.showOpenDialogSync(mainWindow, {
+			title: 'Choose song folders location',
+			message: 'Choose song folders location',
+			properties: ['openDirectory'],
+		})
+	)
+})
+
+ipcMain.on('separate', async (e, sourcePath, partsList, prefix) => {
+	mainWindow.webContents.send('show-loader')
+	try {
+		const destinationDirectory = await separateSongParts(
+			sourcePath,
+			partsList,
+			prefix
+		)
+		showMessageBox(
+			'info',
+			`Success!\n\nSeparated PDFs created in folder "${destinationDirectory}"`
+		)
+	} catch (errorMessage) {
+		showMessageBox('error', errorMessage.toString())
+	}
+	mainWindow.webContents.send('hide-loader')
+})
+
+ipcMain.on(
+	'generate',
+	async (e, pieceList, songFoldersLocation, partsList, destName) => {
+		mainWindow.webContents.send('show-loader')
+		try {
+			const destinationDirectory = await generateInstrumentPartsAndMaster(
+				pieceList,
+				songFoldersLocation,
+				partsList,
+				destName
+			)
+			showMessageBox(
+				'info',
+				`Success!\n\nInstrument parts and Master PDF created in folder "${destinationDirectory}"`
+			)
+		} catch (errorMessage) {
+			showMessageBox('error', errorMessage.toString())
+		}
+		mainWindow.webContents.send('hide-loader')
+	}
+)
