@@ -2,7 +2,7 @@
 	"name": "presto-parts",
 	"productName": "Presto Parts",
 	"version": "0.1.1",
-	"description": "My Electron application description",
+	"description": "Restructure your sheet music to be by part, not by song.",
 	"main": ".webpack/main",
 	"scripts": {
 		"start": "electron-forge start",
@@ -13,25 +13,32 @@
 	},
 	"keywords": [],
 	"author": {
-		"name": "Colin Williams",
-		"email": "colin@colinaw.com"
+		"name": "Colin A. Williams",
+		"email": "colin@prestoparts.org"
 	},
 	"license": "MIT",
 	"config": {
 		"forge": {
-			"packagerConfig": {},
+			"packagerConfig": {
+				"icon": "./assets/app-icons/app-icon.icns"
+			},
 			"makers": [
 				{
 					"name": "@electron-forge/maker-squirrel",
 					"config": {
-						"name": "presto_parts"
+						"name": "PrestoParts",
+						"icon": "./assets/app-icons/app-icon.ico",
+						"loadingGif": "./assets/app-icons/install-animation.gif",
+						"setupExe": "${name}-windows-${version}.exe",
+						"setupIcon": "./assets/app-icons/installer-icon.ico"
 					}
 				},
 				{
-					"name": "@electron-forge/maker-zip",
-					"platforms": [
-						"darwin"
-					]
+					"name": "@electron-forge/maker-dmg",
+					"config": {
+						"name": "${name}-mac-${version}",
+						"overwrite": true
+					}
 				},
 				{
 					"name": "@electron-forge/maker-deb",
