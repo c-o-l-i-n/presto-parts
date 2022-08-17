@@ -13,6 +13,7 @@ rules.push({
 })
 
 module.exports = {
+	target: 'electron-renderer',
 	module: {
 		rules,
 	},

@@ -86,6 +86,7 @@ const createWindow = () => {
 	mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY)
 
 	mainWindow.once('ready-to-show', () => {
+		setupIpcMain(mainWindow)
 		mainWindow.show()
 	})
 
@@ -133,5 +134,3 @@ app.whenReady().then(() => {
 app.on('before-quit', () => {
 	appIsQuitting = true
 })
-
-setupIpcMain(mainWindow)

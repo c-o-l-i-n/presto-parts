@@ -7,7 +7,7 @@ interface Props {
 	onType: (text: string) => unknown
 }
 
-export const TextInputField = ({ label, placeholder, text, onType }: Props) => {
+const TextInputField = ({ label, placeholder, text, onType }: Props) => {
 	return (
 		<div className='field'>
 			<label className='label'>{label}</label>
@@ -23,3 +23,5 @@ export const TextInputField = ({ label, placeholder, text, onType }: Props) => {
 		</div>
 	)
 }
+
+export default TextInputField

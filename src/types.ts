@@ -1,3 +1,5 @@
+type Maybe<T> = T | undefined
+
 enum Page {
 	SEPARATE,
 	GENERATE,
@@ -34,6 +36,7 @@ enum IpcRendererMessage {
 }
 
 export {
+	Maybe,
 	Page,
 	ActivePageContextType,
 	Tab,
