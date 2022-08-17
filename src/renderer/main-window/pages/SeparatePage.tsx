@@ -2,6 +2,7 @@ import { ipcRenderer } from 'electron'
 import React, { useContext, useState } from 'react'
 import { IpcMainMessage, IpcRendererMessage, Maybe, Page } from '../../../types'
 import FileUploadField from '../components/FileUploadField'
+import TextAreaField from '../components/TextAreaField'
 import TextInputField from '../components/TextInputField'
 import ActivePageContext from '../context/ActivePageContext'
 
@@ -12,6 +13,7 @@ const SeparatePage = () => {
 
 	const [songTitle, setSongTitle] = useState('')
 	const [pdfSource, setPdfSource] = useState('')
+	const [partsList, setPartsList] = useState('')
 
 	ipcRenderer.on(
 		IpcRendererMessage.USER_CHOSE_PDF_SOURCE_FILE,
@@ -40,6 +42,19 @@ const SeparatePage = () => {
 				filePath={pdfSource}
 				ipcMessage={IpcMainMessage.CHOOSE_PDF_SOURCE_FILE}
 				onType={setPdfSource}
+			/>
+
+			<TextAreaField
+				label='Parts List'
+				placeholder='Score #5
+Flute
+Claritnet
+Alto Sax
+Trumpet
+Trombone
+Tuba'
+				text={partsList}
+				onType={setPartsList}
 			/>
 		</>
 	)
