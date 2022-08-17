@@ -51,13 +51,6 @@ const createAppMenu = (
 		},
 	]
 
-	const helpMenu: {
-		role: 'help'
-		submenu: Electron.MenuItemConstructorOptions[]
-	} = { role: 'help', submenu: helpSubmenu }
-
-	template.push(helpMenu)
-
 	if (isMac) {
 		helpSubmenu.push({ type: 'separator' })
 		helpSubmenu.push({
@@ -68,8 +61,15 @@ const createAppMenu = (
 		})
 	}
 
-	const menu = Menu.buildFromTemplate(template)
-	Menu.setApplicationMenu(menu)
+	const helpMenu: {
+		role: 'help'
+		submenu: Electron.MenuItemConstructorOptions[]
+	} = { role: 'help', submenu: helpSubmenu }
+
+	template.push(helpMenu)
+
+	const appMenu = Menu.buildFromTemplate(template)
+	Menu.setApplicationMenu(appMenu)
 }
 
 export default createAppMenu
