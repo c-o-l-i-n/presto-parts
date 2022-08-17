@@ -8,7 +8,7 @@ const SeparatePage = () => {
 
 	if (activePage !== thisPage) return
 
-	return <div>SeparateSongParts</div>
+	return <h1 className='title'>Separate Song Parts</h1>
 }
 
 export default SeparatePage

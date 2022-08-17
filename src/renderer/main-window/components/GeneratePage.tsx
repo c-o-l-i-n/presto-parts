@@ -8,7 +8,7 @@ const GeneratePage = () => {
 
 	if (activePage !== thisPage) return
 
-	return <div>Generate</div>
+	return <h1 className='title'>Generate Instrument Parts and Master</h1>
 }
 
 export default GeneratePage

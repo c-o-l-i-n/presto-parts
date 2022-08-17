@@ -24,8 +24,10 @@ const MainWindow = () => {
 	return (
 		<ActivePageProvider>
 			<Navbar tabs={tabs} />
-			<SeparatePage />
-			<GeneratePage />
+			<main id='main' className='section'>
+				<SeparatePage />
+				<GeneratePage />
+			</main>
 		</ActivePageProvider>
 	)
 }
