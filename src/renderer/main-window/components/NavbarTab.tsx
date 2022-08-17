@@ -10,7 +10,7 @@ const NavbarTab = ({ tab }: Props) => {
 	const { activePage, setActivePage } = useContext(ActivePageContext)
 
 	return (
-		<li className={activePage === tab.page && 'is-active'}>
+		<li className={activePage === tab.page ? 'is-active' : undefined}>
 			<a onClick={() => setActivePage(tab.page)}>
 				<span className='icon'>
 					<div

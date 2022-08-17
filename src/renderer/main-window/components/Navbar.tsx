@@ -7,7 +7,9 @@ interface Props {
 }
 
 const Navbar = ({ tabs }: Props) => {
-	const tabComponents = tabs.map((tab, index) => <NavbarTab tab={tab} />)
+	const tabComponents = tabs.map((tab, index) => (
+		<NavbarTab tab={tab} key={index} />
+	))
 
 	return (
 		<nav id='navbar' className='tabs is-centered'>
