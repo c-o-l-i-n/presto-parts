@@ -1,11 +1,11 @@
 import React from 'react'
-import Navbar from './Navbar'
-import CutIcon from '../../../../assets/images/cut.svg'
-import SheetMusicIcon from '../../../../assets/images/sheet-music.svg'
-import { Page, Tab } from '../../../../src/types'
+import Navbar from './components/Navbar'
+import CutIcon from '../../../assets/images/cut.svg'
+import SheetMusicIcon from '../../../assets/images/sheet-music.svg'
+import { Page, Tab } from '../../types'
 import { ActivePageProvider } from './context/ActivePageContext'
-import SeparatePage from './SeparatePage'
-import GeneratePage from './GeneratePage'
+import SeparatePage from './pages/SeparatePage'
+import GeneratePage from './pages/GeneratePage'
 
 const tabs: Tab[] = [
 	{

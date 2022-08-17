@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import MainWindow from './components/MainWindow'
+import MainWindow from './MainWindow'
 import '../common/style.scss'
 
 const el = document.getElementById('root')

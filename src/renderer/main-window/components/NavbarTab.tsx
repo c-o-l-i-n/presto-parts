@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { Tab } from '../../../../src/types'
-import ActivePageContext from './context/ActivePageContext'
+import ActivePageContext from '../context/ActivePageContext'
 
 interface Props {
 	tab: Tab

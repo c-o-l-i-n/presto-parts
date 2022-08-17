@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react'
-import { Page, ActivePageContextType } from '../../../../types'
+import { Page, ActivePageContextType } from '../../../types'
 
 const initialActivePage = Page.SEPARATE
 

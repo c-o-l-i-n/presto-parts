@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { Page } from '../../../../src/types'
-import ActivePageContext from './context/ActivePageContext'
+import ActivePageContext from '../context/ActivePageContext'
 
 const GeneratePage = () => {
 	const { activePage } = useContext(ActivePageContext)
