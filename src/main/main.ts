@@ -1,11 +1,9 @@
-import { app, dialog, BrowserWindow, ipcMain, Menu, shell } from 'electron'
+import { app, BrowserWindow, shell } from 'electron'
 import contextMenu from 'electron-context-menu'
-import Store from 'electron-store'
 import unhandled from 'electron-unhandled'
 import os from 'os'
-import separateSongParts from './separate-song-parts'
-import generateInstrumentPartsAndMaster from './generate-instrument-parts-and-master'
 import createAppMenu from './menu'
+import setupIpcMain from './ipc-main'
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string
 declare const ABOUT_WINDOW_WEBPACK_ENTRY: string
@@ -58,22 +56,9 @@ const mainWindowMinimumWidth = mainWindowWidth
 const mainWindowHeight = isMac ? 660 : 0
 const mainWindowMinimumHeight = isMac ? mainWindowHeight : 700
 
-const store = new Store()
-
 let mainWindow: BrowserWindow
 let aboutWindow: BrowserWindow
 let appIsQuitting = false
-
-const showMessageBox = (
-	type: 'none' | 'info' | 'error' | 'question' | 'warning',
-	message: string
-) => {
-	dialog.showMessageBox(mainWindow, {
-		type: type,
-		message: message,
-		title: app.name,
-	})
-}
 
 contextMenu({
 	menu: (actions, props, browserWindow, dictionarySuggestions) => [
@@ -149,77 +134,4 @@ app.on('before-quit', () => {
 	appIsQuitting = true
 })
 
-ipcMain.handle('store-get', (e, storeItem) => {
-	return store.get(storeItem)
-})
-
-ipcMain.on('store-set', (e, storeItem, value) => {
-	store.set(storeItem, value)
-})
-
-ipcMain.on('show-message-box', (e, type, message) => {
-	showMessageBox(type, message)
-})
-
-ipcMain.on('choose-pdf-source-file', () => {
-	mainWindow.webContents.send(
-		'user-chose-pdf-source-file',
-		dialog.showOpenDialogSync(mainWindow, {
-			title: 'Choose PDF source file',
-			message: 'Choose PDF source file',
-			filters: [{ name: 'PDF Files', extensions: ['pdf'] }],
-			properties: ['openFile'],
-		})
-	)
-})
-
-ipcMain.on('choose-song-folders-location', () => {
-	mainWindow.webContents.send(
-		'user-chose-song-folders-location',
-		dialog.showOpenDialogSync(mainWindow, {
-			title: 'Choose song folders location',
-			message: 'Choose song folders location',
-			properties: ['openDirectory'],
-		})
-	)
-})
-
-ipcMain.on('separate', async (e, sourcePath, partsList, prefix) => {
-	mainWindow.webContents.send('show-loader')
-	try {
-		const destinationDirectory = await separateSongParts(
-			sourcePath,
-			partsList,
-			prefix
-		)
-		showMessageBox(
-			'info',
-			`Success!\n\nSeparated PDFs created in folder "${destinationDirectory}"`
-		)
-	} catch (errorMessage) {
-		showMessageBox('error', errorMessage.toString())
-	}
-	mainWindow.webContents.send('hide-loader')
-})
-
-ipcMain.on(
-	'generate',
-	async (e, pieceList, songFoldersLocation, partsList, destName) => {
-		mainWindow.webContents.send('show-loader')
-		try {
-			const destinationDirectory = await generateInstrumentPartsAndMaster(
-				pieceList,
-				songFoldersLocation,
-				partsList,
-				destName
-			)
-			showMessageBox(
-				'info',
-				`Success!\n\nInstrument parts and Master PDF created in folder "${destinationDirectory}"`
-			)
-		} catch (errorMessage) {
-			showMessageBox('error', errorMessage.toString())
-		}
-		mainWindow.webContents.send('hide-loader')
-	}
-)
+setupIpcMain(mainWindow)
