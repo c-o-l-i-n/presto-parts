@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Page } from '../../../../src/types'
+import { Page } from '../../../types'
 import ActivePageContext from '../context/ActivePageContext'
 
 const GeneratePage = () => {
