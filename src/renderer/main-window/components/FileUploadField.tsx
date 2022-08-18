@@ -1,13 +1,11 @@
-import { ipcRenderer } from 'electron'
 import React from 'react'
-import { IpcMainMessage } from '../../../types'
 
 interface Props {
 	label: string
 	buttonLabel: string
 	placeholder: string
 	filePath: string
-	ipcMessage: IpcMainMessage
+	onButtonClick: () => unknown
 	onType: (text: string) => unknown
 }
 
@@ -16,7 +14,7 @@ const FileUploadField = ({
 	buttonLabel,
 	placeholder,
 	filePath,
-	ipcMessage,
+	onButtonClick,
 	onType,
 }: Props) => {
 	return (
@@ -34,9 +32,7 @@ const FileUploadField = ({
 				/>
 				<button
 					className='button is-primary is-outlined ml-3'
-					onClick={() => {
-						ipcRenderer.send(ipcMessage)
-					}}
+					onClick={onButtonClick}
 				>
 					{buttonLabel}
 				</button>

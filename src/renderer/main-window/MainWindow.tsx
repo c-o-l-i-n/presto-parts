@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Navbar from './components/Navbar'
 import CutIcon from '../../../assets/images/cut.svg'
 import SheetMusicIcon from '../../../assets/images/sheet-music.svg'
@@ -6,6 +6,8 @@ import { Page, Tab } from '../../types'
 import { ActivePageProvider } from './context/ActivePageContext'
 import SeparatePage from './pages/SeparatePage'
 import GeneratePage from './pages/GeneratePage'
+import Loader from './components/Loader'
+import IsLoadingContext from './context/IsLoadingContext'
 
 const tabs: Tab[] = [
 	{
@@ -21,14 +23,17 @@ const tabs: Tab[] = [
 ]
 
 const MainWindow = () => {
+	const { state: isLoading } = useContext(IsLoadingContext)
+
 	return (
-		<ActivePageProvider>
+		<>
+			{isLoading ? <Loader /> : null}
 			<Navbar tabs={tabs} />
 			<main id='main' className='section'>
 				<SeparatePage />
 				<GeneratePage />
 			</main>
-		</ActivePageProvider>
+		</>
 	)
 }
 

@@ -7,6 +7,7 @@ import setupIpcMain from './ipc-main'
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string
 declare const ABOUT_WINDOW_WEBPACK_ENTRY: string
+declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string
 
 if (require('electron-squirrel-startup')) process.exit()
 
@@ -78,8 +79,7 @@ const createWindow = () => {
 		minWidth: mainWindowMinimumWidth,
 		minHeight: mainWindowMinimumHeight,
 		webPreferences: {
-			nodeIntegration: true,
-			contextIsolation: false,
+			preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
 		},
 	})
 

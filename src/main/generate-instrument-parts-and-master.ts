@@ -2,13 +2,13 @@ import { PDFDocument } from 'pdf-lib'
 import path from 'path'
 import fs from 'fs'
 import validFilename from 'valid-filename'
+import { GeneratePayload } from '../types'
 
-const generateInstrumentPartsAndMaster = async (
-	collectionName: string,
-	songFoldersLocation: string,
-	songList: string,
-	instrumentPartsList: string
-) => {
+const generateInstrumentPartsAndMaster = async (payload: GeneratePayload) => {
+	// unwrap payload
+	const { collectionName, songFoldersLocation, songList, instrumentPartsList } =
+		payload
+
 	const destinationDirectory = `${songFoldersLocation}${path.sep}${collectionName}`
 
 	if (!validFilename(collectionName)) {

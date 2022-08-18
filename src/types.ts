@@ -1,24 +1,24 @@
-type Maybe<T> = T | undefined
+export type Maybe<T> = T | undefined
 
-enum Page {
+export enum Page {
 	SEPARATE,
 	GENERATE,
 }
 
-interface ActivePageContextType {
-	activePage: Page
-	setActivePage?: (page: Page) => void
+export interface Context<T> {
+	state: T
+	setState?: (newState: T) => void
 }
 
-interface Tab {
+export interface Tab {
 	text: string
 	icon: string
 	page: Page
 }
 
-type MessageBoxType = 'none' | 'info' | 'error' | 'question' | 'warning'
+export type MessageBoxType = 'none' | 'info' | 'error' | 'question' | 'warning'
 
-enum IpcMainMessage {
+export enum IpcMainMessage {
 	STORE_GET = 'store-get',
 	STORE_SET = 'store-set',
 	SHOW_MESSAGE_BOX = 'show-message-box',
@@ -28,19 +28,28 @@ enum IpcMainMessage {
 	GENERATE = 'generate',
 }
 
-enum IpcRendererMessage {
-	USER_CHOSE_PDF_SOURCE_FILE = 'user-chose-pdf-source-file',
-	USER_CHOSE_SONG_FOLDERS_LOCATION = 'user-chose-song-folders-location',
-	SHOW_LOADER = 'show-loader',
-	HIDE_LOADER = 'hide-loader',
+export interface IpcRendererApi {
+	invoke: (
+		channel: IpcMainMessage,
+		payload?: Payload
+	) => Promise<Maybe<string[]>>
 }
 
-export {
-	Maybe,
-	Page,
-	ActivePageContextType,
-	Tab,
-	MessageBoxType,
-	IpcMainMessage,
-	IpcRendererMessage,
+export interface ElectronApi {
+	ipcRenderer: IpcRendererApi
 }
+
+export interface SepatatePayload {
+	songTitle: string
+	pdfSourcePath: string
+	partsList: string
+}
+
+export interface GeneratePayload {
+	collectionName: string
+	songFoldersLocation: string
+	songList: string
+	instrumentPartsList: string
+}
+
+export type Payload = SepatatePayload | GeneratePayload

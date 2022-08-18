@@ -1,10 +1,10 @@
 import React, { createContext, useState } from 'react'
-import { Page, ActivePageContextType } from '../../../types'
+import { Page, Context } from '../../../types'
 
 const initialActivePage = Page.SEPARATE
 
-const ActivePageContext = createContext<ActivePageContextType>({
-	activePage: initialActivePage,
+const ActivePageContext = createContext<Context<Page>>({
+	state: initialActivePage,
 })
 
 interface Props {
@@ -16,8 +16,8 @@ const ActivePageProvider = ({ children }: Props) => {
 	return (
 		<ActivePageContext.Provider
 			value={{
-				activePage: activePage,
-				setActivePage: (page) => setActivePage(page),
+				state: activePage,
+				setState: (page) => setActivePage(page),
 			}}
 		>
 			{children}

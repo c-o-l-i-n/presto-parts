@@ -13,7 +13,6 @@ rules.push({
 })
 
 module.exports = {
-	target: 'electron-renderer',
 	module: {
 		rules,
 	},
@@ -21,4 +20,5 @@ module.exports = {
 	resolve: {
 		extensions: ['.js', '.ts', '.jsx', '.tsx', '.css'],
 	},
+	devtool: 'source-map',
 }

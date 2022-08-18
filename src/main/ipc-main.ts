@@ -2,7 +2,12 @@ import Store from 'electron-store'
 import { app, BrowserWindow, dialog, ipcMain } from 'electron'
 import separateSongParts from './separate-song-parts'
 import generateInstrumentPartsAndMaster from './generate-instrument-parts-and-master'
-import { IpcMainMessage, IpcRendererMessage, MessageBoxType } from '../types'
+import {
+	GeneratePayload,
+	IpcMainMessage,
+	MessageBoxType,
+	SepatatePayload,
+} from '../types'
 
 const setupIpcMain = (mainWindow: BrowserWindow) => {
 	const showMessageBox = (type: MessageBoxType, message: string) => {
@@ -27,39 +32,28 @@ const setupIpcMain = (mainWindow: BrowserWindow) => {
 		showMessageBox(type, message)
 	})
 
-	ipcMain.on(IpcMainMessage.CHOOSE_PDF_SOURCE_FILE, () => {
-		mainWindow.webContents.send(
-			IpcRendererMessage.USER_CHOSE_PDF_SOURCE_FILE,
-			dialog.showOpenDialogSync(mainWindow, {
-				title: 'Choose PDF source file',
-				message: 'Choose PDF source file',
-				filters: [{ name: 'PDF Files', extensions: ['pdf'] }],
-				properties: ['openFile'],
-			})
-		)
+	ipcMain.handle(IpcMainMessage.CHOOSE_PDF_SOURCE_FILE, () => {
+		return dialog.showOpenDialogSync(mainWindow, {
+			title: 'Choose PDF source file',
+			message: 'Choose PDF source file',
+			filters: [{ name: 'PDF Files', extensions: ['pdf'] }],
+			properties: ['openFile'],
+		})
 	})
 
-	ipcMain.on(IpcMainMessage.CHOOSE_SONG_FOLDERS_LOCATION, () => {
-		mainWindow.webContents.send(
-			IpcRendererMessage.USER_CHOSE_SONG_FOLDERS_LOCATION,
-			dialog.showOpenDialogSync(mainWindow, {
-				title: 'Choose song folders location',
-				message: 'Choose song folders location',
-				properties: ['openDirectory'],
-			})
-		)
+	ipcMain.handle(IpcMainMessage.CHOOSE_SONG_FOLDERS_LOCATION, () => {
+		return dialog.showOpenDialogSync(mainWindow, {
+			title: 'Choose song folders location',
+			message: 'Choose song folders location',
+			properties: ['openDirectory'],
+		})
 	})
 
-	ipcMain.on(
+	ipcMain.handle(
 		IpcMainMessage.SEPARATE,
-		async (e, sourcePath, partsList, prefix) => {
-			mainWindow.webContents.send(IpcRendererMessage.SHOW_LOADER)
+		async (e, payload: SepatatePayload) => {
 			try {
-				const destinationDirectory = await separateSongParts(
-					sourcePath,
-					partsList,
-					prefix
-				)
+				const destinationDirectory = await separateSongParts(payload)
 				showMessageBox(
 					'info',
 					`Success!\n\nSeparated PDFs created in folder "${destinationDirectory}"`
@@ -67,20 +61,15 @@ const setupIpcMain = (mainWindow: BrowserWindow) => {
 			} catch (errorMessage) {
 				showMessageBox('error', errorMessage.toString())
 			}
-			mainWindow.webContents.send(IpcRendererMessage.HIDE_LOADER)
 		}
 	)
 
-	ipcMain.on(
+	ipcMain.handle(
 		IpcMainMessage.GENERATE,
-		async (e, pieceList, songFoldersLocation, partsList, destName) => {
-			mainWindow.webContents.send(IpcRendererMessage.SHOW_LOADER)
+		async (e, payload: GeneratePayload) => {
 			try {
 				const destinationDirectory = await generateInstrumentPartsAndMaster(
-					pieceList,
-					songFoldersLocation,
-					partsList,
-					destName
+					payload
 				)
 				showMessageBox(
 					'info',
@@ -89,7 +78,6 @@ const setupIpcMain = (mainWindow: BrowserWindow) => {
 			} catch (errorMessage) {
 				showMessageBox('error', errorMessage.toString())
 			}
-			mainWindow.webContents.send(IpcRendererMessage.HIDE_LOADER)
 		}
 	)
 }

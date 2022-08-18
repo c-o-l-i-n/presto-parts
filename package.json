@@ -60,7 +60,10 @@
 								{
 									"html": "./src/renderer/common/index.html",
 									"js": "./src/renderer/main-window/index.tsx",
-									"name": "main_window"
+									"name": "main_window",
+									"preload": {
+										"js": "./src/main/preload.ts"
+									}
 								},
 								{
 									"html": "./src/renderer/common/index.html",

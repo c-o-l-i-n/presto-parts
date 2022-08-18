@@ -1,29 +1,30 @@
-import { ipcRenderer } from 'electron'
 import React, { useContext, useState } from 'react'
-import { IpcMainMessage, IpcRendererMessage, Maybe, Page } from '../../../types'
+import { IpcMainMessage, Page } from '../../../types'
 import FileUploadField from '../components/FileUploadField'
+import GoButton from '../components/GoButton'
 import TextAreaField from '../components/TextAreaField'
 import TextInputField from '../components/TextInputField'
 import ActivePageContext from '../context/ActivePageContext'
 
 const GeneratePage = () => {
-	const { activePage } = useContext(ActivePageContext)
-	const thisPage = Page.GENERATE
-	if (activePage !== thisPage) return
+	const { state: activePage } = useContext(ActivePageContext)
 
 	const [collectionName, setCollectionName] = useState('')
 	const [songFoldersLocation, setSongFoldersLocation] = useState('')
 	const [songList, setSongList] = useState('')
 	const [instrumentPartsList, setInstrumentPartsList] = useState('')
 
-	ipcRenderer.on(
-		IpcRendererMessage.USER_CHOSE_SONG_FOLDERS_LOCATION,
-		(e, folderPath: Maybe<string>) => {
-			if (folderPath) {
-				setSongFoldersLocation(folderPath)
-			}
+	if (activePage !== Page.GENERATE) return
+
+	const chooseSongFoldersLocation = async () => {
+		const folderPath = await window.electron.ipcRenderer.invoke(
+			IpcMainMessage.CHOOSE_SONG_FOLDERS_LOCATION
+		)
+
+		if (folderPath) {
+			setSongFoldersLocation(folderPath[0])
 		}
-	)
+	}
 
 	return (
 		<>
@@ -41,7 +42,7 @@ const GeneratePage = () => {
 				placeholder='/Users/Colin/Desktop'
 				buttonLabel='Choose Folder'
 				filePath={songFoldersLocation}
-				ipcMessage={IpcMainMessage.CHOOSE_SONG_FOLDERS_LOCATION}
+				onButtonClick={chooseSongFoldersLocation}
 				onType={setSongFoldersLocation}
 			/>
 
@@ -70,6 +71,16 @@ Tuba #2'
 					onType={setInstrumentPartsList}
 				/>
 			</div>
+
+			<GoButton
+				ipcMessage={IpcMainMessage.GENERATE}
+				payload={{
+					collectionName,
+					songFoldersLocation,
+					songList,
+					instrumentPartsList,
+				}}
+			/>
 		</>
 	)
 }

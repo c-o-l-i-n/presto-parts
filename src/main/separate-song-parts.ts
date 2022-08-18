@@ -1,13 +1,10 @@
+import { SepatatePayload } from '../types'
 import { PDFDocument, degrees } from 'pdf-lib'
 import path from 'path'
 import fs from 'fs'
 import validFilename from 'valid-filename'
 
-const separateSongParts = async (
-	sourcePath: string,
-	partsList: string,
-	prefix: string
-) => {
+const separateSongParts = async (payload: SepatatePayload) => {
 	// 	Sepatates song parts based on a list of part names and number of pages for each part.
 	// 	Format is shown below: part name followed by #num_pages (1 is default)
 	//
@@ -18,18 +15,22 @@ const separateSongParts = async (
 	// 	etc ...
 	//
 
-	// trim spaces from song name
-	prefix = prefix.trim()
+	// unwrap payload
+	const { pdfSourcePath, partsList } = payload
+	let { songTitle } = payload
 
-	if (!validFilename(prefix)) {
-		throw `Error: Song Title must be a valid folder name. "${prefix}" is not a valid folder name. Please try something different.`
+	// trim spaces from song name
+	songTitle = songTitle.trim()
+
+	if (!validFilename(songTitle)) {
+		throw `Error: Song Title must be a valid folder name. "${songTitle}" is not a valid folder name. Please try something different.`
 	}
 
-	if (!fs.existsSync(sourcePath)) {
+	if (!fs.existsSync(pdfSourcePath)) {
 		throw 'Error: The given PDF source file does not exist.'
 	}
 
-	if (sourcePath.slice(-4).toLowerCase() != '.pdf') {
+	if (pdfSourcePath.slice(-4).toLowerCase() !== '.pdf') {
 		throw 'Error: The given PDF source file is not a PDF.'
 	}
 
@@ -63,26 +64,26 @@ const separateSongParts = async (
 	}
 
 	// get source file
-	const sourceFile = fs.readFileSync(sourcePath)
+	const sourceFile = fs.readFileSync(pdfSourcePath)
 
 	// create source PDF object
 	const source = await PDFDocument.load(sourceFile)
 
 	// make sure actual page # of src matches part names list
-	if (source.getPageCount() != pagesSum) {
+	if (source.getPageCount() !== pagesSum) {
 		throw `Error: Incorrect number of pages in Parts List.\n\nThe PDF source has ${source.getPageCount()} pages, but ${pagesSum} ${
 			pagesSum === 1 ? 'was' : 'were'
 		} listed.`
 	}
 
 	// check that destination directory name is available
-	const sourceFileDirectory = sourcePath.substring(
+	const sourceFileDirectory = pdfSourcePath.substring(
 		0,
-		sourcePath.lastIndexOf(path.sep)
+		pdfSourcePath.lastIndexOf(path.sep)
 	)
-	const destinationDirecrory = `${sourceFileDirectory}${path.sep}${prefix}`
+	const destinationDirecrory = `${sourceFileDirectory}${path.sep}${songTitle}`
 	if (fs.existsSync(destinationDirecrory)) {
-		throw `Error: A folder named "${prefix}" already exists at the PDF location.`
+		throw `Error: A folder named "${songTitle}" already exists at the PDF location.`
 	}
 
 	// generate PDF for each part in the given list
@@ -104,7 +105,7 @@ const separateSongParts = async (
 		startingPage += numPagesForPart[part]
 
 		// generate file name
-		const destFileName = `${destinationDirecrory}${path.sep}${prefix} - ${part}.pdf`
+		const destFileName = `${destinationDirecrory}${path.sep}${songTitle} - ${part}.pdf`
 
 		// save PDF file bytes
 		const pdfBytes = await partPdf.save()

@@ -7,7 +7,8 @@ interface Props {
 }
 
 const NavbarTab = ({ tab }: Props) => {
-	const { activePage, setActivePage } = useContext(ActivePageContext)
+	const { state: activePage, setState: setActivePage } =
+		useContext(ActivePageContext)
 
 	return (
 		<li className={activePage === tab.page ? 'is-active' : undefined}>

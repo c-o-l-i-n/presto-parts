@@ -57,21 +57,16 @@ body {
 	left: 0;
 	height: 100%;
 	width: 100%;
-	opacity: 0;
-	z-index: -1;
+	opacity: 0.5;
+	z-index: 1;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-
-	&.is-active {
-		opacity: 11;
-		z-index: 1;
-	}
 }
 
 // full-screen loading animation
 #loader {
-	background: rgba(0, 0, 0, 0.5);
+	background: black;
 
 	.loader {
 		height: 80px;
