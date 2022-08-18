@@ -1,5 +1,5 @@
 <h1 align="center">Welcome to Presto Parts 🎺</h1>
-<img alt="Presto Parts Logo" width="128" height="128" align="right" src="app-icons/app-icon.iconset/icon_256x256.png" />
+<img alt="Presto Parts Logo" width="128" height="128" align="right" src="assets/app-icons/app-icon.iconset/icon_256x256.png" />
 <p>
   <img alt="Latest Release" src="https://img.shields.io/github/v/release/c-o-l-i-n/presto-parts?include_prereleases&label=latest%20release">
   <img alt="Build Status" src="https://img.shields.io/github/workflow/status/c-o-l-i-n/presto-parts/Build/main">
