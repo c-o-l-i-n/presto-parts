@@ -30,10 +30,6 @@ const setupIpcMain = (mainWindow: BrowserWindow) => {
 		store.set(storeItem, value)
 	})
 
-	ipcMain.on(IpcMainMessage.SHOW_MESSAGE_BOX, (e, type, message) => {
-		showMessageBox(type, message)
-	})
-
 	ipcMain.handle(IpcMainMessage.CHOOSE_PDF_SOURCE_FILE, () => {
 		return dialog.showOpenDialogSync(mainWindow, {
 			title: 'Choose PDF source file',
@@ -57,11 +53,11 @@ const setupIpcMain = (mainWindow: BrowserWindow) => {
 			try {
 				const destinationDirectory = await separateSongParts(payload)
 				showMessageBox(
-					'info',
+					MessageBoxType.INFO,
 					`Success!\n\nSeparated PDFs created in folder "${destinationDirectory}"`
 				)
 			} catch (errorMessage) {
-				showMessageBox('error', errorMessage.toString())
+				showMessageBox(MessageBoxType.ERROR, errorMessage.toString())
 			}
 		}
 	)
@@ -74,11 +70,11 @@ const setupIpcMain = (mainWindow: BrowserWindow) => {
 					payload
 				)
 				showMessageBox(
-					'info',
+					MessageBoxType.INFO,
 					`Success!\n\nInstrument parts and Master PDF created in folder "${destinationDirectory}"`
 				)
 			} catch (errorMessage) {
-				showMessageBox('error', errorMessage.toString())
+				showMessageBox(MessageBoxType.ERROR, errorMessage.toString())
 			}
 		}
 	)
