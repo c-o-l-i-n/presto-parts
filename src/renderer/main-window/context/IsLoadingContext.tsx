@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react'
-import { Context } from '../../../types'
+import { Context } from '../../../types/types'
 
 const initialIsLoading = false
 

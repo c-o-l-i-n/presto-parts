@@ -1,4 +1,4 @@
-import { IpcMainMessage, Page } from '../../../types'
+import { IpcMainMessage, Page } from '../../../types/types'
 import React, { useContext, useState } from 'react'
 import FileUploadField from '../components/FileUploadField'
 import GoButton from '../components/GoButton'
@@ -16,7 +16,7 @@ const SeparatePage = () => {
 	if (activePage !== Page.SEPARATE) return
 
 	const choosePdfSourceFile = async () => {
-		const filePath = await window.electron.ipcRenderer.invoke(
+		const filePath = await window.electron.invoke(
 			IpcMainMessage.CHOOSE_PDF_SOURCE_FILE,
 			{
 				songTitle,
@@ -26,7 +26,7 @@ const SeparatePage = () => {
 		)
 
 		if (filePath) {
-			setPdfSourcePath(filePath[0])
+			setPdfSourcePath(filePath)
 		}
 	}
 

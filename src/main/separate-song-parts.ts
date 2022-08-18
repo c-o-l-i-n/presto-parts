@@ -1,4 +1,4 @@
-import { SepatatePayload } from '../types'
+import { SepatatePayload } from '../types/types'
 import { PDFDocument, degrees } from 'pdf-lib'
 import path from 'path'
 import fs from 'fs'

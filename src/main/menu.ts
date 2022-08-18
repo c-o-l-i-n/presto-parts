@@ -1,4 +1,5 @@
 import { App, BrowserWindow, Menu, shell } from 'electron'
+import { ExternalSite } from '../types/types'
 
 const createAppMenu = (
 	isMac: boolean,
@@ -45,9 +46,7 @@ const createAppMenu = (
 	const helpSubmenu: Electron.MenuItemConstructorOptions[] = [
 		{
 			label: 'Learn More',
-			click: async () => {
-				await shell.openExternal('https://prestoparts.org')
-			},
+			click: () => shell.openExternal(ExternalSite.APP_WEBSITE),
 		},
 	]
 

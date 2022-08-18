@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { IpcMainMessage, Page } from '../../../types'
+import { IpcMainMessage, Page } from '../../../types/types'
 import FileUploadField from '../components/FileUploadField'
 import GoButton from '../components/GoButton'
 import TextAreaField from '../components/TextAreaField'
@@ -17,12 +17,12 @@ const GeneratePage = () => {
 	if (activePage !== Page.GENERATE) return
 
 	const chooseSongFoldersLocation = async () => {
-		const folderPath = await window.electron.ipcRenderer.invoke(
+		const folderPath = await window.electron.invoke(
 			IpcMainMessage.CHOOSE_SONG_FOLDERS_LOCATION
 		)
 
 		if (folderPath) {
-			setSongFoldersLocation(folderPath[0])
+			setSongFoldersLocation(folderPath)
 		}
 	}
 

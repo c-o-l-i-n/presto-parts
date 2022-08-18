@@ -4,48 +4,33 @@ import unhandled from 'electron-unhandled'
 import os from 'os'
 import createAppMenu from './menu'
 import setupIpcMain from './ipc-main'
+import { ErrorReport, ExternalSite } from '../types/types'
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string
 declare const ABOUT_WINDOW_WEBPACK_ENTRY: string
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string
+declare const ABOUT_WINDOW_PRELOAD_WEBPACK_ENTRY: string
 
 if (require('electron-squirrel-startup')) process.exit()
 
-const sendErrorReport = (
-	os: NodeJS.Platform,
-	osVersion: string,
-	appVersion: string,
-	electronVersion: string,
-	nodeVersion: string,
-	chromeVersion: string,
-	stackTrace: string
-) => {
-	const params = new URLSearchParams({
-		os: os,
-		osv: osVersion,
-		av: appVersion,
-		ev: electronVersion,
-		nv: nodeVersion,
-		cv: chromeVersion,
-		stack: stackTrace,
-	})
-
-	shell.openExternal('https://prestoparts.org/report?' + params.toString())
+const sendErrorReport = (errorReport: ErrorReport) => {
+	const params = new URLSearchParams({ ...errorReport })
+	shell.openExternal(`${ExternalSite.APP_WEBSITE}/report?${params.toString()}`)
 }
 
 // handles unhandled errors
 unhandled({
 	showDialog: true,
 	reportButton: (error) => {
-		sendErrorReport(
-			process.platform,
-			os.release(),
-			app.getVersion(),
-			process.versions.electron,
-			process.versions.node,
-			process.versions.chrome,
-			error.stack
-		)
+		sendErrorReport({
+			os: process.platform,
+			osVersion: os.release(),
+			appVersion: app.getVersion(),
+			electronVersion: process.versions.electron,
+			nodeVersion: process.versions.node,
+			chromeVersion: process.versions.chrome,
+			stackTrace: error.stack,
+		})
 	},
 })
 
@@ -87,6 +72,8 @@ const createWindow = () => {
 
 	mainWindow.once('ready-to-show', () => {
 		setupIpcMain(mainWindow)
+		createAboutWindow()
+		createAppMenu(isMac, app, aboutWindow)
 		mainWindow.show()
 	})
 
@@ -94,41 +81,36 @@ const createWindow = () => {
 		app.quit()
 	})
 
-	aboutWindow = new BrowserWindow({
-		show: false,
-		width: 270,
-		height: 278,
-		resizable: false,
-		minimizable: false,
-		maximizable: false,
-		webPreferences: {
-			nodeIntegration: true,
-			contextIsolation: false,
-		},
-	})
-
-	aboutWindow.setMenu(null)
-
-	aboutWindow.loadURL(ABOUT_WINDOW_WEBPACK_ENTRY).then(() => {
-		aboutWindow.webContents.send('app-info', {
-			name: app.name,
-			version: app.getVersion(),
+	const createAboutWindow = () => {
+		aboutWindow = new BrowserWindow({
+			show: false,
+			width: 270,
+			height: 278,
+			resizable: false,
+			minimizable: false,
+			maximizable: false,
+			webPreferences: {
+				preload: ABOUT_WINDOW_PRELOAD_WEBPACK_ENTRY,
+			},
 		})
-	})
 
-	// hide window rather than destroy it on close
-	aboutWindow.on('close', (e) => {
-		// if this isn't here, the app won't ever quit
-		if (!appIsQuitting) {
-			e.preventDefault()
-			aboutWindow.hide()
-		}
-	})
+		aboutWindow.setMenu(null)
+
+		aboutWindow.loadURL(ABOUT_WINDOW_WEBPACK_ENTRY)
+
+		// hide window rather than destroy it on close
+		aboutWindow.on('close', (e) => {
+			// if this isn't here, the app won't ever quit
+			if (!appIsQuitting) {
+				e.preventDefault()
+				aboutWindow.hide()
+			}
+		})
+	}
 }
 
 app.whenReady().then(() => {
 	createWindow()
-	createAppMenu(isMac, app, aboutWindow)
 })
 
 app.on('before-quit', () => {

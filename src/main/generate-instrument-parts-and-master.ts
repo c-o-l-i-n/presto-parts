@@ -2,7 +2,7 @@ import { PDFDocument } from 'pdf-lib'
 import path from 'path'
 import fs from 'fs'
 import validFilename from 'valid-filename'
-import { GeneratePayload } from '../types'
+import { GeneratePayload } from '../types/types'
 
 const generateInstrumentPartsAndMaster = async (payload: GeneratePayload) => {
 	// unwrap payload

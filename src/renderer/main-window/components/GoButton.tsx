@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { IpcMainMessage, Payload } from '../../../types'
+import { IpcMainMessage, Payload } from '../../../types/types'
 import IsLoadingContext from '../context/IsLoadingContext'
 
 interface Props {
@@ -12,7 +12,7 @@ const GoButton = ({ ipcMessage, payload }: Props) => {
 
 	const go = async () => {
 		setIsLoading(true)
-		await window.electron.ipcRenderer.invoke(ipcMessage, payload)
+		await window.electron.invoke(ipcMessage, payload)
 		setIsLoading(false)
 	}
 

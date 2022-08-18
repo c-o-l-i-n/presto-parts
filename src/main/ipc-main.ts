@@ -1,13 +1,15 @@
 import Store from 'electron-store'
-import { app, BrowserWindow, dialog, ipcMain } from 'electron'
+import { app, BrowserWindow, dialog, ipcMain, shell } from 'electron'
 import separateSongParts from './separate-song-parts'
 import generateInstrumentPartsAndMaster from './generate-instrument-parts-and-master'
 import {
+	AppInfo,
+	ExternalSite,
 	GeneratePayload,
 	IpcMainMessage,
 	MessageBoxType,
 	SepatatePayload,
-} from '../types'
+} from '../types/types'
 
 const setupIpcMain = (mainWindow: BrowserWindow) => {
 	const showMessageBox = (type: MessageBoxType, message: string) => {
@@ -80,6 +82,19 @@ const setupIpcMain = (mainWindow: BrowserWindow) => {
 			}
 		}
 	)
+
+	ipcMain.handle(
+		IpcMainMessage.GET_APP_INFO,
+		(): AppInfo => ({
+			name: app.name,
+			version: app.getVersion(),
+		})
+	)
+
+	ipcMain.on(IpcMainMessage.OPEN_EXTERNAL, (e, site: ExternalSite) => {
+		if (!Object.values(ExternalSite).includes(site)) return
+		shell.openExternal(site)
+	})
 }
 
 export default setupIpcMain

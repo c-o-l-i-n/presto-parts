@@ -1,5 +1,25 @@
 export type Maybe<T> = T | undefined
 
+export interface AppInfo {
+	name: string
+	version: string
+}
+
+export enum ExternalSite {
+	APP_WEBSITE = 'https://prestoparts.org',
+	ICONS_8 = 'https://icons8.com',
+}
+
+export interface ErrorReport {
+	os: NodeJS.Platform
+	osVersion: string
+	appVersion: string
+	electronVersion: string
+	nodeVersion: string
+	chromeVersion: string
+	stackTrace: string
+}
+
 export enum Page {
 	SEPARATE,
 	GENERATE,
@@ -26,17 +46,14 @@ export enum IpcMainMessage {
 	CHOOSE_SONG_FOLDERS_LOCATION = 'choose-song-folders-location',
 	SEPARATE = 'separate',
 	GENERATE = 'generate',
-}
-
-export interface IpcRendererApi {
-	invoke: (
-		channel: IpcMainMessage,
-		payload?: Payload
-	) => Promise<Maybe<string[]>>
+	GET_APP_INFO = 'get-app-info',
+	OPEN_EXTERNAL = 'open-external',
 }
 
 export interface ElectronApi {
-	ipcRenderer: IpcRendererApi
+	invoke: (channel: IpcMainMessage, payload?: Payload) => Promise<Maybe<string>>
+	getAppInfo: () => Promise<AppInfo>
+	openExternal: (url: ExternalSite) => void
 }
 
 export interface SepatatePayload {

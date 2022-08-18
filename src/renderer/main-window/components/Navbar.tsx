@@ -1,5 +1,5 @@
 import React from 'react'
-import { Tab } from '../../../types'
+import { Tab } from '../../../types/types'
 import NavbarTab from './NavbarTab'
 
 interface Props {
