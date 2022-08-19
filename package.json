@@ -62,7 +62,7 @@
 									"js": "./src/renderer/main-window/index.tsx",
 									"name": "main_window",
 									"preload": {
-										"js": "./src/main/preload.ts"
+										"js": "./src/renderer/common/preload.ts"
 									}
 								},
 								{
@@ -70,7 +70,7 @@
 									"js": "./src/renderer/about-window/index.tsx",
 									"name": "about_window",
 									"preload": {
-										"js": "./src/main/preload.ts"
+										"js": "./src/renderer/common/preload.ts"
 									}
 								}
 							]

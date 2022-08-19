@@ -6,7 +6,7 @@ import {
 	IpcMainMessage,
 	Maybe,
 	Payload,
-} from '../types/types'
+} from '../../types/types'
 
 const electronApi: ElectronApi = {
 	async invoke(
