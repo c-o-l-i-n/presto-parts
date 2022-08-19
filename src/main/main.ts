@@ -2,7 +2,7 @@ import { app, BrowserWindow, shell } from 'electron'
 import contextMenu from 'electron-context-menu'
 import unhandled from 'electron-unhandled'
 import os from 'os'
-import createAppMenu from './menu'
+import setApplicationMenu from './menu'
 import setupIpcMain from './ipc-main'
 import { ErrorReport, ExternalSite } from '../types/types'
 
@@ -73,7 +73,7 @@ const createWindow = () => {
 	mainWindow.once('ready-to-show', () => {
 		setupIpcMain(mainWindow)
 		createAboutWindow()
-		createAppMenu(isMac, app, aboutWindow)
+		setApplicationMenu(isMac, aboutWindow)
 		mainWindow.show()
 	})
 
