@@ -8,7 +8,7 @@ import {
 	GeneratePayload,
 	IpcMainMessage,
 	MessageBoxType,
-	SepatatePayload,
+	SeparatePayload,
 } from '../types/types'
 
 const setupIpcMain = (mainWindow: BrowserWindow) => {
@@ -49,7 +49,7 @@ const setupIpcMain = (mainWindow: BrowserWindow) => {
 
 	ipcMain.handle(
 		IpcMainMessage.SEPARATE,
-		async (e, payload: SepatatePayload) => {
+		async (e, payload: SeparatePayload) => {
 			try {
 				const destinationDirectory = await separateSongParts(payload)
 				showMessageBox(

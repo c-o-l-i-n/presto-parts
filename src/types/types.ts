@@ -61,7 +61,7 @@ export interface ElectronApi {
 	openExternal: (url: ExternalSite) => void
 }
 
-export interface SepatatePayload {
+export interface SeparatePayload {
 	songTitle: string
 	pdfSourcePath: string
 	partsList: string
@@ -74,4 +74,4 @@ export interface GeneratePayload {
 	instrumentPartsList: string
 }
 
-export type Payload = SepatatePayload | GeneratePayload
+export type Payload = SeparatePayload | GeneratePayload

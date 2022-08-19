@@ -1,10 +1,10 @@
-import { SepatatePayload } from '../types/types'
+import { SeparatePayload } from '../types/types'
 import { PDFDocument, degrees } from 'pdf-lib'
 import path from 'path'
 import fs from 'fs'
 import validFilename from 'valid-filename'
 
-const separateSongParts = async (payload: SepatatePayload) => {
+const separateSongParts = async (payload: SeparatePayload) => {
 	// 	Sepatates song parts based on a list of part names and number of pages for each part.
 	// 	Format is shown below: part name followed by #num_pages (1 is default)
 	//
