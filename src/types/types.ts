@@ -44,9 +44,18 @@ export enum MessageBoxType {
 	WARNING = 'warning',
 }
 
+export enum FileType {
+	PDF = 'PDF',
+	FOLDER = 'folder',
+	NO_TYPE = 'file with no type',
+}
+
 export enum IpcMainMessage {
 	STORE_GET = 'store-get',
 	STORE_SET = 'store-set',
+	SHOW_MESSAGE_BOX = 'show-message-box',
+	FILE_IS_DIRECTORY = 'file-is-directory',
+	GET_FILE_EXTENSION = 'get-file-extension',
 	CHOOSE_PDF_SOURCE_FILE = 'choose-pdf-source-file',
 	CHOOSE_SONG_FOLDERS_LOCATION = 'choose-song-folders-location',
 	SEPARATE = 'separate',
@@ -59,6 +68,9 @@ export interface ElectronApi {
 	invoke: (channel: IpcMainMessage, payload?: Payload) => Promise<Maybe<string>>
 	getAppInfo: () => Promise<AppInfo>
 	openExternal: (url: ExternalSite) => void
+	showMessageBox: (type: MessageBoxType, text: string) => void
+	fileIsDirectory: (filePath: string) => Promise<boolean>
+	getFileExtension: (filePath: string) => Promise<string>
 }
 
 export interface SeparatePayload {

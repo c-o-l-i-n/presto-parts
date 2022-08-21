@@ -10,6 +10,8 @@ import {
 	MessageBoxType,
 	SeparatePayload,
 } from '../types/types'
+import { statSync } from 'fs'
+import { extname } from 'path'
 
 const setupIpcMain = (mainWindow: BrowserWindow) => {
 	const showMessageBox = (type: MessageBoxType, message: string) => {
@@ -85,6 +87,21 @@ const setupIpcMain = (mainWindow: BrowserWindow) => {
 			name: app.name,
 			version: app.getVersion(),
 		})
+	)
+
+	ipcMain.handle(IpcMainMessage.FILE_IS_DIRECTORY, (e, filePath: string) => {
+		return statSync(filePath).isDirectory()
+	})
+
+	ipcMain.handle(IpcMainMessage.GET_FILE_EXTENSION, (e, filePath: string) => {
+		return extname(filePath)
+	})
+
+	ipcMain.on(
+		IpcMainMessage.SHOW_MESSAGE_BOX,
+		(e, type: MessageBoxType, text: string) => {
+			return showMessageBox(type, text)
+		}
 	)
 
 	ipcMain.on(IpcMainMessage.OPEN_EXTERNAL, (e, site: ExternalSite) => {

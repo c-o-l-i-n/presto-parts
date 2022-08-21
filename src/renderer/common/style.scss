@@ -57,7 +57,6 @@ body {
 	left: 0;
 	height: 100%;
 	width: 100%;
-	opacity: 0.5;
 	z-index: 1;
 	display: flex;
 	justify-content: center;
@@ -67,6 +66,7 @@ body {
 // full-screen loading animation
 #loader {
 	background: black;
+	opacity: 0.5;
 
 	.loader {
 		height: 80px;
@@ -75,7 +75,7 @@ body {
 }
 
 // full-screen drop zone
-#drop-zone {
+.drop-zone {
 	background: rgba($primary, 0.75);
 }
 

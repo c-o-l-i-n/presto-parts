@@ -1,10 +1,11 @@
-import { IpcMainMessage, Page } from '../../../types/types'
+import { FileType, IpcMainMessage, Page } from '../../../types/types'
 import React, { useContext, useState } from 'react'
 import FileUploadField from '../components/FileUploadField'
 import GoButton from '../components/GoButton'
 import TextAreaField from '../components/TextAreaField'
 import TextInputField from '../components/TextInputField'
 import ActivePageContext from '../context/ActivePageContext'
+import DropZone from '../components/DropZone'
 
 const SeparatePage = () => {
 	const { state: activePage } = useContext(ActivePageContext)
@@ -32,6 +33,12 @@ const SeparatePage = () => {
 
 	return (
 		<>
+			<DropZone
+				text='Drop PDF Source'
+				desiredFileType={FileType.PDF}
+				onDrop={setPdfSourcePath}
+			/>
+
 			<h1 className='title'>Separate Song Parts</h1>
 
 			<TextInputField

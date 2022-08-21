@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
-import { IpcMainMessage, Page } from '../../../types/types'
+import { FileType, IpcMainMessage, Page } from '../../../types/types'
+import DropZone from '../components/DropZone'
 import FileUploadField from '../components/FileUploadField'
 import GoButton from '../components/GoButton'
 import TextAreaField from '../components/TextAreaField'
@@ -28,6 +29,12 @@ const GeneratePage = () => {
 
 	return (
 		<>
+			<DropZone
+				text='Drop Song Folders Location'
+				desiredFileType={FileType.FOLDER}
+				onDrop={setSongFoldersLocation}
+			/>
+
 			<h1 className='title'>Generate Instrument Parts and Master</h1>
 
 			<TextInputField
