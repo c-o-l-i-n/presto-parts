@@ -8,6 +8,7 @@ import {
 	GeneratePayload,
 	IpcMainMessage,
 	MessageBoxType,
+	Payload,
 	SeparatePayload,
 } from '../types/types'
 import { statSync } from 'fs'
@@ -24,13 +25,11 @@ const setupIpcMain = (mainWindow: BrowserWindow) => {
 
 	const store = new Store()
 
-	ipcMain.handle(IpcMainMessage.STORE_GET, (e, storeItem) => {
-		return store.get(storeItem)
-	})
+	ipcMain.handle(IpcMainMessage.GET_APP_DATA, () => store.store)
 
-	ipcMain.on(IpcMainMessage.STORE_SET, (e, storeItem, value) => {
-		store.set(storeItem, value)
-	})
+	ipcMain.on(IpcMainMessage.STORE_SET, (e, payload: Payload) =>
+		store.set(payload)
+	)
 
 	ipcMain.handle(IpcMainMessage.CHOOSE_PDF_SOURCE_FILE, () => {
 		return dialog.showOpenDialogSync(mainWindow, {

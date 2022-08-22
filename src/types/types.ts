@@ -51,7 +51,7 @@ export enum FileType {
 }
 
 export enum IpcMainMessage {
-	STORE_GET = 'store-get',
+	GET_APP_DATA = 'get-app-data',
 	STORE_SET = 'store-set',
 	SHOW_MESSAGE_BOX = 'show-message-box',
 	FILE_IS_DIRECTORY = 'file-is-directory',
@@ -71,15 +71,17 @@ export interface ElectronApi {
 	showMessageBox: (type: MessageBoxType, text: string) => void
 	fileIsDirectory: (filePath: string) => Promise<boolean>
 	getFileExtension: (filePath: string) => Promise<string>
+	getAppData: () => Promise<AppData>
+	storeSet: (payload: Payload) => void
 }
 
-export interface SeparatePayload {
+export type SeparatePayload = {
 	songTitle: string
 	pdfSourcePath: string
 	partsList: string
 }
 
-export interface GeneratePayload {
+export type GeneratePayload = {
 	collectionName: string
 	songFoldersLocation: string
 	songList: string
@@ -87,3 +89,5 @@ export interface GeneratePayload {
 }
 
 export type Payload = SeparatePayload | GeneratePayload
+
+export type AppData = SeparatePayload & GeneratePayload

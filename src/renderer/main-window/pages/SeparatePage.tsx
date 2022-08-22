@@ -1,5 +1,10 @@
-import { FileType, IpcMainMessage, Page } from '../../../types/types'
-import React, { useContext, useState } from 'react'
+import {
+	FileType,
+	IpcMainMessage,
+	Page,
+	SeparatePayload,
+} from '../../../types/types'
+import React, { useContext, useEffect, useState } from 'react'
 import FileUploadField from '../components/FileUploadField'
 import GoButton from '../components/GoButton'
 import TextAreaField from '../components/TextAreaField'
@@ -7,28 +12,42 @@ import TextInputField from '../components/TextInputField'
 import ActivePageContext from '../context/ActivePageContext'
 import DropZone from '../components/DropZone'
 
-const SeparatePage = () => {
+const SeparatePage = ({
+	songTitle: initialSongTitle,
+	pdfSourcePath: initialPdfSourcePath,
+	partsList: initialPartsList,
+}: SeparatePayload) => {
 	const { state: activePage } = useContext(ActivePageContext)
 
-	const [songTitle, setSongTitle] = useState('')
-	const [pdfSourcePath, setPdfSourcePath] = useState('')
-	const [partsList, setPartsList] = useState('')
+	const [songTitle, setSongTitle] = useState(initialSongTitle || '')
+	const [pdfSourcePath, setPdfSourcePath] = useState(initialPdfSourcePath || '')
+	const [partsList, setPartsList] = useState(initialPartsList || '')
+
+	// a meaningless state whose sole purpose is to trigger a store update when it changes
+	// without this, we would write to the disk every keystroke (onType) rather than after done editing field (onChange)
+	const [saveToStoreDependency, setSaveToStoreDependency] = useState<boolean>()
+
+	// save all fields to store when any field is changed
+	useEffect(() => {
+		if (saveToStoreDependency === undefined) return
+		window.electron.storeSet({ songTitle, pdfSourcePath, partsList })
+	}, [saveToStoreDependency])
 
 	if (activePage !== Page.SEPARATE) return
 
 	const choosePdfSourceFile = async () => {
 		const filePath = await window.electron.invoke(
-			IpcMainMessage.CHOOSE_PDF_SOURCE_FILE,
-			{
-				songTitle,
-				pdfSourcePath,
-				partsList,
-			}
+			IpcMainMessage.CHOOSE_PDF_SOURCE_FILE
 		)
 
 		if (filePath) {
 			setPdfSourcePath(filePath)
+			saveToStore()
 		}
+	}
+
+	const saveToStore = () => {
+		setSaveToStoreDependency(!saveToStoreDependency)
 	}
 
 	return (
@@ -46,6 +65,7 @@ const SeparatePage = () => {
 				placeholder='Hey Judy'
 				text={songTitle}
 				onType={setSongTitle}
+				onChange={saveToStore}
 			/>
 
 			<FileUploadField
@@ -55,6 +75,7 @@ const SeparatePage = () => {
 				filePath={pdfSourcePath}
 				onButtonClick={choosePdfSourceFile}
 				onType={setPdfSourcePath}
+				onChange={saveToStore}
 			/>
 
 			<TextAreaField
@@ -68,6 +89,7 @@ Trombone
 Tuba'
 				text={partsList}
 				onType={setPartsList}
+				onChange={saveToStore}
 			/>
 
 			<GoButton

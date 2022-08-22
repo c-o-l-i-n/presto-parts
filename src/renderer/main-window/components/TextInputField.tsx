@@ -1,13 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Maybe } from '../../../types/types'
 
 interface Props {
 	label: string
 	placeholder: string
-	text: string
+	text: Maybe<string>
 	onType: (text: string) => unknown
+	onChange: () => unknown
 }
 
-const TextInputField = ({ label, placeholder, text, onType }: Props) => {
+const TextInputField = ({
+	label,
+	placeholder,
+	text,
+	onType,
+	onChange,
+}: Props) => {
+	const [initialText, setInitialText] = useState('')
+
 	return (
 		<div className='field'>
 			<label className='label'>{label}</label>
@@ -15,9 +25,15 @@ const TextInputField = ({ label, placeholder, text, onType }: Props) => {
 				className='input'
 				type='text'
 				placeholder={placeholder}
-				value={text}
+				value={text || ''}
 				onInput={(e) => {
 					onType((e.target as HTMLInputElement).value)
+				}}
+				onFocus={() => {
+					setInitialText(text)
+				}}
+				onBlur={() => {
+					if (text !== initialText) onChange()
 				}}
 			/>
 		</div>

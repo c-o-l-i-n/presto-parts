@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Maybe } from '../../../types/types'
 
 interface Props {
 	label: string
 	buttonLabel: string
 	placeholder: string
-	filePath: string
+	filePath: Maybe<string>
 	onButtonClick: () => unknown
 	onType: (text: string) => unknown
+	onChange: () => unknown
 }
 
 const FileUploadField = ({
@@ -16,7 +18,10 @@ const FileUploadField = ({
 	filePath,
 	onButtonClick,
 	onType,
+	onChange,
 }: Props) => {
+	const [initialFilePath, setInitialFilepath] = useState('')
+
 	return (
 		<div className='field'>
 			<label className='label'>{label}</label>
@@ -25,9 +30,15 @@ const FileUploadField = ({
 					className='input'
 					type='text'
 					placeholder={placeholder}
-					value={filePath}
+					value={filePath || ''}
 					onInput={(e) => {
 						onType((e.target as HTMLInputElement).value)
+					}}
+					onFocus={() => {
+						setInitialFilepath(filePath)
+					}}
+					onBlur={() => {
+						if (filePath !== initialFilePath) onChange()
 					}}
 				/>
 				<button

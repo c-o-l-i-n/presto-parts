@@ -1,12 +1,16 @@
 import { contextBridge, ipcRenderer } from 'electron'
 import {
+	AppData,
 	AppInfo,
 	ElectronApi,
 	ExternalSite,
+	GeneratePayload,
 	IpcMainMessage,
 	Maybe,
 	MessageBoxType,
+	Page,
 	Payload,
+	SeparatePayload,
 } from '../../types/types'
 
 const electronApi: ElectronApi = {
@@ -34,6 +38,12 @@ const electronApi: ElectronApi = {
 	},
 	getFileExtension(filePath: string): Promise<string> {
 		return ipcRenderer.invoke(IpcMainMessage.GET_FILE_EXTENSION, filePath)
+	},
+	getAppData(): Promise<AppData> {
+		return ipcRenderer.invoke(IpcMainMessage.GET_APP_DATA)
+	},
+	storeSet(payload: Payload) {
+		ipcRenderer.send(IpcMainMessage.STORE_SET, payload)
 	},
 }
 

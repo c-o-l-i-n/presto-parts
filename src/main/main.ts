@@ -68,10 +68,11 @@ const createWindow = () => {
 		},
 	})
 
+	setupIpcMain(mainWindow)
+
 	mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY)
 
 	mainWindow.once('ready-to-show', () => {
-		setupIpcMain(mainWindow)
 		createAboutWindow()
 		setApplicationMenu(isMac, aboutWindow)
 		mainWindow.show()

@@ -9,12 +9,15 @@ const el = document.getElementById('root')
 if (el === null) throw new Error('Root container missing in index.html')
 
 const root = ReactDOM.createRoot(el)
-root.render(
-	<React.StrictMode>
-		<IsLoadingProvider>
-			<ActivePageProvider>
-				<MainWindow />
-			</ActivePageProvider>
-		</IsLoadingProvider>
-	</React.StrictMode>
+
+window.electron.getAppData().then((appData) =>
+	root.render(
+		<React.StrictMode>
+			<IsLoadingProvider>
+				<ActivePageProvider>
+					<MainWindow appData={appData} />
+				</ActivePageProvider>
+			</IsLoadingProvider>
+		</React.StrictMode>
+	)
 )
