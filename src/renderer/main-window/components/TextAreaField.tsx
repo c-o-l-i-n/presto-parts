@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Maybe } from '../../../types/types'
+import { resolveFieldName } from '../utils'
 
 interface Props {
 	label: string
@@ -18,10 +19,15 @@ const TextAreaField = ({
 }: Props) => {
 	const [initialText, setInitialText] = useState('')
 
+	const fieldName = resolveFieldName(label)
+
 	return (
 		<div className='field'>
-			<label className='label'>{label}</label>
+			<label className='label' htmlFor={fieldName}>
+				{label}
+			</label>
 			<textarea
+				id={fieldName}
 				className='textarea'
 				cols={30}
 				rows={10}

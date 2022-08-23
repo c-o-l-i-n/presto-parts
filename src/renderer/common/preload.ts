@@ -13,7 +13,7 @@ import {
 	SeparatePayload,
 } from '../../types/types'
 
-const electronApi: ElectronApi = {
+export const electronApi: ElectronApi = {
 	async invoke(
 		channel: IpcMainMessage,
 		payload?: Payload
@@ -42,9 +42,9 @@ const electronApi: ElectronApi = {
 	getAppData(): Promise<AppData> {
 		return ipcRenderer.invoke(IpcMainMessage.GET_APP_DATA)
 	},
-	storeSet(payload: Payload) {
+	saveToStore(payload: Payload) {
 		ipcRenderer.send(IpcMainMessage.STORE_SET, payload)
 	},
 }
 
-contextBridge.exposeInMainWorld('electron', electronApi)
+contextBridge?.exposeInMainWorld('electron', electronApi)

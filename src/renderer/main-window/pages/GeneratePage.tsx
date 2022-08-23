@@ -31,22 +31,8 @@ const GeneratePage = ({
 		initialInstrumentPartsList || ''
 	)
 
-	// a meaningless state whose sole purpose is to trigger a store update when it changes
-	// without this, we would write to the disk every keystroke (onType) rather than after done editing field (onChange)
-	const [saveToStoreDependency, setSaveToStoreDependency] = useState<boolean>()
-
-	// save all fields to store when any field is changed
-	useEffect(() => {
-		if (saveToStoreDependency === undefined) return
-		window.electron.storeSet({
-			collectionName,
-			songFoldersLocation,
-			songList,
-			instrumentPartsList,
-		})
-	}, [saveToStoreDependency])
-
-	if (activePage !== Page.GENERATE) return
+	const thisPage = Page.GENERATE
+	if (activePage !== thisPage) return
 
 	const chooseSongFoldersLocation = async () => {
 		const folderPath = await window.electron.invoke(
@@ -60,7 +46,12 @@ const GeneratePage = ({
 	}
 
 	const saveToStore = () => {
-		setSaveToStoreDependency(!saveToStoreDependency)
+		window.electron.saveToStore({
+			collectionName,
+			songFoldersLocation,
+			songList,
+			instrumentPartsList,
+		})
 	}
 
 	return (
@@ -71,63 +62,61 @@ const GeneratePage = ({
 				onDrop={setSongFoldersLocation}
 			/>
 
-			<h1 className='title'>Generate Instrument Parts and Master</h1>
+			<h1 className='title'>{thisPage}</h1>
 
-			<TextInputField
-				label='Collection Name'
-				placeholder='Insect Concert'
-				text={collectionName}
-				onType={setCollectionName}
-				onChange={saveToStore}
-			/>
-
-			<FileUploadField
-				label='Song Folders Location'
-				placeholder='/Users/Colin/Desktop'
-				buttonLabel='Choose Folder'
-				filePath={songFoldersLocation}
-				onButtonClick={chooseSongFoldersLocation}
-				onType={setSongFoldersLocation}
-				onChange={saveToStore}
-			/>
-
-			<div className='field field-body'>
-				<TextAreaField
-					label='Song List'
-					placeholder='A Week in the Life
+			<form onSubmit={(e) => e.preventDefault()}>
+				<TextInputField
+					label='Collection Name'
+					placeholder='Insect Concert'
+					text={collectionName}
+					onType={setCollectionName}
+					onChange={saveToStore}
+				/>
+				<FileUploadField
+					label='Song Folders Location'
+					placeholder='/Users/Colin/Desktop'
+					buttonLabel='Choose Folder'
+					filePath={songFoldersLocation}
+					onButtonClick={chooseSongFoldersLocation}
+					onType={setSongFoldersLocation}
+					onChange={saveToStore}
+				/>
+				<div className='field field-body'>
+					<TextAreaField
+						label='Song List'
+						placeholder='A Week in the Life
 Here Comes the Moon
 Leave it Be
 Eleanor Brigsby
 Hey Judy'
-					text={songList}
-					onType={setSongList}
-					onChange={saveToStore}
-				/>
-
-				<TextAreaField
-					label='Instrument Parts List'
-					placeholder='Score
+						text={songList}
+						onType={setSongList}
+						onChange={saveToStore}
+					/>
+					<TextAreaField
+						label='Instrument Parts List'
+						placeholder='Score
 Flute
 Claritnet
 Alto Sax #2
 Trumpet #4
 Trombone #2
 Tuba #2'
-					text={instrumentPartsList}
-					onType={setInstrumentPartsList}
-					onChange={saveToStore}
+						text={instrumentPartsList}
+						onType={setInstrumentPartsList}
+						onChange={saveToStore}
+					/>
+				</div>
+				<GoButton
+					ipcMessage={IpcMainMessage.GENERATE}
+					payload={{
+						collectionName,
+						songFoldersLocation,
+						songList,
+						instrumentPartsList,
+					}}
 				/>
-			</div>
-
-			<GoButton
-				ipcMessage={IpcMainMessage.GENERATE}
-				payload={{
-					collectionName,
-					songFoldersLocation,
-					songList,
-					instrumentPartsList,
-				}}
-			/>
+			</form>
 		</>
 	)
 }

@@ -21,8 +21,8 @@ export interface ErrorReport {
 }
 
 export enum Page {
-	SEPARATE,
-	GENERATE,
+	SEPARATE = 'Separate Song Parts',
+	GENERATE = 'Generate Instrument Parts and Master',
 }
 
 export interface Context<T> {
@@ -31,7 +31,6 @@ export interface Context<T> {
 }
 
 export interface Tab {
-	text: string
 	icon: string
 	page: Page
 }
@@ -72,7 +71,7 @@ export interface ElectronApi {
 	fileIsDirectory: (filePath: string) => Promise<boolean>
 	getFileExtension: (filePath: string) => Promise<string>
 	getAppData: () => Promise<AppData>
-	storeSet: (payload: Payload) => void
+	saveToStore: (payload: Payload) => void
 }
 
 export type SeparatePayload = {

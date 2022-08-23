@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Maybe } from '../../../types/types'
+import { resolveFieldName } from '../utils'
 
 interface Props {
 	label: string
@@ -18,10 +19,15 @@ const TextInputField = ({
 }: Props) => {
 	const [initialText, setInitialText] = useState('')
 
+	const fieldName = resolveFieldName(label)
+
 	return (
 		<div className='field'>
-			<label className='label'>{label}</label>
+			<label className='label' htmlFor={fieldName}>
+				{label}
+			</label>
 			<input
+				id={fieldName}
 				className='input'
 				type='text'
 				placeholder={placeholder}

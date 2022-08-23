@@ -11,12 +11,10 @@ import IsLoadingContext from './context/IsLoadingContext'
 const tabs: Tab[] = [
 	{
 		page: Page.SEPARATE,
-		text: 'Separate Song Parts',
 		icon: CutIcon,
 	},
 	{
 		page: Page.GENERATE,
-		text: 'Generate Instrument Parts and Master',
 		icon: SheetMusicIcon,
 	},
 ]
