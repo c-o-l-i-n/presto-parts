@@ -18,7 +18,11 @@ jobs:
         with:
           node-version: 18
       - name: install dependencies
-        run: npm install
+        run: npm ci
+      - name: run linter
+        run: npm run lint
+      - name: run tests
+        run: npm test
       - name: publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
