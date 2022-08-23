@@ -22,7 +22,8 @@
 		"semi": false,
 		"useTabs": true,
 		"singleQuote": true,
-		"jsxSingleQuote": true
+		"jsxSingleQuote": true,
+		"endOfLine": "auto"
 	},
 	"eslintConfig": {
 		"env": {
