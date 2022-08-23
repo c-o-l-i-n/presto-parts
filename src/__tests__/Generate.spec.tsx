@@ -7,12 +7,11 @@ import {
 	mockChangeValue,
 	mockElectronApi,
 } from './mocks'
-import SeparatePage from '../renderer/main-window/pages/SeparatePage'
+import GeneratePage from '../renderer/main-window/pages/GeneratePage'
 import { AppData, Page } from '../types/types'
 import ActivePageContext from '../renderer/main-window/context/ActivePageContext'
 import userEvent from '@testing-library/user-event'
 import { UserEvent } from '@testing-library/user-event/dist/types/setup/setup'
-import GeneratePage from '../renderer/main-window/pages/GeneratePage'
 
 describe('GeneratePage', () => {
 	const pageTitle = 'Generate Instrument Parts and Master'

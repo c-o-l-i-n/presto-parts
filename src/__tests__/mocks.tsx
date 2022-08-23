@@ -2,15 +2,7 @@
 
 import { render } from '@testing-library/react'
 import React from 'react'
-import {
-	AppData,
-	AppInfo,
-	ElectronApi,
-	ExternalSite,
-	IpcMainMessage,
-	MessageBoxType,
-	Payload,
-} from '../types/types'
+import { AppData, AppInfo, ElectronApi } from '../types/types'
 
 export const mockAppData: AppData = {
 	songTitle: 'Mock Song Title',
@@ -29,33 +21,22 @@ export const mockAppInfo: AppInfo = {
 
 export const mockChangeValue = 'change'
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+export const noop = () => {}
+
 export const mockElectronApi: ElectronApi = {
-	invoke: (channel: IpcMainMessage, payload?: Payload): Promise<string> =>
-		Promise.resolve(mockChangeValue),
-
+	invoke: (): Promise<string> => Promise.resolve(mockChangeValue),
 	getAppInfo: (): Promise<AppInfo> => Promise.resolve(mockAppInfo),
-
-	openExternal: (url: ExternalSite): void => {
-		return
-	},
-
-	showMessageBox: (type: MessageBoxType, text: string): void => {
-		return
-	},
-
-	fileIsDirectory: (filePath: string): Promise<boolean> => {
+	openExternal: noop,
+	showMessageBox: noop,
+	fileIsDirectory: (): Promise<boolean> => {
 		throw new Error('You should mock implement this function.')
 	},
-
-	getFileExtension: (filePath: string): Promise<string> => {
+	getFileExtension: (): Promise<string> => {
 		throw new Error('You should mock implement this function.')
 	},
-
 	getAppData: (): Promise<AppData> => Promise.resolve(mockAppData),
-
-	saveToStore: (payload: Payload): void => {
-		return
-	},
+	saveToStore: noop,
 }
 
 export const emptyRenderBaseElement = render(<></>).baseElement

@@ -4,7 +4,7 @@ import {
 	Page,
 	SeparatePayload,
 } from '../../../types/types'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import FileUploadField from '../components/FileUploadField'
 import GoButton from '../components/GoButton'
 import TextAreaField from '../components/TextAreaField'

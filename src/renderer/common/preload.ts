@@ -4,13 +4,10 @@ import {
 	AppInfo,
 	ElectronApi,
 	ExternalSite,
-	GeneratePayload,
 	IpcMainMessage,
 	Maybe,
 	MessageBoxType,
-	Page,
 	Payload,
-	SeparatePayload,
 } from '../../types/types'
 
 export const electronApi: ElectronApi = {
