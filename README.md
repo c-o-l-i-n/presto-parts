@@ -21,7 +21,9 @@
 ## Install
 
 ```sh
-git clone https://github.com/c-o-l-i-n/presto-parts.git && cd presto-parts && npm install
+git clone https://github.com/c-o-l-i-n/presto-parts.git
+cd presto-parts
+npm install
 ```
 
 ## Usage
