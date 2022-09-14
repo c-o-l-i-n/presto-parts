@@ -3,6 +3,7 @@
 <p>
   <img alt="Latest Release" src="https://img.shields.io/github/v/release/c-o-l-i-n/presto-parts?include_prereleases&label=latest%20release">
   <img alt="Build Status" src="https://img.shields.io/github/workflow/status/c-o-l-i-n/presto-parts/Build/main">
+  <img alt="Build Status" src="https://img.shields.io/codecov/c/gh/c-o-l-i-n/presto-parts">
   <img alt="Last Commit" src="https://img.shields.io/github/last-commit/c-o-l-i-n/presto-parts">
   <a href="LICENSE" target="_blank">
     <img alt="License" src="https://img.shields.io/github/license/c-o-l-i-n/presto-parts">
