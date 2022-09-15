@@ -1,20 +1,22 @@
 {
-	"compilerOptions": {
-		"allowJs": true,
-		"module": "commonjs",
-		"skipLibCheck": true,
-		"esModuleInterop": true,
-		"noImplicitAny": true,
-		"sourceMap": true,
-		"baseUrl": ".",
-		"outDir": "dist",
-		"moduleResolution": "node",
-		"resolveJsonModule": true,
-		"paths": {
-			"*": ["node_modules/*"]
-		},
-		"jsx": "react",
-		"types": ["react-dom/experimental"]
-	},
-	"include": ["src/**/*"]
+  "compilerOptions": {
+    "allowJs": true,
+    "module": "commonjs",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "strictNullChecks": true,
+    "baseUrl": ".",
+    "outDir": "dist",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "paths": {
+      "*": ["node_modules/*"],
+      "electron-squirrel-startup": ["./src/types/electron-squirrel-startup"]
+    },
+    "jsx": "react",
+    "types": ["react-dom/experimental"]
+  },
+  "include": ["src/**/*"]
 }

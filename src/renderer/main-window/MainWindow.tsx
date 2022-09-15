@@ -9,42 +9,42 @@ import Loader from './components/Loader'
 import IsLoadingContext from './context/IsLoadingContext'
 
 const tabs: Tab[] = [
-	{
-		page: Page.SEPARATE,
-		icon: CutIcon,
-	},
-	{
-		page: Page.GENERATE,
-		icon: SheetMusicIcon,
-	},
+  {
+    page: Page.SEPARATE,
+    icon: CutIcon
+  },
+  {
+    page: Page.GENERATE,
+    icon: SheetMusicIcon
+  }
 ]
 
 interface Props {
-	appData: AppData
+  appData: AppData
 }
 
-const MainWindow = ({ appData }: Props) => {
-	const { state: isLoading } = useContext(IsLoadingContext)
+const MainWindow = ({ appData }: Props): JSX.Element => {
+  const { state: isLoading } = useContext(IsLoadingContext)
 
-	return (
-		<>
-			{isLoading ? <Loader /> : null}
-			<Navbar tabs={tabs} />
-			<main id='main' className='section'>
-				<SeparatePage
-					songTitle={appData.songTitle}
-					pdfSourcePath={appData.pdfSourcePath}
-					partsList={appData.partsList}
-				/>
-				<GeneratePage
-					collectionName={appData.collectionName}
-					songFoldersLocation={appData.songFoldersLocation}
-					songList={appData.songList}
-					instrumentPartsList={appData.instrumentPartsList}
-				/>
-			</main>
-		</>
-	)
+  return (
+    <>
+      {isLoading ? <Loader /> : null}
+      <Navbar tabs={tabs} />
+      <main id='main' className='section'>
+        <SeparatePage
+          songTitle={appData.songTitle}
+          pdfSourcePath={appData.pdfSourcePath}
+          partsList={appData.partsList}
+        />
+        <GeneratePage
+          collectionName={appData.collectionName}
+          songFoldersLocation={appData.songFoldersLocation}
+          songList={appData.songList}
+          instrumentPartsList={appData.instrumentPartsList}
+        />
+      </main>
+    </>
+  )
 }
 
 export default MainWindow

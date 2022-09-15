@@ -3,26 +3,26 @@ import { IpcMainMessage, Payload } from '../../../types/types'
 import IsLoadingContext from '../context/IsLoadingContext'
 
 interface Props {
-	ipcMessage: IpcMainMessage
-	payload: Payload
+  ipcMessage: IpcMainMessage
+  payload: Payload
 }
 
-const GoButton = ({ ipcMessage, payload }: Props) => {
-	const { setState: setIsLoading } = useContext(IsLoadingContext)
+const GoButton = ({ ipcMessage, payload }: Props): JSX.Element => {
+  const { setState: setIsLoading } = useContext(IsLoadingContext)
 
-	const go = async () => {
-		setIsLoading(true)
-		await window.electron.invoke(ipcMessage, payload)
-		setIsLoading(false)
-	}
+  const go = async (): Promise<void> => {
+    setIsLoading(true)
+    await window.electron.invoke(ipcMessage, payload)
+    setIsLoading(false)
+  }
 
-	return (
-		<div className='field'>
-			<button className='button is-primary' onClick={go}>
-				Go
-			</button>
-		</div>
-	)
+  return (
+    <div className='field'>
+      <button className='button is-primary' onClick={go}>
+        Go
+      </button>
+    </div>
+  )
 }
 
 export default GoButton

@@ -4,25 +4,26 @@ import { Page, Context } from '../../../types/types'
 const initialActivePage = Page.SEPARATE
 
 const ActivePageContext = createContext<Context<Page>>({
-	state: initialActivePage,
+  state: initialActivePage,
+  setState: () => {}
 })
 
 interface Props {
-	children: React.ReactNode
+  children: React.ReactNode
 }
-const ActivePageProvider = ({ children }: Props) => {
-	const [activePage, setActivePage] = useState<Page>(initialActivePage)
+const ActivePageProvider = ({ children }: Props): JSX.Element => {
+  const [activePage, setActivePage] = useState<Page>(initialActivePage)
 
-	return (
-		<ActivePageContext.Provider
-			value={{
-				state: activePage,
-				setState: (page) => setActivePage(page),
-			}}
-		>
-			{children}
-		</ActivePageContext.Provider>
-	)
+  return (
+    <ActivePageContext.Provider
+      value={{
+        state: activePage,
+        setState: (page) => setActivePage(page)
+      }}
+    >
+      {children}
+    </ActivePageContext.Provider>
+  )
 }
 
 export default ActivePageContext

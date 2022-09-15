@@ -15,114 +15,114 @@ $body-min-width: 200px;
 :not(input):not(textarea)::after,
 :not(input):not(textarea)::before,
 input[type='submit'] {
-	-webkit-user-select: none;
-	user-select: none;
-	cursor: default !important;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: default !important;
 }
 
 // disable dragging
 a:not([draggable='true']),
 img:not([draggable='true']) {
-	-webkit-user-drag: none;
-	user-drag: none; /* Technically not supported in Electron yet */
+  -webkit-user-drag: none;
+  user-drag: none; /* Technically not supported in Electron yet */
 }
 a[href^="http://"],
 a[href^="https://"],
 a[href^="ftp://"]
 {
-	-webkit-user-drag: auto;
-	user-drag: auto; /* Technically not supported in Electron yet */
+  -webkit-user-drag: auto;
+  user-drag: auto; /* Technically not supported in Electron yet */
 }
 
 html {
-	font: caption;
-	font-size: 14px;
+  font: caption;
+  font-size: 14px;
 }
 
 html,
 body {
-	height: 100vh;
-	overflow: hidden;
+  height: 100vh;
+  overflow: hidden;
 }
 
 // textbox highlight color
 ::selection {
-	background: rgba($primary, 0.5);
+  background: rgba($primary, 0.5);
 }
 
 // full-screen overlays
 .full-screen-overlay {
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: 100%;
-	width: 100%;
-	z-index: 1;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 // full-screen loading animation
 #loader {
-	background: black;
-	opacity: 0.5;
+  background: black;
+  opacity: 0.5;
 
-	.loader {
-		height: 80px;
-		width: 80px;
-	}
+  .loader {
+    height: 80px;
+    width: 80px;
+  }
 }
 
 // full-screen drop zone
 .drop-zone {
-	background: rgba($primary, 0.75);
+  background: rgba($primary, 0.75);
 }
 
 #navbar {
-	margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 section {
-	height: 100%;
-	overflow-y: auto;
+  height: 100%;
+  overflow-y: auto;
 }
 
 .pp-icon {
-	height: $icon-dimensions;
-	width: $icon-dimensions;
-	background-color: $text;
-	-webkit-mask-size: cover;
+  height: $icon-dimensions;
+  width: $icon-dimensions;
+  background-color: $text;
+  -webkit-mask-size: cover;
 }
 
 .tabs {
-	li a:hover .pp-icon {
-		background-color: $text-strong;
-	}
+  li a:hover .pp-icon {
+    background-color: $text-strong;
+  }
 
-	li.is-active a .pp-icon {
-		background-color: $link;
-	}
+  li.is-active a .pp-icon {
+    background-color: $link;
+  }
 }
 
 // ------------------------------ dark mode -------------------------------
 
 @media (prefers-color-scheme: dark) {
-	.tabs {
-		li a .pp-icon {
-			background-color: $text-dark;
-		}
+  .tabs {
+    li a .pp-icon {
+      background-color: $text-dark;
+    }
 
-		li a:hover .pp-icon {
-			background-color: $text-strong-dark;
-		}
+    li a:hover .pp-icon {
+      background-color: $text-strong-dark;
+    }
 
-		li.is-active a {
-			color: $link;
+    li.is-active a {
+      color: $link;
 
-			.pp-icon {
-				background-color: $link;
-			}
-		}
-	}
+      .pp-icon {
+        background-color: $link;
+      }
+    }
+  }
 }

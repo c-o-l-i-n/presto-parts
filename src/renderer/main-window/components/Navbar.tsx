@@ -3,19 +3,19 @@ import { Tab } from '../../../types/types'
 import NavbarTab from './NavbarTab'
 
 interface Props {
-	tabs: Tab[]
+  tabs: Tab[]
 }
 
-const Navbar = ({ tabs }: Props) => {
-	const tabComponents = tabs.map((tab, index) => (
-		<NavbarTab tab={tab} key={index} />
-	))
+const Navbar = ({ tabs }: Props): JSX.Element => {
+  const tabComponents = tabs.map((tab, index) =>
+    <NavbarTab tab={tab} key={index} />
+  )
 
-	return (
-		<nav id='navbar' className='tabs is-centered'>
-			<ul>{tabComponents}</ul>
-		</nav>
-	)
+  return (
+    <nav id='navbar' className='tabs is-centered'>
+      <ul>{tabComponents}</ul>
+    </nav>
+  )
 }
 
 export default Navbar

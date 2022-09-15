@@ -10,14 +10,14 @@ if (el === null) throw new Error('Root container missing in index.html')
 
 const root = createRoot(el)
 
-window.electron.getAppData().then((appData) =>
-	root.render(
-		<React.StrictMode>
-			<IsLoadingProvider>
-				<ActivePageProvider>
-					<MainWindow appData={appData} />
-				</ActivePageProvider>
-			</IsLoadingProvider>
-		</React.StrictMode>
-	)
+void window.electron.getAppData().then((appData) =>
+  root.render(
+    <React.StrictMode>
+      <IsLoadingProvider>
+        <ActivePageProvider>
+          <MainWindow appData={appData} />
+        </ActivePageProvider>
+      </IsLoadingProvider>
+    </React.StrictMode>
+  )
 )
