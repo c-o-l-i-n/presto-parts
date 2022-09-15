@@ -2,16 +2,20 @@
 
 <p align="center">Organize sheet music PDFs in a few minutes, not many hours.</p>
 
-<!-- PROJECT SHIELDS -->
-
 <div align="center">
-  <img alt="Latest Release" src="https://img.shields.io/github/v/release/c-o-l-i-n/presto-parts?include_prereleases&label=latest%20release" />
-  <img alt="Build Status" src="https://img.shields.io/github/workflow/status/c-o-l-i-n/presto-parts/Build" />
-  <img alt="Test Coverage" src="https://img.shields.io/codecov/c/gh/c-o-l-i-n/presto-parts" />
+  <a href="https://github.com/c-o-l-i-n/presto-parts/releases/latest">
+    <img alt="Latest Release" src="https://img.shields.io/github/v/release/c-o-l-i-n/presto-parts?include_prereleases&label=latest%20release" />
+  </a>
+  <a href="https://github.com/c-o-l-i-n/presto-parts/actions">
+    <img alt="Build Status" src="https://img.shields.io/github/workflow/status/c-o-l-i-n/presto-parts/Build" />
+  </a>
+  <a href="https://app.codecov.io/gh/c-o-l-i-n/presto-parts" target="_blank">
+    <img alt="Test Coverage" src="https://img.shields.io/codecov/c/gh/c-o-l-i-n/presto-parts" />
+  </a>
   <a href="LICENSE">
     <img alt="Liscense" src="https://img.shields.io/github/license/c-o-l-i-n/presto-parts" />
   </a>
-  <a href="https://www.npmjs.com/package/ts-standard">
+  <a href="https://www.npmjs.com/package/ts-standard" target="_blank">
     <img alt="Code Style: TS Standard" src="https://img.shields.io/badge/code%20style-ts--standard-blue?logo=typescript&logoColor=white&logoWidth=12" />
   </a>
 </div>
@@ -73,4 +77,4 @@ Give a ⭐️ if this project helped you!
 
 ## License
 
-Copyright © 2022 [Colin A. Williams](https://github.com/c-o-l-i-n).<br /> This project is [MIT](https://github.com/c-o-l-i-n/presto-parts/blob/main/LICENSE) licensed.
+Copyright © 2022 [Colin A. Williams](https://github.com/c-o-l-i-n).<br /> This project is [MIT](LICENSE) licensed.
