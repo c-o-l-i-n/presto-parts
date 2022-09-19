@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { ReactElement, useCallback, useEffect, useRef, useState } from 'react'
 import { FileType, MessageBoxType } from '../../../types/types'
 
 interface Props {
@@ -7,7 +7,7 @@ interface Props {
   onDrop: (filePath: string) => unknown
 }
 
-const DropZone = ({ text, desiredFileType, onDrop }: Props): JSX.Element => {
+const DropZone = ({ text, desiredFileType, onDrop }: Props): ReactElement => {
   const [isDragging, setIsDragging] = useState(false)
   const dragCounter = useRef(0)
 

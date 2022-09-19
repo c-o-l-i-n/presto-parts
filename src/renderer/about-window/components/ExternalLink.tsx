@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { ExternalSite } from '../../../types/types'
 
 interface Props {
@@ -6,7 +6,7 @@ interface Props {
   url: ExternalSite
 }
 
-const ExternalLink = ({ children, url }: Props): JSX.Element => {
+const ExternalLink = ({ children, url }: Props): ReactElement => {
   return <a onClick={() => window.electron.openExternal(url)}>{children}</a>
 }
 

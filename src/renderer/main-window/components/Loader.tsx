@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 
-const Loader = (): JSX.Element => {
+const Loader = (): ReactElement => {
   return (
     <div id='loader' data-testid='loader' className='full-screen-overlay'>
       <div className='loader is-loading' />

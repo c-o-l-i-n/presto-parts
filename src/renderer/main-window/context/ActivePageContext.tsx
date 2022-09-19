@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, ReactElement, useState } from 'react'
 import { Page, Context } from '../../../types/types'
 
 const initialActivePage = Page.SEPARATE
@@ -11,7 +11,7 @@ const ActivePageContext = createContext<Context<Page>>({
 interface Props {
   children: React.ReactNode
 }
-const ActivePageProvider = ({ children }: Props): JSX.Element => {
+const ActivePageProvider = ({ children }: Props): ReactElement => {
   const [activePage, setActivePage] = useState<Page>(initialActivePage)
 
   return (

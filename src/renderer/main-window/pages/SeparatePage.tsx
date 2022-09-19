@@ -1,5 +1,5 @@
 import { FileType, IpcMainMessage, Page, SeparatePayload } from '../../../types/types'
-import React, { useContext, useState } from 'react'
+import React, { ReactElement, useContext, useState } from 'react'
 import FileUploadField from '../components/FileUploadField'
 import GoButton from '../components/GoButton'
 import TextAreaField from '../components/TextAreaField'
@@ -11,7 +11,7 @@ const SeparatePage = ({
   songTitle: initialSongTitle,
   pdfSourcePath: initialPdfSourcePath,
   partsList: initialPartsList
-}: SeparatePayload): JSX.Element => {
+}: SeparatePayload): ReactElement => {
   const { state: activePage } = useContext(ActivePageContext)
 
   const [songTitle, setSongTitle] = useState(initialSongTitle ?? '')

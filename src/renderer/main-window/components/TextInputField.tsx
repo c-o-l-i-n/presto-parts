@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { ReactElement, useState } from 'react'
 import { Maybe } from '../../../types/types'
 import { resolveFieldName } from '../utils'
 
@@ -10,7 +10,7 @@ interface Props {
   onChange: () => unknown
 }
 
-const TextInputField = ({ label, placeholder, text, onType, onChange }: Props): JSX.Element => {
+const TextInputField = ({ label, placeholder, text, onType, onChange }: Props): ReactElement => {
   const [initialText, setInitialText] = useState('')
 
   const fieldName = resolveFieldName(label)

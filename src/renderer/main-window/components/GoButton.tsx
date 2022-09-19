@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { ReactElement, useContext } from 'react'
 import { IpcMainMessage, Payload } from '../../../types/types'
 import IsLoadingContext from '../context/IsLoadingContext'
 
@@ -7,7 +7,7 @@ interface Props {
   payload: Payload
 }
 
-const GoButton = ({ ipcMessage, payload }: Props): JSX.Element => {
+const GoButton = ({ ipcMessage, payload }: Props): ReactElement => {
   const { setState: setIsLoading } = useContext(IsLoadingContext)
 
   const go = async (): Promise<void> => {

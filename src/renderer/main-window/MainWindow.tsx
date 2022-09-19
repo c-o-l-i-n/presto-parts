@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { ReactElement, useContext } from 'react'
 import Navbar from './components/Navbar'
 import CutIcon from '../../../assets/images/cut.svg'
 import SheetMusicIcon from '../../../assets/images/sheet-music.svg'
@@ -23,7 +23,7 @@ interface Props {
   appData: AppData
 }
 
-const MainWindow = ({ appData }: Props): JSX.Element => {
+const MainWindow = ({ appData }: Props): ReactElement => {
   const { state: isLoading } = useContext(IsLoadingContext)
 
   return (

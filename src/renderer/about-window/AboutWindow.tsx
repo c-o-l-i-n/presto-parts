@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { AppInfo, ExternalSite } from '../../types/types'
 import Logo from '../../../assets/app-icons/app-icon.iconset/icon_128x128.png'
 import ExternalLink from './components/ExternalLink'
@@ -7,7 +7,7 @@ interface Props {
   appInfo: AppInfo
 }
 
-const AboutWindow = ({ appInfo }: Props): JSX.Element => {
+const AboutWindow = ({ appInfo }: Props): ReactElement => {
   document.title = `About ${appInfo.name}`
 
   return (

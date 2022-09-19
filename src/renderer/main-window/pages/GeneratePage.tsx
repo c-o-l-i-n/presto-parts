@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { ReactElement, useContext, useState } from 'react'
 import { FileType, GeneratePayload, IpcMainMessage, Page } from '../../../types/types'
 import DropZone from '../components/DropZone'
 import FileUploadField from '../components/FileUploadField'
@@ -12,7 +12,7 @@ const GeneratePage = ({
   songFoldersLocation: initialSongFoldersLocation,
   songList: initialSongList,
   instrumentPartsList: initialInstrumentPartsList
-}: GeneratePayload): JSX.Element => {
+}: GeneratePayload): ReactElement => {
   const { state: activePage } = useContext(ActivePageContext)
 
   const [collectionName, setCollectionName] = useState(

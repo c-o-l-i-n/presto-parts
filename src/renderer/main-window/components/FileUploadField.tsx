@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { ReactElement, useState } from 'react'
 import { Maybe } from '../../../types/types'
 import { resolveFieldName } from '../utils'
 
@@ -12,7 +12,7 @@ interface Props {
   onChange: () => unknown
 }
 
-const FileUploadField = ({ label, buttonLabel, placeholder, filePath, onButtonClick, onType, onChange }: Props): JSX.Element => {
+const FileUploadField = ({ label, buttonLabel, placeholder, filePath, onButtonClick, onType, onChange }: Props): ReactElement => {
   const [initialFilePath, setInitialFilepath] = useState('')
 
   const fieldName = resolveFieldName(label)

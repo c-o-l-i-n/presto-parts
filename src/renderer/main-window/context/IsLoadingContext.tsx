@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, ReactElement, useState } from 'react'
 import { Context } from '../../../types/types'
 
 const initialIsLoading = false
@@ -11,7 +11,7 @@ const IsLoadingContext = createContext<Context<boolean>>({
 interface Props {
   children: React.ReactNode
 }
-const IsLoadingProvider = ({ children }: Props): JSX.Element => {
+const IsLoadingProvider = ({ children }: Props): ReactElement => {
   const [isLoading, setIsLoading] = useState<boolean>(initialIsLoading)
 
   return (
