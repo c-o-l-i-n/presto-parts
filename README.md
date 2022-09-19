@@ -13,9 +13,9 @@
     <img alt="Test Coverage" src="https://img.shields.io/codecov/c/gh/c-o-l-i-n/presto-parts" />
   </a>
   <a href="LICENSE">
-    <img alt="Liscense" src="https://img.shields.io/github/license/c-o-l-i-n/presto-parts" />
+    <img alt="License" src="https://img.shields.io/github/license/c-o-l-i-n/presto-parts" />
   </a>
-  <a href="https://www.npmjs.com/package/ts-standard" target="_blank">
+  <a href="https://standardjs.com" target="_blank">
     <img alt="Code Style: TS Standard" src="https://img.shields.io/badge/code%20style-ts--standard-blue?logo=typescript&logoColor=white&logoWidth=12" />
   </a>
 </div>
