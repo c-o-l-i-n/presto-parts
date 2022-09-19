@@ -1,11 +1,12 @@
 import React, { createContext, ReactElement, useState } from 'react'
+import { noop } from '../../../__tests__/mocks'
 import { Page, Context } from '../../../types/types'
 
 const initialActivePage = Page.SEPARATE
 
 const ActivePageContext = createContext<Context<Page>>({
   state: initialActivePage,
-  setState: () => {}
+  setState: noop
 })
 
 interface Props {

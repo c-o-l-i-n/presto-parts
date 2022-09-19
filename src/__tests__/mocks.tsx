@@ -2,16 +2,24 @@
 
 import { render } from '@testing-library/react'
 import React from 'react'
-import { AppData, AppInfo, ElectronApi } from '../types/types'
+import { AppData, AppInfo, ElectronApi, GeneratePayload, Page, SeparatePayload, Tab } from '../types/types'
 
-export const mockAppData: AppData = {
+export const mockSeparatePaylod: SeparatePayload = {
   songTitle: 'Mock Song Title',
   pdfSourcePath: 'Mock PDF Source Path',
-  partsList: 'Mock Parts List',
+  partsList: 'Mock Parts List'
+}
+
+export const mockGeneratePaylod: GeneratePayload = {
   collectionName: 'Mock Collection Name',
   songFoldersLocation: 'Mock Song Folders Location',
   songList: 'Mock Song List',
   instrumentPartsList: 'Mock Instrument Parts Lists'
+}
+
+export const mockAppData: AppData = {
+  ...mockSeparatePaylod,
+  ...mockGeneratePaylod
 }
 
 export const mockAppInfo: AppInfo = {
@@ -40,3 +48,5 @@ export const mockElectronApi: ElectronApi = {
 }
 
 export const emptyRenderBaseElement = render(<></>).baseElement
+
+export const mockTab: Tab = { page: Page.GENERATE, icon: 'mock/icon/path' }

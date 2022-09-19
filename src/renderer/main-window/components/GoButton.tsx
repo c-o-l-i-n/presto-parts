@@ -18,7 +18,7 @@ const GoButton = ({ ipcMessage, payload }: Props): ReactElement => {
 
   return (
     <div className='field'>
-      <button className='button is-primary' onClick={go}>
+      <button className='button is-primary' onClick={go} role='button'>
         Go
       </button>
     </div>

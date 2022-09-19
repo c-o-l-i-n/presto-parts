@@ -1,11 +1,12 @@
 import React, { createContext, ReactElement, useState } from 'react'
+import { noop } from '../../../__tests__/mocks'
 import { Context } from '../../../types/types'
 
 const initialIsLoading = false
 
 const IsLoadingContext = createContext<Context<boolean>>({
   state: initialIsLoading,
-  setState: () => {}
+  setState: noop
 })
 
 interface Props {

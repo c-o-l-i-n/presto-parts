@@ -11,7 +11,7 @@ const NavbarTab = ({ tab }: Props): ReactElement => {
 
   return (
     <li className={activePage === tab.page ? 'is-active' : undefined} role='tab'>
-      <a onClick={() => setActivePage(tab.page)}>
+      <a onClick={() => setActivePage(tab.page)} role='link'>
         <span className='icon'>
           <div
             className='pp-icon'
