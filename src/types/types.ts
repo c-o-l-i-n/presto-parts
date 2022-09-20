@@ -91,3 +91,11 @@ export interface GeneratePayload {
 export type Payload = SeparatePayload | GeneratePayload
 
 export type AppData = SeparatePayload & GeneratePayload
+
+export interface DragDropEventOptions {
+  dataTransfer: {
+    items: File[]
+    files: File[]
+    clearData: () => void
+  }
+}

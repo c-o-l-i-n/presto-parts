@@ -15,7 +15,6 @@ describe('SeparatePage', () => {
     'PDF Source': 'pdfSourcePath',
     'Parts List': 'partsList'
   }
-  window.electron = mockElectronApi
 
   let component: ReactElement
   let renderResult: RenderResult
@@ -32,6 +31,7 @@ describe('SeparatePage', () => {
     )
     renderResult = render(component)
     user = userEvent.setup()
+    window.electron = mockElectronApi
     saveToStoreSpy = jest.spyOn(window.electron, 'saveToStore')
   })
 

@@ -104,7 +104,7 @@ const DropZone = ({ text, desiredFileType, onDrop }: Props): ReactElement => {
   if (!isDragging) return <></>
 
   return (
-    <div className='drop-zone full-screen-overlay'>
+    <div className='drop-zone full-screen-overlay' data-testid='drop-zone'>
       <h1 className='is-size-1 has-text-light has-text-weight-semibold mb-6'>
         {text}
       </h1>

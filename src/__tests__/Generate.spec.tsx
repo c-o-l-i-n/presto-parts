@@ -16,7 +16,6 @@ describe('GeneratePage', () => {
     'Song List': 'songList',
     'Instrument Parts List': 'instrumentPartsList'
   }
-  window.electron = mockElectronApi
 
   let component: ReactElement
   let renderResult: RenderResult
@@ -38,6 +37,7 @@ describe('GeneratePage', () => {
       </ActivePageContext.Provider>
     )
     user = userEvent.setup()
+    window.electron = mockElectronApi
     saveToStoreSpy = jest.spyOn(window.electron, 'saveToStore')
   })
 

@@ -50,3 +50,6 @@ export const mockElectronApi: ElectronApi = {
 export const emptyRenderBaseElement = render(<></>).baseElement
 
 export const mockTab: Tab = { page: Page.GENERATE, icon: 'mock/icon/path' }
+
+export const mockPdfFile = { ...new File(['Mock PDF File'], 'MockPdfFile.pdf', { type: 'application/pdf' }), path: '/path/to/MockPdfFile.pdf' }
+export const mockTxtFile = { ...new File(['Mock TXT File'], 'MockTxtFile.txt', { type: 'text/plain' }), path: '/path/to/MockTxtFile.txt' }
