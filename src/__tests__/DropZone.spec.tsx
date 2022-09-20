@@ -1,9 +1,9 @@
 import React, { ReactElement } from 'react'
 import '@testing-library/jest-dom'
 import { fireEvent, render, RenderResult, screen } from '@testing-library/react'
-import { DragDropEventOptions, FileType, MessageBoxType } from '../types/types'
+import { DragDropEventOptions, FileType, MessageBoxType, TestFile } from '../types/types'
 import DropZone from '../renderer/main-window/components/DropZone'
-import { mockElectronApi, mockPdfFile, mockTxtFile, noop } from './mocks'
+import { mockDirectory, mockElectronApi, mockFileWithNoType, mockPdfFile, mockTxtFile, noop } from './mocks'
 
 const createDragDropEventOptions = (files: File[]): DragDropEventOptions => ({
   dataTransfer: {
@@ -110,11 +110,35 @@ describe('DropZone', () => {
     expect(messageBoxSpy.mock.calls[0][0]).toEqual(MessageBoxType.ERROR)
   })
 
-  it('should show an error message if drop undesired file type', async () => {
-    const messageBoxSpy = jest.spyOn(window.electron, 'showMessageBox')
-    fireEvent.drop(window, createDragDropEventOptions([mockTxtFile]))
-    await new Promise(process.nextTick) // wait for all code to execute
-    expect(messageBoxSpy).toHaveBeenCalledTimes(1)
-    expect(messageBoxSpy.mock.calls[0][0]).toEqual(MessageBoxType.ERROR)
+  const undesiredFiles: Record<string, TestFile> = {
+    'txt file': {
+      file: mockTxtFile,
+      isFolder: false,
+      fileExtension: '.txt'
+    },
+    directory: {
+      file: mockDirectory,
+      isFolder: true,
+      fileExtension: ''
+    },
+    'file with no type': {
+      file: mockFileWithNoType,
+      isFolder: false,
+      fileExtension: ''
+    }
+  }
+
+  Object.entries(undesiredFiles).forEach(([testFileType, testFile]) => {
+    it(`should show an error message if drop undesired file type (${testFileType})`, async () => {
+      const messageBoxSpy = jest.spyOn(window.electron, 'showMessageBox')
+      jest.spyOn(window.electron, 'fileIsDirectory').mockReturnValue(Promise.resolve(testFile.isFolder))
+      jest.spyOn(window.electron, 'getFileExtension').mockReturnValue(Promise.resolve(testFile.fileExtension))
+
+      fireEvent.drop(window, createDragDropEventOptions([testFile.file]))
+      await new Promise(process.nextTick) // wait for all code to execute
+
+      expect(messageBoxSpy).toHaveBeenCalledTimes(1)
+      expect(messageBoxSpy.mock.calls[0][0]).toEqual(MessageBoxType.ERROR)
+    })
   })
 })

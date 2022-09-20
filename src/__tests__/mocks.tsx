@@ -53,3 +53,5 @@ export const mockTab: Tab = { page: Page.GENERATE, icon: 'mock/icon/path' }
 
 export const mockPdfFile = { ...new File(['Mock PDF File'], 'MockPdfFile.pdf', { type: 'application/pdf' }), path: '/path/to/MockPdfFile.pdf' }
 export const mockTxtFile = { ...new File(['Mock TXT File'], 'MockTxtFile.txt', { type: 'text/plain' }), path: '/path/to/MockTxtFile.txt' }
+export const mockDirectory = { ...new File(['Mock Directory'], 'MockDirectory', {}), path: '/path/to/MockDirectory' }
+export const mockFileWithNoType = { ...new File(['Mock File With No Type'], 'MockFileWithNoTYpe', {}), path: '/path/to/MockFileWithNoTYpe' }

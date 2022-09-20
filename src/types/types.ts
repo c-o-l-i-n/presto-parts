@@ -47,7 +47,7 @@ export enum FileType {
   PDF = 'PDF',
   FOLDER = 'folder',
   NO_TYPE = 'file with no type',
-  UNEXPECTED = '<unexpected file type>'
+  IMPOSSIBLE = '<impossible file type>'
 }
 
 export enum IpcMainMessage {
@@ -98,4 +98,10 @@ export interface DragDropEventOptions {
     files: File[]
     clearData: () => void
   }
+}
+
+export interface TestFile {
+  file: File
+  isFolder: boolean
+  fileExtension: string
 }

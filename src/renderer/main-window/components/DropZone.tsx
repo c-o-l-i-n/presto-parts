@@ -85,7 +85,7 @@ const DropZone = ({ text, desiredFileType, onDrop }: Props): ReactElement => {
       ? FileType.FOLDER
       : fileExtension === ''
         ? FileType.NO_TYPE
-        : fileExtension.split('.').pop()?.toUpperCase() ?? FileType.UNEXPECTED
+        : fileExtension.split('.').pop()?.toUpperCase() ?? FileType.IMPOSSIBLE
 
     if (fileType !== desiredFileType) {
       const lettersPrecededByAn = 'AEFHILMNORSX'
