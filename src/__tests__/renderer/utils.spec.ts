@@ -1,4 +1,4 @@
-import { resolveFieldName } from '../renderer/main-window/utils'
+import { resolveFieldName } from '../../renderer/main-window/utils'
 
 describe('resolveFieldName', () => {
   const expectedResult: Record<string, string> = {

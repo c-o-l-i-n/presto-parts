@@ -1,5 +1,5 @@
 import React, { createContext, ReactElement, useState } from 'react'
-import { noop } from '../../../__tests__/mocks'
+import { noop } from '../../../__tests__/renderer/mocks'
 import { Context } from '../../../types/types'
 
 const initialIsLoading = false

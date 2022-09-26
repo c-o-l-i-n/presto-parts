@@ -2,7 +2,7 @@
 
 import { render } from '@testing-library/react'
 import React from 'react'
-import { AppData, AppInfo, ElectronApi, GeneratePayload, Page, SeparatePayload, Tab } from '../types/types'
+import { AppData, AppInfo, ElectronApi, GeneratePayload, Page, SeparatePayload, Tab } from '../../types/types'
 
 export const mockSeparatePaylod: SeparatePayload = {
   songTitle: 'Mock Song Title',
@@ -22,9 +22,12 @@ export const mockAppData: AppData = {
   ...mockGeneratePaylod
 }
 
+export const mockAppName = 'Mock App Name'
+export const mockAppVersion = 'Mock App Version'
+
 export const mockAppInfo: AppInfo = {
-  name: 'Mock App Name',
-  version: 'Mock App Version'
+  name: mockAppName,
+  version: mockAppVersion
 }
 
 export const mockChangeValue = 'change'

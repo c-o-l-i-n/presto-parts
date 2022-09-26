@@ -2,11 +2,11 @@ import React, { ReactElement } from 'react'
 import '@testing-library/jest-dom'
 import { render, RenderResult, screen } from '@testing-library/react'
 import { mockElectronApi, mockSeparatePaylod } from './mocks'
-import { IpcMainMessage, Payload } from '../types/types'
+import { IpcMainMessage, Payload } from '../../types/types'
 import userEvent from '@testing-library/user-event'
 import { UserEvent } from '@testing-library/user-event/dist/types/setup/setup'
-import GoButton from '../renderer/main-window/components/GoButton'
-import { IsLoadingProvider } from '../renderer/main-window/context/IsLoadingContext'
+import GoButton from '../../renderer/main-window/components/GoButton'
+import { IsLoadingProvider } from '../../renderer/main-window/context/IsLoadingContext'
 
 describe('GoButton', () => {
   window.electron = mockElectronApi

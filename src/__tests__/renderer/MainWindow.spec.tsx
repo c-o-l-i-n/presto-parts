@@ -2,12 +2,12 @@ import React, { ReactElement } from 'react'
 import '@testing-library/jest-dom'
 import { getByRole, queryByText, render, RenderResult, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import MainWindow from '../renderer/main-window/MainWindow'
+import MainWindow from '../../renderer/main-window/MainWindow'
 import { mockAppData, noop } from './mocks'
-import IsLoadingContext from '../renderer/main-window/context/IsLoadingContext'
-import { Page } from '../types/types'
+import IsLoadingContext from '../../renderer/main-window/context/IsLoadingContext'
+import { Page } from '../../types/types'
 import { UserEvent } from '@testing-library/user-event/dist/types/setup/setup'
-import { ActivePageProvider } from '../renderer/main-window/context/ActivePageContext'
+import { ActivePageProvider } from '../../renderer/main-window/context/ActivePageContext'
 
 describe('MainWindow', () => {
   let component: ReactElement
