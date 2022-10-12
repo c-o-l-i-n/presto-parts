@@ -120,7 +120,7 @@ describe('DropZone', () => {
     })
   })
 
-  const shouldShowErrorMessageBox = () => {
+  const shouldShowErrorMessageBox = (): void => {
     expect(messageBoxSpy).toHaveBeenCalledTimes(1)
     expect(messageBoxSpy.mock.calls[0][0]).toEqual(MessageBoxType.ERROR)
   }
