@@ -18,6 +18,7 @@ describe('DropZone', () => {
   let text: string
   let desiredFileType: FileType
   let mockOnDrop: jest.Mock
+  let messageBoxSpy: jest.SpyInstance
   let component: ReactElement
   let renderResult: RenderResult
 
@@ -35,6 +36,7 @@ describe('DropZone', () => {
     renderResult = render(component)
     window.electron = mockElectronApi
 
+    messageBoxSpy = jest.spyOn(window.electron, 'showMessageBox')
     jest.spyOn(window.electron, 'fileIsDirectory').mockReturnValue(Promise.resolve(false))
     jest.spyOn(window.electron, 'getFileExtension').mockImplementation(async f => f.substring(f.length - 4))
   })
@@ -57,7 +59,7 @@ describe('DropZone', () => {
   })
 
   describe('after dragenter', () => {
-    let eventOptions: {}
+    let eventOptions: DragDropEventOptions
 
     beforeEach(() => {
       eventOptions = createDragDropEventOptions([mockPdfFile])
@@ -96,19 +98,42 @@ describe('DropZone', () => {
     })
   })
 
-  it('should show an error message if drop undefined', () => {
-    const messageBoxSpy = jest.spyOn(window.electron, 'showMessageBox')
-    // @ts-expect-error
-    fireEvent.drop(window, createDragDropEventOptions([undefined]))
+  describe('after dragenter undefined', () => {
+    let eventOptions: DragDropEventOptions
+
+    beforeEach(() => {
+      // @ts-expect-error
+      eventOptions = {}
+      fireEvent.dragEnter(window, eventOptions)
+      fireEvent.dragOver(window, eventOptions)
+    })
+
+    it('should not show', () => {
+      const element = screen.queryByTestId('drop-zone')
+      expect(element).not.toBeInTheDocument()
+    })
+
+    it('should not show after drop undefined', () => {
+      fireEvent.drop(window, eventOptions)
+      const element = screen.queryByTestId('drop-zone')
+      expect(element).not.toBeInTheDocument()
+    })
+  })
+
+  const shouldShowErrorMessageBox = () => {
     expect(messageBoxSpy).toHaveBeenCalledTimes(1)
     expect(messageBoxSpy.mock.calls[0][0]).toEqual(MessageBoxType.ERROR)
+  }
+
+  it('should show an error message if drop undefined', () => {
+    // @ts-expect-error
+    fireEvent.drop(window, createDragDropEventOptions([undefined]))
+    shouldShowErrorMessageBox()
   })
 
   it('should show an error message if drop 2 files', () => {
-    const messageBoxSpy = jest.spyOn(window.electron, 'showMessageBox')
     fireEvent.drop(window, createDragDropEventOptions([mockPdfFile, mockPdfFile]))
-    expect(messageBoxSpy).toHaveBeenCalledTimes(1)
-    expect(messageBoxSpy.mock.calls[0][0]).toEqual(MessageBoxType.ERROR)
+    shouldShowErrorMessageBox()
   })
 
   const undesiredFiles: Record<string, TestFile> = {
@@ -131,15 +156,21 @@ describe('DropZone', () => {
 
   Object.entries(undesiredFiles).forEach(([testFileType, testFile]) => {
     it(`should show an error message if drop undesired file type (${testFileType})`, async () => {
-      const messageBoxSpy = jest.spyOn(window.electron, 'showMessageBox')
       jest.spyOn(window.electron, 'fileIsDirectory').mockReturnValue(Promise.resolve(testFile.isFolder))
       jest.spyOn(window.electron, 'getFileExtension').mockReturnValue(Promise.resolve(testFile.fileExtension))
 
       fireEvent.drop(window, createDragDropEventOptions([testFile.file]))
       await new Promise(process.nextTick) // wait for all code to execute
 
-      expect(messageBoxSpy).toHaveBeenCalledTimes(1)
-      expect(messageBoxSpy.mock.calls[0][0]).toEqual(MessageBoxType.ERROR)
+      shouldShowErrorMessageBox()
     })
+  })
+
+  // this impossible case is required for 100% branch coverage
+  it("should show an error message if drop a file and String.prototype.split() doesn't work", async () => {
+    jest.spyOn(String.prototype, 'split').mockReturnValueOnce([])
+    fireEvent.drop(window, createDragDropEventOptions([mockPdfFile]))
+    await new Promise(process.nextTick) // wait for all code to execute
+    shouldShowErrorMessageBox()
   })
 })

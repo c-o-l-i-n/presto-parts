@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import AboutWindow from './AboutWindow'

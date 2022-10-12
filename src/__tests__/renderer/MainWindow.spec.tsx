@@ -19,7 +19,7 @@ describe('MainWindow', () => {
     component = <MainWindow appData={mockAppData} />
     componentRender = render(
       <ActivePageProvider>
-        <MainWindow appData={mockAppData} />
+        {component}
       </ActivePageProvider>
     )
     user = userEvent.setup()

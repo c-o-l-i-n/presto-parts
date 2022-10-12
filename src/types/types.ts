@@ -47,7 +47,7 @@ export enum FileType {
   PDF = 'PDF',
   FOLDER = 'folder',
   NO_TYPE = 'file with no type',
-  IMPOSSIBLE = '<impossible file type>'
+  IMPOSSIBLE = 'Impossible File Type'
 }
 
 export enum IpcMainMessage {

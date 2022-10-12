@@ -1,11 +1,10 @@
 import React, { ReactElement, useState } from 'react'
-import { Maybe } from '../../../types/types'
 import { resolveFieldName } from '../utils'
 
 interface Props {
   label: string
   placeholder: string
-  text: Maybe<string>
+  text: string
   onType: (text: string) => unknown
   onChange: () => unknown
 }
@@ -26,9 +25,9 @@ const TextAreaField = ({ label, placeholder, text, onType, onChange }: Props): R
         cols={30}
         rows={10}
         placeholder={placeholder}
-        value={text ?? ''}
+        value={text}
         onInput={(e) => { onType((e.target as HTMLTextAreaElement).value) }}
-        onFocus={() => { setInitialText(text ?? '') }}
+        onFocus={() => { setInitialText(text) }}
         onBlur={() => { if (text !== initialText) onChange() }}
       />
     </div>
