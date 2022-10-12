@@ -10,7 +10,7 @@
     "make": "electron-forge make",
     "publish": "electron-forge publish",
     "lint": "ts-standard",
-    "test": "jest --coverage"
+    "test": "jest"
   },
   "keywords": [],
   "author": {
@@ -22,6 +22,11 @@
     "preset": "ts-jest",
     "testEnvironment": "jsdom",
     "testRegex": "src/__tests__/.*spec\\.tsx?$",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}",
+      "!src/**/*.d.ts"
+    ],
     "transform": {
       ".+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$": "jest-transform-stub"
     }
