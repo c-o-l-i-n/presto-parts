@@ -7,7 +7,7 @@ interface Props {
 }
 
 const ExternalLink = ({ children, url }: Props): ReactElement => {
-  return <a role='link' onClick={() => window.electron.openExternal(url)}>{children}</a>
+  return <a role='link' title={url} onClick={() => window.electron.openExternal(url)}>{children}</a>
 }
 
 export default ExternalLink

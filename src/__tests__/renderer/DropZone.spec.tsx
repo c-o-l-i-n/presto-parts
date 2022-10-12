@@ -3,7 +3,8 @@ import '@testing-library/jest-dom'
 import { fireEvent, render, RenderResult, screen } from '@testing-library/react'
 import { DragDropEventOptions, FileType, MessageBoxType, TestFile } from '../../types/types'
 import DropZone from '../../renderer/main-window/components/DropZone'
-import { mockDirectory, mockElectronApi, mockFileWithNoType, mockPdfFile, mockTxtFile, noop } from './mocks'
+import { mockDirectory, mockElectronApi, mockFileWithNoType, mockPdfFile, mockTxtFile } from './mocks'
+import { noop } from '../../renderer/main-window/utils'
 
 const createDragDropEventOptions = (files: File[]): DragDropEventOptions => ({
   dataTransfer: {

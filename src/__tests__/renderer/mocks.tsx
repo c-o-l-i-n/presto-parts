@@ -2,6 +2,7 @@
 
 import { render } from '@testing-library/react'
 import React from 'react'
+import { noop } from '../../renderer/main-window/utils'
 import { AppData, AppInfo, ElectronApi, GeneratePayload, Page, SeparatePayload, Tab } from '../../types/types'
 
 export const mockSeparatePaylod: SeparatePayload = {
@@ -31,9 +32,6 @@ export const mockAppInfo: AppInfo = {
 }
 
 export const mockChangeValue = 'change'
-
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-export const noop = (): void => {}
 
 export const mockElectronApi: ElectronApi = {
   invoke: async (): Promise<string> => await Promise.resolve(mockChangeValue),

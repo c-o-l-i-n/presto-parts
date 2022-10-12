@@ -4,3 +4,5 @@ export const resolveFieldName = (label: string): string =>
     .toLowerCase()
     .trim()
     .replace(/ /g, '-')
+
+export const noop = (): void => {}
