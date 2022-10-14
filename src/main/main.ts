@@ -76,6 +76,7 @@ const createWindow = (): void => {
   mainWindow.once('ready-to-show', () => {
     createAboutWindow()
     setApplicationMenu(isMac, aboutWindow)
+    aboutWindow.setMenu(null)
     mainWindow.show()
   })
 
@@ -95,8 +96,6 @@ const createWindow = (): void => {
         preload: ABOUT_WINDOW_PRELOAD_WEBPACK_ENTRY
       }
     })
-
-    aboutWindow.setMenu(null)
 
     void aboutWindow.loadURL(ABOUT_WINDOW_WEBPACK_ENTRY)
 
