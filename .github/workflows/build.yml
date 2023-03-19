@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@main
         with:
-          node-version: 18
+          node-version: latest
       - name: install dependencies
         run: npm ci
       - name: run linter
