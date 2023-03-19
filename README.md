@@ -7,10 +7,10 @@
     <img alt="Latest Release" src="https://img.shields.io/github/v/release/c-o-l-i-n/presto-parts?include_prereleases&label=latest%20release" />
   </a>
   <a href="https://github.com/c-o-l-i-n/presto-parts/actions">
-    <img alt="Build Status" src="https://img.shields.io/github/actions/workflow/status/c-o-l-i-n/presto-parts/build.yml?branch=main" />
+    <img alt="Build Status" src="https://img.shields.io/github/actions/workflow/status/c-o-l-i-n/presto-parts/build.yml?branch=main&logo=github&logoWidth=12" />
   </a>
   <a href="https://app.codecov.io/gh/c-o-l-i-n/presto-parts" target="_blank">
-    <img alt="Test Coverage" src="https://img.shields.io/codecov/c/gh/c-o-l-i-n/presto-parts" />
+    <img alt="Test Coverage" src="https://img.shields.io/codecov/c/gh/c-o-l-i-n/presto-parts?logo=codecov&logoWidth=12&logoColor=white" />
   </a>
   <a href="LICENSE">
     <img alt="License" src="https://img.shields.io/github/license/c-o-l-i-n/presto-parts" />
@@ -45,7 +45,9 @@ Presto Parts is a cross-platform desktop application that saves music instructor
 ### Prerequisites
 
 * [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/) v16.15.0 or higher
+* [Node.js](https://nodejs.org/) v18.12.1 or higher
+
+### Install
 
 ```sh
 git clone https://github.com/c-o-l-i-n/presto-parts.git
@@ -53,7 +55,7 @@ cd presto-parts
 npm install
 ```
 
-## Usage
+### Run
 
 ```sh
 npm start
@@ -79,4 +81,4 @@ Contributions, issues and feature requests are welcome!<br />Feel free to check 
 
 ## License
 
-Copyright © 2022 [Colin A. Williams](https://github.com/c-o-l-i-n).<br /> This project is [MIT](LICENSE) licensed.
+Copyright © 2023 [Colin A. Williams](https://github.com/c-o-l-i-n).<br /> This project is [MIT](LICENSE) licensed.
