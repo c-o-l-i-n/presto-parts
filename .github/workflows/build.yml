@@ -1,4 +1,5 @@
 name: Build
+
 on:
   push:
     branches:
@@ -16,17 +17,26 @@ jobs:
         os: [macos-latest, windows-latest]
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@main
+      - name: Checkout 🛎
+        uses: actions/checkout@v3
+
+      - name: Setup Node 💿
+        uses: actions/setup-node@v3
         with:
           node-version: latest
-      - name: install dependencies
+          cache: 'npm'
+
+      - name: Install Dependencies 📦
         run: npm ci
-      - name: run linter
+
+      - name: Run Linter 🔎
         run: npm run lint
-      - name: run tests
+
+      - name: Run Tests 🧪
         run: npm test
-      - name: upload coverage to Codecov
-        uses: codecov/codecov-action@v3.1.0
-      - name: build
+        
+      - name: Upload Coverage to Codecov ☂️
+        uses: codecov/codecov-action@v3
+
+      - name: Build 🛠
         run: npm run make
