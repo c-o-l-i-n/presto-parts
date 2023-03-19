@@ -12,7 +12,7 @@ const buildDefaultMenuTemplate = (
     submenu: [
       {
         label: 'Learn More',
-        click: async () => await shell.openExternal(ExternalSite.APP_WEBSITE)
+        click: () => { void shell.openExternal(ExternalSite.APP_WEBSITE) }
       },
       { type: 'separator' },
       {
@@ -55,7 +55,7 @@ const buildMacMenuTemplate = (
     submenu: [
       {
         label: 'Learn More',
-        click: async () => await shell.openExternal(ExternalSite.APP_WEBSITE)
+        click: () => { void shell.openExternal(ExternalSite.APP_WEBSITE) }
       }
     ]
   }

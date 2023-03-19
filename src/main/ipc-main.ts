@@ -9,8 +9,8 @@ import { extname } from 'path'
 const setupIpcMain = (mainWindow: BrowserWindow): void => {
   const showMessageBox = (type: MessageBoxType, message: string): void => {
     void dialog.showMessageBox(mainWindow, {
-      type: type,
-      message: message,
+      type,
+      message,
       title: app.name
     })
   }

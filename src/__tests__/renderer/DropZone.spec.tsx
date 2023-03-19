@@ -9,7 +9,7 @@ import { noop } from '../../renderer/main-window/utils'
 const createDragDropEventOptions = (files: File[]): DragDropEventOptions => ({
   dataTransfer: {
     items: files,
-    files: files,
+    files,
     clearData: noop
   }
 })

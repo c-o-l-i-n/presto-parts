@@ -10,6 +10,7 @@
     "make": "electron-forge make",
     "publish": "electron-forge publish",
     "lint": "ts-standard",
+    "lint-fix": "ts-standard --fix",
     "test": "jest"
   },
   "keywords": [],
