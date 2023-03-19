@@ -23,7 +23,7 @@ const AboutWindow = ({ appInfo }: Props): ReactElement => {
         Navbar icons by{' '}
         <ExternalLink url={ExternalSite.ICONS_8}>icons8</ExternalLink>
       </p>
-      <p className='is-size-7 mt-2'>Copyright &copy; 2022 Colin A. Williams</p>
+      <p className='is-size-7 mt-2'>Copyright &copy; 2023 Colin A. Williams</p>
     </main>
   )
 }
