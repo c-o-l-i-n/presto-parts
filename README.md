@@ -7,7 +7,7 @@
     <img alt="Latest Release" src="https://img.shields.io/github/v/release/c-o-l-i-n/presto-parts?include_prereleases&label=latest%20release" />
   </a>
   <a href="https://github.com/c-o-l-i-n/presto-parts/actions">
-    <img alt="Build Status" src="https://img.shields.io/github/workflow/status/c-o-l-i-n/presto-parts/Build" />
+    <img alt="Build Status" src="https://img.shields.io/github/actions/workflow/status/c-o-l-i-n/presto-parts/build.yml?branch=main" />
   </a>
   <a href="https://app.codecov.io/gh/c-o-l-i-n/presto-parts" target="_blank">
     <img alt="Test Coverage" src="https://img.shields.io/codecov/c/gh/c-o-l-i-n/presto-parts" />
@@ -30,16 +30,22 @@
 
 Presto Parts is a cross-platform desktop application that saves music instructors hours of time. The application restructures collections of sheet music to be by instrument part (ready to hand to musicians), not by song (how it is originally distributed by the arranger).
 
-## Download Latest
+### Technology Stack
 
-<a href="https://prestoparts.org/download-windows" target="_blank">
-  <img width="200" alt="Download for Windows" src="https://i.imgur.com/G94vkr4.png" />
-</a>
-<a href="https://prestoparts.org/download-mac" target="_blank">
-  <img width="200" alt="Download for MacOS" src="https://i.imgur.com/mblonIw.png" />
-</a>
+[![Electron](https://img.shields.io/badge/Electron-191970?style=for-the-badge&logo=Electron&logoColor=white)](https://www.electronjs.org/)
+[![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Jest](https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white)](https://jestjs.io/)
+[![Testing-Library](https://img.shields.io/badge/-Testing%20Library-%23E33332?style=for-the-badge&logo=testing-library&logoColor=white)](https://testing-library.com/)
+[![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/features/actions)
 
-## Install
+## Getting Started
+
+### Prerequisites
+
+* [Git](https://git-scm.com/)
+* [Node.js](https://nodejs.org/) v16.15.0 or higher
 
 ```sh
 git clone https://github.com/c-o-l-i-n/presto-parts.git
@@ -70,10 +76,6 @@ Github: [@c-o-l-i-n](https://github.com/c-o-l-i-n)
 ## Contributing
 
 Contributions, issues and feature requests are welcome!<br />Feel free to check the [issues page](https://github.com/c-o-l-i-n/presto-parts/issues).
-
-## Show your support
-
-Give a ⭐️ if this project helped you!
 
 ## License
 
