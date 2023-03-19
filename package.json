@@ -51,22 +51,15 @@
           "name": "@electron-forge/maker-dmg",
           "config": {
             "name": "${name}-mac-${version}",
+            "icon": "./assets/app-icons/installer-icon.png",
             "overwrite": true
           }
-        },
-        {
-          "name": "@electron-forge/maker-deb",
-          "config": {}
-        },
-        {
-          "name": "@electron-forge/maker-rpm",
-          "config": {}
         }
       ],
       "plugins": [
-        [
-          "@electron-forge/plugin-webpack",
-          {
+        {
+          "name": "@electron-forge/plugin-webpack",
+          "config": {
             "mainConfig": "./webpack/webpack.main.config.js",
             "renderer": {
               "config": "./webpack/webpack.renderer.config.js",
@@ -90,7 +83,7 @@
               ]
             }
           }
-        ]
+        }
       ],
       "publishers": [
         {
@@ -108,13 +101,11 @@
     }
   },
   "devDependencies": {
-    "@electron-forge/cli": "^6.0.0-beta.65",
-    "@electron-forge/maker-deb": "^6.0.0-beta.65",
-    "@electron-forge/maker-dmg": "^6.0.0-beta.65",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.65",
-    "@electron-forge/maker-squirrel": "^6.0.0-beta.65",
-    "@electron-forge/plugin-webpack": "^6.0.0-beta.65",
-    "@electron-forge/publisher-github": "^6.0.0-beta.67",
+    "@electron-forge/cli": "^6.0.1",
+    "@electron-forge/maker-dmg": "^6.0.1",
+    "@electron-forge/maker-squirrel": "^6.0.1",
+    "@electron-forge/plugin-webpack": "^6.0.1",
+    "@electron-forge/publisher-github": "^6.0.1",
     "@testing-library/dom": "^8.17.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
